@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admin
-  devise_for :user
+  devise_for :admin, skip[:registration, :passwords]
+  devise_for :public, skip[:passwords]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   root to: 'homes#top'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   
   
   
-  # user内のルーティング
+  # # user内のルーティング
   scope module: :user do
     
   end
