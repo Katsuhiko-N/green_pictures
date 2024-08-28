@@ -78,7 +78,7 @@ Rails.application.configure do
   config.hosts << "3514ba41b3f745069d61436ab7165bff.vfs.cloud9.ap-northeast-1.amazonaws.com"
   
   # ActiveStorage用の記述
-  config.active_job.qweue_adapter = inline
+  config.active_job.qweue_adapter = :inline
   
   
   
