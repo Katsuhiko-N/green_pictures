@@ -1,0 +1,8 @@
+<h2>homes#v_test テストページ</h2>
+
+<% if user_signed_in? %>
+<p>ログインユーザー名 => <%= @user.name %></p>
+<p>ログインユーザーニックネーム => <%= @user.nickname %></p>
+<% else %>
+<p>ログインできていません</p>
+<% end %>
