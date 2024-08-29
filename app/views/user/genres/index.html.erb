@@ -1,0 +1,13 @@
+<h2>ジャンル検索ページ</h2>
+<p>Find me in app/views/user/genres/index.html.erb</p>
+
+
+<h3>ジャンル一覧</h3>
+<% @genres.each do |genre| %>
+<p><%= genre.name %></p>
+<%= link_to '編集', edit_genre_path(genre.id) %>
+<%= link_to '削除', genre_path(genre.id), method: :delete %>
+<% end %>
+
+<!--以下試験用-->
+<%= link_to 'ジャンル新規作成', new_genre_path %>

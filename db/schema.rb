@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2024_08_29_103359) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -37,11 +39,15 @@ ActiveRecord::Schema.define(version: 2024_08_29_103359) do
   end
 
   create_table "group_combinations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "group_messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -56,6 +62,8 @@ ActiveRecord::Schema.define(version: 2024_08_29_103359) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false

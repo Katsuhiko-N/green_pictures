@@ -1,0 +1,8 @@
+<h1>User::Genres#new</h1>
+<p>Find me in app/views/user/genres/new.html.erb</p>
+
+<%= form_with model: @genre do |f| %>
+<p>ジャンル名</p>
+<%= f.text_field :name %>
+<%= f.submit '保存' %>
+<% end %>
