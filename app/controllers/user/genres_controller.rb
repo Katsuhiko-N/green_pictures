@@ -7,9 +7,9 @@ class User::GenresController < ApplicationController
 
 # 試験用（後でadminへ移行）
   def create
-    genre = Genre.new(genre_params)
+    @genre = Genre.new(genre_params)
     
-    if genre.save
+    if @genre.save
       redirect_to genres_path
     else
       @genre = Genre.new
