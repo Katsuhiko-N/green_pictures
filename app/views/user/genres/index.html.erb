@@ -4,8 +4,8 @@
 
 <h3>ジャンル一覧</h3>
 <% @genres.each do |genre| %>
-<!--ID１（”未設定”）は編集できないようにする-->
-    <% if genre.id != 1 %>
+<!--”未設定”は編集できないようにする-->
+    <% if genre.name != "未設定" %>
     <p><%= genre.name %></p>
     <%= link_to '編集', edit_genre_path(genre.id) %>
     <%= link_to '削除', genre_path(genre.id), method: :delete %>

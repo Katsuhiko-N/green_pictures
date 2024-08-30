@@ -1,2 +1,7 @@
-<h1>User::Users#mypage</h1>
-<p>Find me in app/views/user/users/mypage.html.erb</p>
+<h2>マイページ</h2>
+
+<div><%= image_tag @user.p_img(100, 100) %></div>
+<p>ニックネーム　<%= @user.nickname %></p>
+<p>名前　<%= @user.name %></p>
+<p>email　<%= @user.email %></p>
+<p>コメント　<%= @user.body %></p>

@@ -4,7 +4,6 @@
   <%= render "user/shared/error_messages", resource: resource %>
   
   
-  
   <div class="field">
     <%= f.label :name %><br/>
     <%= f.text_field :name %>
@@ -14,6 +13,12 @@
     <%= f.label :nickname %><br/>
     <%= f.text_field :nickname %>
   </div>
+  
+  <div class="field">
+    <%= f.label :image %><br/>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  <p>プロフ画像は後で設定できます</p>
   
   <div class="field">
     <%= f.label :email %><br/>

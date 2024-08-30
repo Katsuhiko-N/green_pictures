@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'users/mypage'
-    get 'users/edit'
-    get 'users/show'
-    get 'users/update'
-    get 'users/unsubscribe'
-    get 'users/withdraw'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   # アプリケーションの機能関係
@@ -23,6 +15,13 @@ Rails.application.routes.draw do
   scope module: :user do
     resources :posts
     resources :genres, except: [:show]
+    resources :users, except: [:new, :index, :destroy] do
+      collection do
+        get 'mypage'
+        get 'unsubscribe'
+        get 'withdraw'
+      end
+    end
     
   end
   
