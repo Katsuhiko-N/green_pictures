@@ -10,40 +10,45 @@ class User::PostsController < ApplicationController
     # ジャンル選択機能は後で実装
     
     if @post.save
+      flash[:notice] = "投稿に成功しました"
       redirect_to posts_path
     else
-      @post = Post.new
       render :new
     end
-    
   end
-
+  
+  
   def index
     @posts = Post.all
   end
+
 
   def show
     @post = Post.find(params[:id])
   end
 
+
   def edit
     @post = Post.find(params[:id])
   end
+
 
   def update
     @post = Post.find(params[:id])
     
     if @post.update(post_params)
+      flash[:notice] = "編集されました"
       redirect_to post_path(@post.id)
     else
-      @post = Post.find(params[:id])
       render :edit
     end
   end
 
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    flash[:notice] = "正常に削除されました"
     redirect_to posts_path
   end
   
