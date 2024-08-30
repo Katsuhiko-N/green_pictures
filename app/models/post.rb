@@ -1,4 +1,4 @@
-class Post < ApplicationRecor
+class Post < ApplicationRecord
     
     has_one_attached :image
     

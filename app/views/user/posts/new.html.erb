@@ -1,2 +1,16 @@
 <h1>User::Posts#new</h1>
 <p>Find me in app/views/user/posts/new.html.erb</p>
+
+<%= form_with model: @post do |f| %>
+
+<p>画像</p>
+<%= f.file_field :image, accept: "image/" %>
+
+<p>タイトル</p>
+<%= f.text_field :title %>
+
+<p>説明文</p>
+<%= f.text_area :body %>
+
+<%= f.submit '保存' %>
+<% end %>

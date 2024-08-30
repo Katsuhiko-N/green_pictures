@@ -1,2 +1,15 @@
-<h1>User::Posts#edit</h1>
-<p>Find me in app/views/user/posts/edit.html.erb</p>
+<h2>投稿編集</h2>
+
+<%= form_with model: @post do |f| %>
+
+<p>画像</p>
+<%= f.file_field :image, accept: "image/*" %>
+
+<p>タイトル</p>
+<%= f.text_field :title %>
+
+<p>説明文</p>
+<%= f.text_area :body %>
+
+<%= f.submit '編集を保存' %>
+<% end %>

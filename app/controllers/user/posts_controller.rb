@@ -5,6 +5,9 @@ class User::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    
+    # ジャンル選択機能は後で実装
     
     if @post.save
       redirect_to posts_path
@@ -31,7 +34,7 @@ class User::PostsController < ApplicationController
     @post = Post.find(params[:id])
     
     if @post.update(post_params)
-      redirect_to posts_path
+      redirect_to post_path(@post.id)
     else
       @post = Post.find(params[:id])
       render :edit
@@ -39,13 +42,9 @@ class User::PostsController < ApplicationController
   end
 
   def destroy
-    @post = post.find(params[:id])
-    
-    if @post.destroy
-      redirect_to posts_path
-    else
-      redirect_to posts_path
-    end
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
   end
   
 
