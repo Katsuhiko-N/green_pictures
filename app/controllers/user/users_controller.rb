@@ -26,16 +26,9 @@ class User::UsersController < ApplicationController
   end
 
   def withdraw
-    @user = User.find(current_user.id)
-    if @user.is_active == true
-      @user.is_active = false
-      @user.update(user_params)
-      redirect_to test_path
-    else
-      @user.is_active = true
-      @user.update(user_params)
-      redirect_to test_path
-    end
+    user = User.find(current_user.id)
+    user.update(is_active: false)
+    redirect_to test_path
   end
   
   

@@ -2,6 +2,7 @@
 
 class User::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :user_state, only: [:create]
   
   def after_sign_in_path_for(resource)
     test_path
@@ -45,7 +46,7 @@ class User::SessionsController < Devise::SessionsController
     # パスワードが入力されたものと一致しない場合終了
     return unless user.valid_password?(params[:user][:password])
     # ステータスがtrueなら終了、falseならサインアップへ
-    return if user.is_active == true?
+    return if user.is_active == true
     redirect_to new_user_registration_path
   end
   

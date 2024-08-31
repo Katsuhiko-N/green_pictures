@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       collection do
         get 'mypage'
         get 'unsubscribe'
-        get 'withdraw'
+        patch 'withdraw'
       end
     end
     
