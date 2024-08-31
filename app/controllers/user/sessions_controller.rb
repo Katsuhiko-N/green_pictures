@@ -35,4 +35,19 @@ class User::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  
+  private
+  def user_state
+    # emailと一致するアカウントを検索
+    user = User.find_by(email: params[:user][:email])
+    # nilなら終了
+    return if user.nil?
+    # パスワードが入力されたものと一致しない場合終了
+    return unless user.valid_password?(params[:user][:password])
+    # ステータスがtrueなら終了、falseならサインアップへ
+    return if user.is_active == true?
+    redirect_to new_user_registration_path
+  end
+  
+  
 end

@@ -5,4 +5,8 @@
 <p>ニックネーム　<%= @user.nickname %></p>
 <p>名前　<%= @user.name %></p>
 <p>email　<%= @user.email %></p>
+
+<!--グループ機能は後日実装-->
+
 <p>コメント　<%= @user.body %></p>
+<%= link_to 'プロフィールを編集', edit_user_path(current_user.id) %>

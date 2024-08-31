@@ -1,2 +1,47 @@
-<h1>User::Users#edit</h1>
-<p>Find me in app/views/user/users/edit.html.erb</p>
+<h2>ユーザープロフィール編集</h2>
+
+<!--エラーメッセージ表示-->
+<% if @user.errors.any? %>
+    <%= @user.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+
+<%= form_with model: @user do |f| %>
+
+ <div class="field">
+    <%= f.label :name, "氏名" %><br/>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :nickname, "ニックネーム" %><br/>
+    <%= f.text_field :nickname %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :image, "プロフィール画像" %><br/>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :body, "コメント" %><br/>
+    <%= f.text_area :body %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %><br/>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "編集完了" %>
+  </div>
+  
+  <%= link_to '退会する', unsubscribe_users_path %>
+  
+<% end %>

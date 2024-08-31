@@ -1,2 +1,11 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<h2>ユーザープロフィール</h2>
+
+
+<div><%= image_tag @user.p_img(100, 100) %></div>
+<p>ニックネーム　<%= @user.nickname %></p>
+<p>名前　<%= @user.name %></p>
+<p>email　<%= @user.email %></p>
+
+<!--グループ機能は後日実装-->
+
+<p>コメント　<%= @user.body %></p>
