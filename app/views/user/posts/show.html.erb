@@ -1,6 +1,8 @@
 <h2>投稿詳細</h2>
 
-<p>投稿者<%= @post.user.nickname %></p>
+<%= @post.user.p_img %>
+<p>投稿者<%= @post.user.nickname %></p
+
 <p>タイトル<%= @post.title %></p>
 <%= image_tag @post.image, size: "250x250" %>
 <p>説明：<%= @post.body %></p>
