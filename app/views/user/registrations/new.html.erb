@@ -18,7 +18,7 @@
     <%= f.label :image, "プロフィール画像" %><br/>
     <%= f.file_field :image, accept: "image/*" %>
   </div>
-  <p>プロフ画像は後で設定できます</p>
+  <p>*画像は後でも設定できます*</p>
   
   <div class="field">
     <%= f.label :email, "メールアドレス" %><br/>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録する" %>
   </div>
 <% end %>
 
