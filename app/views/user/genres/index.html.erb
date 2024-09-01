@@ -1,10 +1,8 @@
 <h2>ジャンル検索ページ</h2>
-<p>Find me in app/views/user/genres/index.html.erb</p>
-
 
 <h3>ジャンル一覧</h3>
 <% @genres.each do |genre| %>
-<!--”未設定”は編集できないようにする-->
+    <!--”未設定”は編集できないようにする-->
     <% if genre.name != "未設定" %>
     <p><%= genre.name %></p>
     <%= link_to '編集', edit_genre_path(genre.id) %>

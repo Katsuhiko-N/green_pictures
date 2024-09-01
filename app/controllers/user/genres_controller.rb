@@ -12,7 +12,6 @@ class User::GenresController < ApplicationController
     if @genre.save
       redirect_to genres_path
     else
-      @genre = Genre.new
       render :new
     end
   end
@@ -34,7 +33,6 @@ class User::GenresController < ApplicationController
     if @genre.update(genre_params)
       redirect_to genres_path
     else
-      @genre = Genre.find(params[:id])
       render :edit
     end
   end

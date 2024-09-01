@@ -1,7 +1,10 @@
 class User::UsersController < ApplicationController
+  before_action :authenticate_user!, except:[:show]
+  
   def mypage
     @user = User.find(current_user.id)
   end
+
 
   def show
     @user = User.find(params[:id])
@@ -12,9 +15,11 @@ class User::UsersController < ApplicationController
     end
   end
 
+
   def edit
     @user = User.find(current_user.id)
   end
+
 
   def update
     @user = User.find(current_user.id)
@@ -27,8 +32,10 @@ class User::UsersController < ApplicationController
     end
   end
 
+
   def unsubscribe
   end
+
 
   def withdraw
     user = User.find(current_user.id)
