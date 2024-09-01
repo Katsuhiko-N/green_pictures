@@ -40,7 +40,8 @@ class User::UsersController < ApplicationController
   def withdraw
     user = User.find(current_user.id)
     user.update(is_active: false)
-    redirect_to test_path
+    reset_session
+    redirect_to new_user_registration_path
   end
   
   

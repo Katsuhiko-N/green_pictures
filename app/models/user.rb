@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :group_messages, dependent: :destroy
   
   # プロフ画像呼び出しメソッド
-  def p_img(width,height)
+  def show_p_img(width,height)
     # 画像未設定の場合
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
