@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 2024_08_30_101110) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "genre_id", default: 1, null: false
     t.string "title", null: false
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false

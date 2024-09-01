@@ -11,12 +11,21 @@
     <tbody>
         <% @posts.each do |post| %>
         <tr>
-            <td><%= link_to post_path(post.id) do %>
+            <td>
+                <%= link_to post_path(post.id) do %>
                     <%= image_tag post.image, size: "80x80" %>
                 <% end %>
             </td>
-            <td><%= post.title %></td>
-            <td><%= post.user.nickname %></td>
+            <td>
+                <%= link_to post_path(post.id) do %>
+                    <%= post.title %>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to user_path(post.user.id) do %>
+                    <%= post.user.nickname %>
+                <% end %>
+            </td>
         </tr>
         <% end %>
     </tbody>

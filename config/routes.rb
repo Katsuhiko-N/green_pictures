@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   
   # アプリケーションの機能関係
   root to: 'homes#top'
-  get 'homes/v_test' => 'homes#v_test', as: "test"
   
   # admin内のルーティング
   namespace :admin do

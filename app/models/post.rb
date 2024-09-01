@@ -4,7 +4,8 @@ class Post < ApplicationRecord
     
     has_many :comments, dependent: :destroy
     belongs_to :user
-    belongs_to :genre
+    # ジャンル機能は後で実装
+    # belongs_to :genre
     
     # バリデーション
     validates :title, presence: true

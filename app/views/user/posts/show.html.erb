@@ -1,18 +1,18 @@
 <h2>投稿詳細</h2>
 
-<%= @post.user.p_img %>
-<p>投稿者<%= @post.user.nickname %></p>
+<%= image_tag @post.user.p_img(100,100) %>
+<p>投稿者：<%= @post.user.nickname %></p>
 
-<p>タイトル<%= @post.title %></p>
+<p>タイトル：<%= @post.title %></p>
 <%= image_tag @post.image, size: "250x250" %>
-<p>説明：<%= @post.body %></p>
+<p>コメント：<%= @post.body %></p>
 
 <% if user_signed_in? %>
     <% if @post.user_id == current_user.id %>
         <%= link_to edit_post_path(@post.id) do %>
             <p>編集</p>
         <% end %>
-        <%= link_to post_path(@post.id), method: :delete do %>
+        <%= link_to post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
             <p>削除</p>
         <% end %>
     <% end %>
