@@ -1,19 +1,28 @@
-<h2>投稿詳細</h2>
+<h2><%= @post.title %></h2>
 
-<%= image_tag @post.user.show_p_img(100,100) %>
-<p>投稿者：<%= @post.user.nickname %></p>
-
-<p>タイトル：<%= @post.title %></p>
-<%= image_tag @post.image, size: "250x250" %>
-<p>コメント：<%= @post.body %></p>
-
-<% if user_signed_in? %>
-    <% if @post.user_id == current_user.id %>
-        <%= link_to edit_post_path(@post.id) do %>
-            <p>編集</p>
-        <% end %>
-        <%= link_to post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-            <p>削除</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 my-4">
+            <%= image_tag @post.user.show_p_img(60,60), size: "60x60" %>
+            <span>投稿者：<%= @post.user.nickname %></span>
+        </div>
+    </div>
+    
+    <div class="row d-block">
+        <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600", class: "" %></div>
+    </div>
+    <div class="row d-block">
+        <div class="mx-auto my-3 comment-box"><p>コメント<br><%= @post.body %></p></div>
+    </div>
+    
+    <% if user_signed_in? %>
+        <% if @post.user_id == current_user.id %>
+            <%= link_to edit_post_path(@post.id) do %>
+                <p class="btn btn-info mx-1">投稿を編集する</p>
+            <% end %>
+            <%= link_to post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+                <p class="btn btn-danger mx-1">投稿を削除する</p>
+            <% end %>
         <% end %>
     <% end %>
-<% end %>
+</div>

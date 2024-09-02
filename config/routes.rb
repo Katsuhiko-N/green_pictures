@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   # # user内のルーティング
   scope module: :user do
     resources :posts
-    resources :genres, except: [:show]
+    # ジャンル機能は後で実装
+    # resources :genres, except: [:show]
     resources :users, except: [:new, :index, :destroy] do
       collection do
         get 'mypage'

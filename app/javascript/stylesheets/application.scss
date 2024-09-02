@@ -9,8 +9,23 @@
 
 body{
     background-color: #96c78c;
+    color: #fffacd;
 }
 
 header{
     background-color: #007700;
+}
+
+a,a:hover{
+    text-decoration: none;
+}
+
+.comment-box{
+    background-color: #c0cddc;
+    color: none;
+}
+
+.post_img{
+    width: 600px;
+    height: 600px;
 }
