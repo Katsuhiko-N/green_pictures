@@ -2,31 +2,38 @@
 <html>
   <head>
     <title>green_pictures</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
-      <div>
-        <ul>
-          <li><%= link_to "TOP", root_path %></li>
-          <li><%= link_to "投稿一覧", posts_path %></li>
-          <li><%= link_to "ジャンル検索", genres_path %></li>
-          <% if user_signed_in? %>
-          <li><%= link_to "新規投稿", new_post_path %></li>
-          <li><%= link_to "マイページ", mypage_users_path %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-          <% else %>
-          <li><%= link_to "新規ユーザー登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-          <% end %>
-        </ul>
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse", id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><%= link_to "TOP", root_path %></li>
+              <li class="nav-item"><%= link_to "投稿一覧", posts_path %></li>
+              <li class="nav-item"><%= link_to "ジャンル検索", genres_path %></li>
+              <% if user_signed_in? %>
+              <li class="nav-item"><%= link_to "新規投稿", new_post_path %></li>
+              <li class="nav-item"><%= link_to "マイページ", mypage_users_path %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <% else %>
+              <li class="nav-item"><%= link_to "新規ユーザー登録", new_user_registration_path %></li>
+              <li class="nav-item"><%= link_to "ログイン", new_user_session_path %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     
     <% flash.each do |message_type, message| %>

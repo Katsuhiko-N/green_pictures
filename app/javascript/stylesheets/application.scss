@@ -1,0 +1,16 @@
+@use '~bootstrap/scss/bootstrap';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    background-color: #96c78c;
+}
+
+header{
+    background-color: #007700;
+}
