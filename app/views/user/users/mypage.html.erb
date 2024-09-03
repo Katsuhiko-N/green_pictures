@@ -1,12 +1,16 @@
 <h2>マイページ</h2>
 
-
-<div><%= image_tag @user.show_p_img(100, 100) %></div>
-<p>ニックネーム　<%= @user.nickname %></p>
-<p>名前　<%= @user.name %></p>
-<p>email　<%= @user.email %></p>
+<div class="d-flex justify-content-center">
+        <div class="mx-auto"><%= image_tag @user.show_p_img(100, 100) %></div>
+</div>
+<p class="mx-auto">ニックネーム　<%= @user.nickname %></p>
+<p class="mx-auto">名前　<%= @user.name %></p>
+<p class="mx-auto">email　<%= @user.email %></p>
 
 <!--グループ機能は後日実装-->
 
-<p>コメント　<%= @user.body %></p>
-<%= link_to 'プロフィールを編集', edit_user_path(current_user.id) %>
+<p class="mx-auto">コメント:<%= @user.body %></p>
+
+<%= link_to edit_user_path(current_user.id), class: "mx-auto" do %>
+    <p class="btn btn-info">プロフィールを編集</p>
+<% end %>

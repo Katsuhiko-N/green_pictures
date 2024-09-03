@@ -8,16 +8,26 @@
 
 
 body{
-    background-color: #96c78c;
-    color: #fffacd;
+    
 }
 
 header{
-    background-color: #007700;
+    background-color: #65a76c;
 }
 
 a,a:hover{
     text-decoration: none;
+    color : black;
+}
+
+
+.table-border-l{
+    border-top: 4px solid ghostwhite;
+}
+
+.table-border-s{
+    border-top: 2px solid ghostwhite;
+    border-bottom: 2px solid ghostwhite;
 }
 
 .comment-box{

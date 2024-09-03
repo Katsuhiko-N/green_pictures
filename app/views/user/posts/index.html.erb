@@ -2,7 +2,7 @@
 
 <table>
     <thead>
-        <tr>
+        <tr class="table-border-l">
             <th><p>画像</p></th>
             <th><p>タイトル</p></th>
             <th><p>投稿者</p></th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <% @posts.each do |post| %>
-        <tr>
+        <tr class="table-border-s">
             <td>
                 <%= link_to post_path(post.id) do %>
                     <%= image_tag post.image, size: "80x80" %>

@@ -4,6 +4,10 @@
 <p>退会した場合、同じアカウントで投稿ができなくなります</p>
 
 
-<%= link_to '戻る', edit_user_path(current_user.id) %>
+<%= link_to edit_user_path(current_user.id) do %>
+    <p class="btn btn-info">戻る</p>
+<% end %>
 
-<%= link_to '退会する', withdraw_users_path, method: :patch, "data-confirm" => "本当に退会しますか？" %>
+<%= link_to withdraw_users_path, method: :patch, "data-confirm" => "本当に退会しますか？" do %>
+    <p class="btn btn-danger">退会する</p>
+<% end %>

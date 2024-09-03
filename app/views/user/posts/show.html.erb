@@ -1,19 +1,18 @@
 <h2><%= @post.title %></h2>
 
 <div class="container">
+    <!--投稿者・名前-->
     <div class="row">
-        <div class="col-md-4 my-4">
+        <div class="col my-4">
             <%= image_tag @post.user.show_p_img(60,60), size: "60x60" %>
             <span>投稿者：<%= @post.user.nickname %></span>
         </div>
     </div>
     
-    <div class="row d-block">
-        <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600", class: "" %></div>
-    </div>
-    <div class="row d-block">
-        <div class="mx-auto my-3 comment-box"><p>コメント<br><%= @post.body %></p></div>
-    </div>
+    <!--投稿画像-->
+    <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600" %></div>
+    <!--投稿コメント-->
+    <div class="mx-auto my-3 comment-box"><p>コメント<br><%= @post.body %></p></div>
     
     <% if user_signed_in? %>
         <% if @post.user_id == current_user.id %>
