@@ -7,12 +7,14 @@ class User::UsersController < ApplicationController
 
 
   def show
-    @user = User.find(params[:id])
-    
     # 自分のページ開いたらマイページへ遷移
-    if @user.id == current_user.id
-      redirect_to mypage_users_path
+    if  user_signed_in?
+      if @user.id == current_user.id
+        redirect_to mypage_users_path
+      end
     end
+    
+    @user = User.find(params[:id])
   end
 
 
