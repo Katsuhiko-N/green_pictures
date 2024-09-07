@@ -4,8 +4,10 @@
     <!--投稿者・名前-->
     <div class="row">
         <div class="col my-4">
-            <%= image_tag @post.user.show_p_img(60,60), size: "60x60" %>
-            <span>投稿者：<%= @post.user.nickname %></span>
+            <%= link_to user_path(@post.user.id) do %>
+                <%= image_tag @post.user.show_p_img(60,60), size: "60x60" %>
+                <span>投稿者：<%= @post.user.nickname %></span>
+            <% end %>
         </div>
     </div>
     
