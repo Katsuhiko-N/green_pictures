@@ -40,3 +40,6 @@ yarn-debug.log*
 .yarn-integrity
 ; デプロイ用
 /.env
+
+; テストデータ（seed）
+fixtures/
