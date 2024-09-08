@@ -36,7 +36,7 @@ end
 puts "seed投稿生成開始"
 Post.find_or_create_by!(title: "庭に生えた草") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
-  post.body = "名前がわかりませんが立派です。"
+  post.body = "名前がわかりませんが大きいです。"
   post.user = taro
 end
 
