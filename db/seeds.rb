@@ -36,13 +36,13 @@ end
 puts "seed投稿生成開始"
 Post.find_or_create_by!(title: "庭に生えた草") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
-  post.body = "名前がわからない草です。"
+  post.body = "名前がわかりませんが立派です。"
   post.user = taro
 end
 
-Post.find_or_create_by!(title: "珍しいキノコ") do |post|
+Post.find_or_create_by!(title: "キノコ?") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")
-  post.body = "キノコ見つけた！"
+  post.body = "これはキノコでしょうか？"
   post.user = jiro
 end
 
