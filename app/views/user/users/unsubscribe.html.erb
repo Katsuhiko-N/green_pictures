@@ -1,10 +1,10 @@
 <h2>退会確認</h2>
 
 <p>本当に退会しますか？</p>
-<p>退会した場合、同じアカウントで投稿ができなくなります</p>
+<p>退会した場合、<%= @user.nickname %>さんのアカウントは削除され、投稿ができなくなります</p>
 
 
-<%= link_to edit_user_path(current_user.id) do %>
+<%= link_to edit_users_path do %>
     <p class="btn btn-info">戻る</p>
 <% end %>
 

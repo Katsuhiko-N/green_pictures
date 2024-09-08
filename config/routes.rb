@@ -15,9 +15,10 @@ Rails.application.routes.draw do
     resources :posts
     # ジャンル機能は後で実装
     # resources :genres, except: [:show]
-    resources :users, except: [:new, :index, :destroy] do
+    resources :users, except: [:new, :index, :edit, :destroy] do
       collection do
         get 'mypage'
+        get 'mypage/edit' => 'users#edit', as: "edit"
         get 'unsubscribe'
         patch 'withdraw'
       end

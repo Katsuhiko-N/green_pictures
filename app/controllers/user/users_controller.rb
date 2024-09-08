@@ -2,7 +2,7 @@ class User::UsersController < ApplicationController
   # ログインしているか
   before_action :authenticate_user!, except:[:show]
   # アクセスしているユーザーはログインユーザーか？
-  before_action :is_matching_login_user, except:[:mypage, :show]
+  before_action :is_matching_login_user, only:[:update]
   
   def mypage
     @user = User.find(current_user.id)
@@ -18,8 +18,6 @@ class User::UsersController < ApplicationController
         redirect_to mypage_users_path
       end
     end
-    
-    @user = User.find(params[:id])
   end
 
 
@@ -41,6 +39,7 @@ class User::UsersController < ApplicationController
 
 
   def unsubscribe
+    @user = User.find(current_user.id)
   end
 
 
