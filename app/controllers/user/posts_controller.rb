@@ -13,7 +13,7 @@ class User::PostsController < ApplicationController
     
     if @post.save
       flash[:notice] = "投稿に成功しました"
-      redirect_to posts_path
+      redirect_to post_path(@post.id)
     else
       render :new
     end
