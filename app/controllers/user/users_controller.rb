@@ -7,6 +7,7 @@ class User::UsersController < ApplicationController
 
 
   def show
+    @user = User.find(params[:id])
     # 自分のページ開いたらマイページへ遷移
     if  user_signed_in?
       if @user.id == current_user.id
