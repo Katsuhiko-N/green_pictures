@@ -1,5 +1,8 @@
 class User::UsersController < ApplicationController
+  # ログインしているか
   before_action :authenticate_user!, except:[:show]
+  # アクセスしているユーザーはログインユーザーか？
+  before_action :is_matching_login_user, except:[:mypage, :show]
   
   def mypage
     @user = User.find(current_user.id)
@@ -10,6 +13,7 @@ class User::UsersController < ApplicationController
     @user = User.find(params[:id])
     # 自分のページ開いたらマイページへ遷移
     if  user_signed_in?
+      # 閲覧しているユーザープロフィール＝閲覧者ならマイページ
       if @user.id == current_user.id
         redirect_to mypage_users_path
       end
@@ -54,5 +58,12 @@ class User::UsersController < ApplicationController
     params.require(:user).permit(:name, :nickname, :image, :email, :body, :password, :password_confirmation)
   end
   
+  # ユーザー認証
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to mypage_users_path
+    end
+  end
   
 end

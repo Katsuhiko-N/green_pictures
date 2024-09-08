@@ -1,5 +1,8 @@
 class User::PostsController < ApplicationController
+  # ログインしているか
   before_action :authenticate_user!, except:[:index, :show]
+  # アクセスしているユーザーはログインユーザーか？
+  before_action :is_matching_login_user, except:[:new, :create, :index, :show]
   
   def new
     @post = Post.new
@@ -61,4 +64,14 @@ class User::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:image, :title, :body)
   end
+  
+  # 投稿者認証
+  def is_matching_login_user
+    user = Post.find(params[:id]).user
+    unless user.id == current_user.id
+      redirect_to posts_path
+    end
+  end
+  
+  
 end

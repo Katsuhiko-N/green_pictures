@@ -11,6 +11,14 @@ class User < ApplicationRecord
   has_many :group_combinations, dependent: :destroy
   has_many :group_messages, dependent: :destroy
   
+  
+  # バリデーション
+    validates :name, presence: true
+    validates :nickname, presence: true
+    validates :email, presence: true
+  
+  
+  
   # プロフ画像呼び出しメソッド
   def show_p_img(width,height)
     # 画像未設定の場合
