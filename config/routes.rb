@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
-  # アプリケーションの機能関係
-  root to: 'homes#top'
-  
   # admin内のルーティング
   namespace :admin do
     
@@ -23,8 +20,14 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    
   end
+  
+  
+  # その他のアプリケーションのページ・機能
+  root to: 'homes#top'
+    # 検索機能
+  get 'search' => 'searches#search', as: "search"
+  get 'search_bar' => 'searches#search_bar', as: "search_bar"
   
   
     # devise関係のルーティング
