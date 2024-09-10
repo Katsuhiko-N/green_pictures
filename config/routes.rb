@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   
   
-  # # user内のルーティング
+  # user内のルーティング
   scope module: :user do
     resources :posts
     # ジャンル機能は後で実装
@@ -23,11 +23,11 @@ Rails.application.routes.draw do
   end
   
   
-  # その他のアプリケーションのページ・機能
+# その他のアプリケーションのページ・機能
+  # トップページ
   root to: 'homes#top'
-    # 検索機能
+  # 検索機能
   get 'search' => 'searches#search', as: "search"
-  get 'search_bar' => 'searches#search_bar', as: "search_bar"
   
   
     # devise関係のルーティング

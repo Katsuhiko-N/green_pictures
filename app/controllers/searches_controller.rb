@@ -6,17 +6,10 @@ class SearchesController < ApplicationController
         model = search_params[:model]
         
         if model == "post"
-            @answer_p = Post.where("title LIKE ?", "%#{word}%").or Post.where("body LIKE ?", "%#{word}%")
+            @posts = Post.where("title LIKE ?", "%#{word}%").or Post.where("body LIKE ?", "%#{word}%")
         else
-            @answer_u = User.where("nickname LIKE ?", "%#{word}%")
+            @users = User.where("nickname LIKE ?", "%#{word}%")
         end
-        
-        
-    end
-    
-    # 検索機能 
-    def search_bar
-        
     end
     
     private
