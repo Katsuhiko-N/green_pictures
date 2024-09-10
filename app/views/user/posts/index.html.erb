@@ -1,33 +1,4 @@
 <h3>投稿一覧</h3>
 
-<table>
-    <thead>
-        <tr class="table-border-l">
-            <th><p>画像</p></th>
-            <th><p>タイトル</p></th>
-            <th><p>投稿者</p></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @posts.each do |post| %>
-        <tr class="table-border-s">
-            <td>
-                <%= link_to post_path(post.id) do %>
-                    <%= image_tag post.image, size: "80x80" %>
-                <% end %>
-            </td>
-            <td>
-                <%= link_to post_path(post.id) do %>
-                    <%= post.title %>
-                <% end %>
-            </td>
-            <td>
-                <%= link_to user_path(post.user.id) do %>
-                    <%= post.user.nickname %>
-                <% end %>
-            </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<%= render 'table_template', posts: @posts %>
 
