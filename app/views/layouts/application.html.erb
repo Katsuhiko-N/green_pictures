@@ -37,22 +37,23 @@
             </ul>
           </div>
         </div>
-        
-        <div class="container">
-        <!--検索バー-->
-            <%= form_with url: search_path, method: :get do |f| %>
-            <!--検索ワード:word-->
-            <%= f.text_field :word %>
-            
-            <!--検索モデル選択（投稿・ユーザー名）-->
-            <%= f.select :model, [["投稿を検索", "post"], ["ユーザーを検索", "user"]], {selected: "post"} %>
-            
-            <%= f.submit "検索" %>
-            <% end %>
-        </div>
       </nav>
     </header>
     
+    <!--検索バー-->
+    <div class="container search_bar">
+      <div class="float-right">
+        <%= form_with url: search_path, method: :get do |f| %>
+          <!--検索ワード:word-->
+          <%= f.text_field :word %>
+          <!--検索モデル選択（投稿・ユーザー名）-->
+          <%= f.select :model, [["投稿を検索", "post"], ["ユーザーを検索", "user"]], {selected: "post"} %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <!--フラシュメッセージ-->
     <% flash.each do |message_type, message| %>
       <div class="flash-message,<%= message_type %>"><%= message %></div>
     <% end %>
