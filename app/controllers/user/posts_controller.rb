@@ -30,6 +30,9 @@ class User::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    
+    # コメント投稿フォーム用
+    @comment = Comment.new
   end
 
 

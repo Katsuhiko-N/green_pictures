@@ -13,9 +13,41 @@
     
     <!--投稿画像-->
     <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600" %></div>
-    <!--投稿コメント-->
-    <div class="mx-auto my-3 comment-box"><p>コメント<br><%= @post.body %></p></div>
+    <!--投稿者コメント-->
+    <div class="mx-auto my-3 comment-box"><p>投稿者コメント<br><%= @post.body %></p></div>
     
+    <!--閲覧者コメント-->
+    <div class="container">
+        <p><%= @post.comments.count %>件のコメント</p>
+        
+            <% @post.comments.each do |comment| %>
+            <div class="row">
+                <div class="d-flex">
+                    <p class="col-5"><%= comment.body %></p><p class="col-2">　　<%= comment.user.nickname %></p><p class="col-2"> - <%= comment.updated_at %></p>
+                    
+                    <!--コメント削除ボタン-->
+                    <% if user_signed_in? %>
+                        <% if comment.user_id == current_user.id %>
+                            <%= link_to post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
+                                <p class="btn btn-sm btn-danger mx-1">コメントを削除する</p>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+            <% end %>
+        
+    </div>
+    
+    <!--コメント投稿フォーム-->
+    <div>
+        <%= form_with model: [@post, @comment] do |f| %>
+            <%= f.text_area :body, size: "60x2", placeholder: "コメントはこちら" %>
+            <%= f.submit "コメントを送信" %>
+        <% end %>
+    </div>
+    
+    <!--投稿編集ボタン-->
     <% if user_signed_in? %>
         <% if @post.user_id == current_user.id %>
             <%= link_to edit_post_path(@post.id) do %>
