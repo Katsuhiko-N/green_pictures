@@ -1,4 +1,10 @@
-<h2><%= @post.title %></h2>
+<div class="container">
+    <div>
+        <h2><%= @post.title %></h2>
+        <span class="ml-auto">投稿日　<%= @post.updated_at %></span>
+    </div>
+</div>
+
 
 <div class="container">
     <!--投稿者・名前-->
@@ -17,26 +23,30 @@
     <div class="mx-auto my-3 comment-box"><p>投稿者コメント<br><%= @post.body %></p></div>
     
     <!--閲覧者コメント-->
-    <div class="container">
-        <p><%= @post.comments.count %>件のコメント</p>
+    <div>
+        <p><%= @post.comments.count %>件のコメント <i class="fa-regular fa-comment"></i></p>
         
-            <% @post.comments.each do |comment| %>
-            <div class="row">
-                <div class="d-flex">
-                    <p class="col-5"><%= comment.body %></p><p class="col-2">　　<%= comment.user.nickname %></p><p class="col-2"> - <%= comment.updated_at %></p>
-                    
-                    <!--コメント削除ボタン-->
-                    <% if user_signed_in? %>
-                        <% if comment.user_id == current_user.id %>
-                            <%= link_to post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
-                                <p class="btn btn-sm btn-danger mx-1">コメントを削除する</p>
+        <table>
+            <tbody>
+                <% @post.comments.each do |comment| %>
+                <tr>
+                    <td class="col-6"><p><%= comment.body %></p></td>
+                    <td class="col-2"><p><%= comment.user.nickname %></p></td>
+                    <td class="col-2"><%= comment.updated_at %></td>
+                    <td class="col-2">
+                        <!--コメント削除ボタン-->
+                        <% if user_signed_in? %>
+                            <% if comment.user_id == current_user.id %>
+                                <%= link_to post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
+                                    <p class="btn btn-sm btn-danger">コメントを削除する</p>
+                                <% end %>
                             <% end %>
                         <% end %>
-                    <% end %>
-                </div>
-            </div>
-            <% end %>
-        
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
     </div>
     
     <!--コメント投稿フォーム-->

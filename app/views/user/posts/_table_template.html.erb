@@ -9,6 +9,7 @@
                 <th><p>画像</p></th>
                 <th><p>タイトル</p></th>
                 <th><p>投稿者</p></th>
+                <th><p>コメント数</p></th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@
                     <%= link_to user_path(post.user.id) do %>
                         <%= post.user.nickname %>
                     <% end %>
+                </td>
+                <td>
+                    <%= post.comments.count %>件のコメント
                 </td>
             </tr>
             <% end %>
