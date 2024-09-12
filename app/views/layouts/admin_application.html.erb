@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>green_pictures</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <script src="https://kit.fontawesome.com/764dde4a53.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="d-flex flex-column vh-100">
+    <header>
+      <!--ナビゲーションバー-->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse", id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><%= link_to "TOP", root_path, class:'text-white mx-1' %></li>
+              <!--ジャンル機能は後で実装-->
+              <!--<li class="nav-item">-->
+              <!--  link_to "ジャンル検索", genres_path, class:'text-white mx-1'-->
+              <!--  </li>-->
+              <% if admin_signed_in? %>
+              <li class="nav-item"><%= link_to "ユーザー一覧", admin_users_path, class:'text-white mx-1' %></li>
+              <li class="nav-item"><%= link_to "投稿一覧", admin_posts_path, class:'text-white mx-1' %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'text-white mx-1' %></li>
+              <% else %>
+              <li class="nav-item"><%= link_to "ログイン", new_admin_session_path, class:'text-white mx-1' %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <p class="text-warning bg-dark text-center">現在管理者としてログインしています</p>
+    </header>
+    
+    <!--検索バー-->
+    <div class="container search_bar">
+      <div class="float-right">
+        <%= form_with url: search_path, method: :get do |f| %>
+          <!--検索ワード:word-->
+          <%= f.text_field :word %>
+          <!--検索モデル選択（投稿・ユーザー名）-->
+          <%= f.select :model, [["投稿を検索", "post"], ["ユーザーを検索", "user"]], {selected: "post"} %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <!--フラシュメッセージ-->
+    <% flash.each do |message_type, message| %>
+      <div class="flash-message,<%= message_type %>"><%= message %></div>
+    <% end %>
+    
+    <%= yield %>
+  </body>
+</html>

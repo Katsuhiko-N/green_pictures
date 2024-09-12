@@ -1,0 +1,9 @@
+<h2>ユーザープロフィール</h2>
+
+<%= render 'profile', user: @user %>
+<p class="mx-auto">ユーザーステータス　<%= @user.is_active %></p>
+<p class="mx-auto">※ユーザーステータスがTRUE＝現在会員、FAULSE=退会済み</p>
+
+<%= link_to admin_user_path(@user.id), method: :patch, class: "mx-auto", "data-confirm" => "本当にステータス変更しますか？" do %>
+    <p class="btn btn-danger">ステータスを変更</p>
+<% end %>

@@ -1,0 +1,53 @@
+<div class="container">
+    <div>
+        <h2><%= @post.title %></h2>
+        <span class="ml-auto">投稿日　<%= @post.updated_at %></span>
+    </div>
+</div>
+
+
+<div class="container">
+    <!--投稿者・名前-->
+    <div class="row">
+        <div class="col my-4">
+            <%= link_to admin_user_path(@post.user.id) do %>
+                <%= image_tag @post.user.show_p_img(60,60), size: "60x60" %>
+                <span>投稿者：<%= @post.user.nickname %></span>
+            <% end %>
+        </div>
+    </div>
+    
+    <!--投稿画像-->
+    <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600" %></div>
+    <!--投稿者コメント-->
+    <div class="mx-auto my-3 comment-box"><p>投稿者コメント<br><%= @post.body %></p></div>
+    
+    <!--閲覧者コメント-->
+    <div>
+        <p><%= @post.comments.count %>件のコメント <i class="fa-regular fa-comment"></i></p>
+        
+        <table>
+            <tbody>
+                <% @post.comments.each do |comment| %>
+                <tr>
+                    <td class="col-6"><p><%= comment.body %></p></td>
+                    <td class="col-2"><p><%= comment.user.nickname %></p></td>
+                    <td class="col-2"><%= comment.updated_at %></td>
+                    <td class="col-2">
+                        <!--コメント削除ボタン-->
+                        <%= link_to admin_post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
+                            <p class="btn btn-sm btn-danger">コメントを削除する</p>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <!--投稿削除ボタン-->
+    <%= link_to admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+        <p class="btn btn-danger mx-1">投稿を削除する</p>
+    <% end %>
+</div>
