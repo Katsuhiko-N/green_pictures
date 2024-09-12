@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     
     # ユーザー機能
     resources :users, except: [:new, :create, :edit, :destroy]
+    
+    # 検索機能
+    get 'search' => 'searches#search', as: "search"
   end
   
   
