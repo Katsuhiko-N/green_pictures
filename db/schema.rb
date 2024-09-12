@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2024_08_30_101110) do
   end
 
   create_table "admins", force: :cascade do |t|
+    t.string "nickname", default: "管理者", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

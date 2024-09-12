@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'comments/create'
-    get 'comments/destroy'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   # admin内のルーティング
   namespace :admin do
+    # 投稿関係機能
+    resources :posts, except: [:new, :create] do
+      # 投稿コメント機能
+      resources :comments, only: [:destroy]
+    end
     
+    # ユーザー機能
+    resources :users, except: [:new, :create, :edit, :destroy]
   end
   
   

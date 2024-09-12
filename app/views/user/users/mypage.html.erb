@@ -1,5 +1,5 @@
 <h2>マイページ</h2>
-
+<p class="mx-auto">名前　<%= @user.name %></p>
 <%= render 'profile', user: @user %>
 
 <%= link_to edit_users_path, class: "mx-auto" do %>

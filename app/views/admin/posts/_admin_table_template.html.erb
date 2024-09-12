@@ -1,6 +1,5 @@
 <!--投稿一覧なら-->
 
-
 <% if defined?(posts) && posts != nil && posts != [] %>
 <!--投稿が存在かつ空でない＝投稿検索結果-->
     <table>
@@ -16,17 +15,17 @@
             <% posts.each do |post| %>
             <tr class="table-border-s">
                 <td>
-                    <%= link_to post_path(post.id) do %>
+                    <%= link_to admin_post_path(post.id) do %>
                         <%= image_tag post.image, size: "80x80" %>
                     <% end %>
                 </td>
                 <td>
-                    <%= link_to post_path(post.id) do %>
+                    <%= link_to admin_post_path(post.id) do %>
                         <%= post.title %>
                     <% end %>
                 </td>
                 <td>
-                    <%= link_to user_path(post.user.id) do %>
+                    <%= link_to admin_user_path(post.user.id) do %>
                         <%= post.user.nickname %>
                     <% end %>
                 </td>
@@ -51,12 +50,12 @@
                 <% users.each do |user| %>
                 <tr class="table-border-s">
                     <td>
-                        <%= link_to user_path(user.id) do %>
+                        <%= link_to admin_user_path(user.id) do %>
                             <%= image_tag user.show_p_img(60,60), size: "60x60" %>
                         <% end %>
                     </td>
                     <td>
-                        <%= link_to user_path(user.id) do %>
+                        <%= link_to admin_user_path(user.id) do %>
                             <%= user.nickname %>
                         <% end %>
                     </td>

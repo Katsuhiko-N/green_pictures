@@ -7,7 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts "seed生成開始"
+
 puts "seed人物生成開始"
+
 taro = User.find_or_create_by!(email: "Taro@example.com") do |user|
   user.name = "太郎"
   user.nickname = "タロー"
@@ -50,6 +52,12 @@ Post.find_or_create_by!(title: "綺麗な花") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
   post.body = '綺麗な花が咲いてた！'
   post.user = hanako
+end
+
+puts "管理者生成開始"
+
+Admin.find_or_create_by!(email: 'SEED_EMAIL') do |admin|
+  admin.password = 'SEED_PASSWORD'
 end
 
 puts "seed生成完了"
