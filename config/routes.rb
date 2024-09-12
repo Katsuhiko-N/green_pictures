@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'comments/create'
+    get 'comments/destroy'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   # admin内のルーティング
@@ -9,9 +13,16 @@ Rails.application.routes.draw do
   
   # user内のルーティング
   scope module: :user do
-    resources :posts
+    # 投稿機能
+    resources :posts do
+      # 投稿コメント機能
+      resources :comments, only: [:create, :destroy]
+    end
+    
     # ジャンル機能は後で実装
     # resources :genres, except: [:show]
+    
+    # ユーザー機能
     resources :users, except: [:new, :index, :edit, :destroy] do
       collection do
         get 'mypage'
@@ -20,6 +31,7 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
+    
   end
   
   
