@@ -38,14 +38,15 @@ Rails.application.routes.draw do
       end
     end
     
+    # 検索機能
+    get 'search' => 'searches#search', as: "search"
   end
   
   
 # その他のアプリケーションのページ・機能
   # トップページ
   root to: 'homes#top'
-  # 検索機能
-  get 'search' => 'searches#search', as: "search"
+  
   
   
     # devise関係のルーティング
