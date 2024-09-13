@@ -56,8 +56,8 @@ end
 
 puts "管理者生成開始"
 
-Admin.find_or_create_by!(email: 'SEED_EMAIL') do |admin|
-  admin.password = 'SEED_PASSWORD'
+admin = Admin.find_or_create_by!(email: ENV['AD_EMAIL'] ) do |admin|
+  admin.password = ENV['AD_PASSWORD']
 end
 
 puts "seed生成完了"
