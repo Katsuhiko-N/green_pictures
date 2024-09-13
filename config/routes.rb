@@ -47,8 +47,6 @@ Rails.application.routes.draw do
   # トップページ
   root to: 'homes#top'
   
-  
-  
     # devise関係のルーティング
   devise_for :admin, controllers: {
     sessions: "admin/sessions"
