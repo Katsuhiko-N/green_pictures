@@ -1,5 +1,6 @@
-class SearchesController < ApplicationController
-    
+class User::SearchesController < ApplicationController
+  
+  
     # 検索機能 
     def search
         word = search_params[:word] 
@@ -17,7 +18,5 @@ class SearchesController < ApplicationController
     def search_params
         params.permit(:word, :model)
     end
-    
-    
     
 end
