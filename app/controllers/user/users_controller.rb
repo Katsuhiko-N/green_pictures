@@ -1,8 +1,9 @@
 class User::UsersController < ApplicationController
   # ログインしているか
-  before_action :authenticate_user!, except:[:show]
+  before_action :authenticate_user!
   # アクセスしているユーザーはログインユーザーか？
-  before_action :is_matching_login_user, only:[:update]
+  # 他人が勝手にいじれないように
+  before_action :is_matching_login_user, only:[:update, :withdraw]
   
   def mypage
     @user = User.find(current_user.id)

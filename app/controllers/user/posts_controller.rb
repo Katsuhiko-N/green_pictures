@@ -1,9 +1,9 @@
 class User::PostsController < ApplicationController
   # ログインしているか
-  before_action :authenticate_user!, except:[:index, :show]
+  before_action :authenticate_user!
   # アクセスしているユーザーはログインユーザーか？
   # 他人が勝手に投稿をいじれないように
-  before_action :is_matching_login_user, except:[:index, :show]
+  before_action :is_matching_login_user, except:[:new, :create, :index, :show]
   
   def new
     @post = Post.new
