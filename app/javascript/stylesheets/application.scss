@@ -6,20 +6,19 @@
     box-sizing: border-box;
 }
 
-
-body{
-    
-}
-
-header{
-    background-color: #65a76c;
-}
-
 a{
     text-decoration: none;
     color : black;
 }
 
+
+.u-header{
+    background-color: #65a76c;
+}
+
+.adm-header{
+    background-color: orange;
+}
 
 .table-border-l{
     border-top: 4px solid ghostwhite;

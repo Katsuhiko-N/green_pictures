@@ -12,7 +12,7 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header>
+    <header class="u-header">
       <!--ナビゲーションバー-->
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -46,7 +46,7 @@
       <div class="float-right">
         <%= form_with url: search_path, method: :get do |f| %>
           <!--検索ワード:word-->
-          <%= f.text_field :word %>
+          <%= f.text_field :word, required: true %>
           <!--検索モデル選択（投稿・ユーザー名）-->
           <%= f.select :model, [["投稿を検索", "post"], ["ユーザーを検索", "user"]], {selected: "post"} %>
           <%= f.submit "検索" %>
