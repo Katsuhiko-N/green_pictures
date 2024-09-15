@@ -30,7 +30,7 @@ class Admin::PostsController < ApplicationController
     
     if @post.update(post_params)
       flash[:notice] = "編集されました"
-      redirect_to post_path(@post.id)
+      redirect_to admin_post_path(@post.id)
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     flash[:notice] = "正常に削除されました"
-    redirect_to posts_path
+    redirect_to admin_posts_path
   end
   
 

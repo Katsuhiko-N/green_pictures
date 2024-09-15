@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # admin内のルーティング
   namespace :admin do
     # 投稿関係機能
-    resources :posts, except: [:new, :create] do
+    resources :posts, except: [:new, :create, :edit, :update] do
       # 投稿コメント機能
       resources :comments, only: [:destroy]
     end
