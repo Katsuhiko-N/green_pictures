@@ -24,6 +24,7 @@ class User::GroupsController < ApplicationController
   end
 
   def show
+    @groups = Group.find(params[:id])
   end
 
   def edit
