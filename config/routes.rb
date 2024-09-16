@@ -40,6 +40,10 @@ Rails.application.routes.draw do
     
     # 検索機能
     get 'search' => 'searches#search', as: "search"
+    
+    # グループ機能
+    resources :groups
+    
   end
   
   
