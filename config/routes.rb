@@ -57,5 +57,4 @@ Rails.application.routes.draw do
     sessions: "user/sessions"
   }
   
-  
 end
