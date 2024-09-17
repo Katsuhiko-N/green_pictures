@@ -1,2 +1,41 @@
-<h1>User::Groups#index</h1>
-<p>Find me in app/views/user/groups/index.html.erb</p>
+<h3>グループ一覧</h3>
+
+<div>
+    <table>
+        <thead>
+            <tr class="table-border-l">
+                <th><p>画像</p></th>
+                <th><p>グループ名</p></th>
+                <th><p>オーナー</p></th>
+                <th><p>人数</p></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @groups.each do |group| %>
+            <tr class="table-border-s">
+                <td>
+                    <%= link_to group_path(group.id) do %>
+                        <%= image_tag group.show_g_img(60,60), size: "60x60"%>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to group_path(group.id) do %>
+                        <%= group.title %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to user_path(group.owner_id) do %>
+                        <%= owner_n_name(group.owner_id) %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= group.group_combinations.count %>人
+                </td>
+            </tr>
+            <tr>
+                <td><%= group.body %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

@@ -2,6 +2,10 @@ class User::GroupsController < ApplicationController
     # ログインしているか
   before_action :authenticate_user!
   
+  # オーナー名呼び出しメソッド
+  helper_method :owner_n_name
+  
+  
   def new
     @group = Group.new
     
@@ -21,6 +25,7 @@ class User::GroupsController < ApplicationController
 
   def index
     @groups = Group.all
+    
   end
 
   def show
@@ -42,6 +47,13 @@ class User::GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:title, :body)
   end
+  
+  # オーナーのニックネーム呼び出し
+  def owner_n_name(id)
+    owner = User.find(id).nickname
+    return owner
+  end
+  
   
   
 end

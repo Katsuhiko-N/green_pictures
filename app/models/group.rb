@@ -7,13 +7,13 @@ class Group < ApplicationRecord
     
     
     # グループ画像呼び出しメソッド
-    def show_p_img(width,height)
+    def show_g_img(width,height)
         # 画像未設定の場合
-        unless image.attached?
-          file_path = Rails.root.join('app/assets/images/no_image.jpg')
-          image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
+        unless g_image.attached?
+          file_path = Rails.root.join('app/assets/images/group_no_image.jpg')
+          image.attach(io: File.open(file_path), filename: 'default-g_image.jpg', content_type: 'image/jpg')
         end
-        image.variant(resize_to_limit: [width, height]).processed
+        g_image.variant(resize_to_limit: [width, height]).processed
     end
   
     
