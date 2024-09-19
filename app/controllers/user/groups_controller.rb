@@ -1,23 +1,27 @@
 class User::GroupsController < ApplicationController
     # ログインしているか
   before_action :authenticate_user!
+  before_action :is_matching_login_user, only:[:edit, :update, :destroy]
   
   # オーナー名呼び出しメソッド
   helper_method :owner_n_name
   
+  # グループ参加人数呼び出しメソッド
+  helper_method :g_count
+  
   
   def new
     @group = Group.new
-    
   end
 
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+
     
     if @group.save
       flash[:notice] = "投稿に成功しました"
-      redirect_to group_path(@group.id)
+        redirect_to group_path(@group.id)
     else
       render :new
     end
@@ -29,16 +33,30 @@ class User::GroupsController < ApplicationController
   end
 
   def show
-    @groups = Group.find(params[:id])
+    @group = Group.find(params[:id])
+    
+    # グループ組合せ試験用
+    @gcomb = GroupCombination.all
   end
 
   def edit
+    @group = Group.find(params[:id])
   end
 
   def update
+    @group = Group.find(group_params)
+    if @group.update
+      flash[:notice] = "保存に成功しました"
+      redirect_to group_path(@group.id)
+    else
+      render :new
+    end
   end
 
-  def destoroy
+  def destroy
+    group = Group.find(params[:id])
+    group.destroy
+    redirect_to groups_path
   end
   
   
@@ -48,12 +66,28 @@ class User::GroupsController < ApplicationController
     params.require(:group).permit(:title, :body)
   end
   
-  # オーナーのニックネーム呼び出し
-  def owner_n_name(id)
-    owner = User.find(id).nickname
-    return owner
+  # オーナー認証
+  def is_matching_login_user
+    owner = Group.find(params[:id]).owner_id
+    unless owner == current_user.id
+      redirect_to groups_path
+    end
   end
   
+  
+  # オーナーのニックネーム呼び出し
+  def owner_n_name(id)
+    owner = Group.find(id).owner_id
+    ownername = User.find(owner).nickname
+    return ownername
+  end
+  
+  
+  # グループ参加人数呼び出し
+  def g_count(number)
+    counts = GroupCombination.where(group_id: number).count
+    return counts
+  end
   
   
 end

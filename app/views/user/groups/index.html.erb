@@ -32,11 +32,11 @@
             </td>
             <td class="col-3">
                 <%= link_to user_path(group.owner_id) do %>
-                    <%= owner_n_name(group.owner_id) %>
+                    <%= owner_n_name(group.id) %>
                 <% end %>
             </td>
             <td class="col-2">
-                <%= group.group_combinations.count %>人
+                <%= g_count(group.id) %>人
             </td>
         </tr>
         <tr class="table-border-s mb-3">
