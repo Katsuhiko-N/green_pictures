@@ -17,11 +17,17 @@ class User::GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
-
     
     if @group.save
       flash[:notice] = "投稿に成功しました"
-        redirect_to group_path(@group.id)
+      
+      # 組合せ（メンバー）作成
+      g_comb = GroupCombination.new(group_id: @group.id)
+      g_comb.user_id = current_user.id
+      g_comb.save
+      
+      redirect_to group_path(@group.id)
+
     else
       render :new
     end

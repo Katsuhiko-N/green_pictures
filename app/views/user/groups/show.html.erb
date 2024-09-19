@@ -1,23 +1,6 @@
 <h2><%= @group.title %>のグループページ</h2>
 <p><%= @group.body %></p>
 <p>このグループのオーナー：<%= owner_n_name(@group.id) %></p>
-<p>このグループのオーナー：<%= @group.group_combinations[0].name %></p>
-
-<% unless @group.exist_user?(current_user) %>
-    <%= link_to group_group_combinations_path(@group.id), method: :post do %>
-        <p class="btn btn-info">グループに参加</p>
-    <% end %>
-<% else %>
-    <%= link_to group_group_combination_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
-        <p class="btn btn-danger">グループを退会</p>
-    <% end %>
-<% end %>
-
-<div class="mx-auto">
-    <p>後日実装予定：メンバー一覧</p>
-    <p>後日実装予定：メンバー投稿</p>
-    <p>後日実装予定：グループメッセージ</p>
-</div>
 
 <% if current_user.id == @group.owner_id %>
     <%= link_to group_path(@group.id), method: :patch do %>
@@ -26,7 +9,26 @@
     <%= link_to group_path(@group.id), method: :delete, "data-confirm" => "本当にグループを削除しますか？" do %>
         <p class="btn btn-danger">グループを削除</p>
     <% end %>
+    
+   
+<% elsif @group.exist_user?(current_user) %>
+    <%= link_to group_group_combination_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+        <p class="btn btn-danger">グループを退会</p>
+    <% end %>
+<% else %>
+    <%= link_to group_group_combinations_path(@group.id), method: :post do %>
+        <p class="btn btn-info">グループに参加</p>
+    <% end %>
 <% end %>
+
+
+<div class="mx-auto">
+    <p>後日実装予定：メンバー一覧</p>
+    <p>後日実装予定：メンバー投稿</p>
+    <p>後日実装予定：グループメッセージ</p>
+</div>
+
+
 
 
 <!--以下試験用-->
