@@ -3,6 +3,9 @@ class User::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
   
+  # 試験用
+  helper_method :guser
+  
   # オーナー名呼び出しメソッド
   helper_method :owner_n_name
   
@@ -27,7 +30,6 @@ class User::GroupsController < ApplicationController
       g_comb.save
       
       redirect_to group_path(@group.id)
-
     else
       render :new
     end
@@ -43,6 +45,7 @@ class User::GroupsController < ApplicationController
     
     # グループ組合せ試験用
     @gcomb = GroupCombination.all
+     
   end
 
   def edit
@@ -93,6 +96,14 @@ class User::GroupsController < ApplicationController
   def g_count(number)
     counts = GroupCombination.where(group_id: number).count
     return counts
+  end
+  
+  
+  
+  # グループ組合せ試験用
+  def guser(user)
+    name = User.find(user).nickname
+    return name
   end
   
   

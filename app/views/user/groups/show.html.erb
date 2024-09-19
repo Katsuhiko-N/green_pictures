@@ -34,9 +34,8 @@
 <!--以下試験用-->
 <% @gcomb.each do |f| %>
 
-<p>組合せID<%= f.id%></p>
-<p>組合せユーザー<%= f.user_id%></p>
-<p>組合せグループ<%= f.group_id%></p>
+<p>組合せID<%= f.id %></p>
+<p><%= f.group_id %>グループに<%= guser(f.user_id) %></p>
 <% end %>
 
 <%= link_to "このグループを破棄", group_path(params[:id]), method: :delete %>
