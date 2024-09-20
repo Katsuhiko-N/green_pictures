@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :group_combinations, dependent: :destroy
   has_many :group_messages, dependent: :destroy
   
+  has_many :groups, through: :group_combinations
+  
   
   # バリデーション
     validates :name, presence: true

@@ -1,2 +1,28 @@
-<h1>User::Groups#new</h1>
-<p>Find me in app/views/user/groups/new.html.erb</p>
+<h2>新規グループ</h2>
+
+<!--エラーメッセージ表示-->
+<% if @group.errors.any? %>
+    <%= @group.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+
+<div class="mx-auto">
+        <%= form_with model: @group do |f| %>
+        
+        <p>画像</p>
+        <%= f.file_field :g_image, accept: "image/*" %>
+        
+        <p>タイトル</p>
+        <%= f.text_field :title %>
+        
+        <p>説明文</p>
+        <%= f.text_area :body %>
+        
+        <%= f.submit 'グループを作成' %>
+        <% end %>
+</div>

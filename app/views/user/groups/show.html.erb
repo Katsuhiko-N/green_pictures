@@ -1,2 +1,41 @@
-<h1>User::Groups#show</h1>
-<p>Find me in app/views/user/groups/show.html.erb</p>
+<h2><%= @group.title %>のグループページ</h2>
+<p><%= @group.body %></p>
+<p>このグループのオーナー：<%= owner_n_name(@group.id) %></p>
+
+<% if current_user.id == @group.owner_id %>
+    <%= link_to group_path(@group.id), method: :patch do %>
+        <p class="btn btn-info">グループを編集</p>
+    <% end %>
+    <%= link_to group_path(@group.id), method: :delete, "data-confirm" => "本当にグループを削除しますか？" do %>
+        <p class="btn btn-danger">グループを削除</p>
+    <% end %>
+    
+   
+<% elsif @group.exist_user?(current_user) %>
+    <%= link_to group_group_combination_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+        <p class="btn btn-danger">グループを退会</p>
+    <% end %>
+<% else %>
+    <%= link_to group_group_combinations_path(@group.id), method: :post do %>
+        <p class="btn btn-info">グループに参加</p>
+    <% end %>
+<% end %>
+
+
+<div class="mx-auto">
+    <p>後日実装予定：メンバー一覧</p>
+    <p>後日実装予定：メンバー投稿</p>
+    <p>後日実装予定：グループメッセージ</p>
+</div>
+
+
+
+
+<!--以下試験用-->
+<% @gcomb.each do |f| %>
+
+<p>組合せID<%= f.id %></p>
+<p><%= f.group_id %>グループに<%= guser(f.user_id) %></p>
+<% end %>
+
+<%= link_to "このグループを破棄", group_path(params[:id]), method: :delete %>

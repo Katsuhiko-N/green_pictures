@@ -10,40 +10,41 @@
     </ul>
 <% end %>
 
-
-<%= form_with model: @user do |f| %>
-
- <div class="field">
-    <%= f.label :name, "氏名" %><br/>
-    <%= f.text_field :name %>
-  </div>
+<div class="mx-auto">
+  <%= form_with model: @user do |f| %>
   
-  <div class="field">
-    <%= f.label :nickname, "ニックネーム" %><br/>
-    <%= f.text_field :nickname %>
-  </div>
+   <div class="field">
+      <%= f.label :name, "氏名" %><br/>
+      <%= f.text_field :name %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :nickname, "ニックネーム" %><br/>
+      <%= f.text_field :nickname %>
+    </div>
+    
+    <div class="field my-3">
+      <%= f.label :image, "プロフィール画像" %><br/>
+      <%= f.file_field :image, accept: "image/*" %>
+    </div>
+    
+    <div class="field my-3">
+      <%= f.label :body, "コメント" %><br/>
+      <%= f.text_area :body %>
+    </div>
+    
+    <div class="field my-3">
+      <%= f.label :email, "メールアドレス" %><br/>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
   
-  <div class="field my-3">
-    <%= f.label :image, "プロフィール画像" %><br/>
-    <%= f.file_field :image, accept: "image/*" %>
-  </div>
-  
-  <div class="field my-3">
-    <%= f.label :body, "コメント" %><br/>
-    <%= f.text_area :body %>
-  </div>
-  
-  <div class="field my-3">
-    <%= f.label :email, "メールアドレス" %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions my-3">
-    <%= f.submit "編集完了" %>
-  </div>
-  
-  <%= link_to unsubscribe_users_path do%>
-    <p class="btn btn-danger my-5">退会する</p>
+    <div class="actions my-3">
+      <%= f.submit "編集完了" %>
+    </div>
+    
+    <%= link_to unsubscribe_users_path do%>
+      <p class="btn btn-danger my-5">退会する</p>
+    <% end %>
+    
   <% end %>
-  
-<% end %>
+</div>

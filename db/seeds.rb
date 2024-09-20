@@ -80,6 +80,52 @@ end
 puts "seedコメント生成完了"
 
 
+puts "seedグループ生成開始"
+Group.find_or_create_by!(id: "1") do |group|
+  group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group1.jpg"), filename:"sample-post1.jpg")
+  group.title = "山菜好き"
+  group.body = "季節の山菜の情報共有。食中毒には気を付けて、怪しいものは採らないようにしましょう"
+  group.owner_id = "1"
+end
+
+
+Group.find_or_create_by!(id: "2") do |group|
+  group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group2.jpg"), filename:"sample-post2.jpg")
+  group.title = "キノコ同好会"
+  group.body = "キノコが好きな方、興味のある方向けのコミュニティ。自由にキノコの情報共有しましょう"
+  group.owner_id = "2"
+end
+
+Group.find_or_create_by!(id: "3") do |group|
+  group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group3.jpg"), filename:"sample-post3.jpg")
+  group.title = "お花の写真共有したい！"
+  group.body = "良い感じの写真が撮れたら共有しよう！"
+  group.owner_id = "3"
+end
+
+puts "seedグループ生成完了"
+
+
+
+puts "seedグループ組合せ生成開始"
+GroupCombination.find_or_create_by!(id: "1") do |group_combinaton|
+  group_combinaton.user_id = "1"
+  group_combinaton.group_id = "1"
+end
+
+GroupCombination.find_or_create_by!(id: "2") do |group_combinaton|
+  group_combinaton.user_id = "2"
+  group_combinaton.group_id = "2"
+end
+
+GroupCombination.find_or_create_by!(id: "3") do |group_combinaton|
+  group_combinaton.user_id = "3"
+  group_combinaton.group_id = "3"
+end
+
+
+puts "seedグループ組合せ生成完了"
+
 
 puts "管理者生成開始"
 admin = Admin.find_or_create_by!(email: ENV['AD_EMAIL'] ) do |admin|
