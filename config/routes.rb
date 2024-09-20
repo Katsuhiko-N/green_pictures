@@ -9,6 +9,12 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
     end
     
+    # 投稿コメント一覧機能
+    resources :comments, only: [:index] do
+      member do
+        delete 'comments' => 'comments#idx_destroy', as: "idx_destroy"
+      end
+    end
     # ユーザー機能
     resources :users, except: [:new, :create, :edit, :destroy]
     

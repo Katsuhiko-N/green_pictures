@@ -79,6 +79,7 @@ end
 
 puts "seedコメント生成完了"
 
+
 puts "seedグループ生成開始"
 Group.find_or_create_by!(id: "1") do |group|
   group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group1.jpg"), filename:"sample-post1.jpg")
