@@ -45,7 +45,7 @@ class User::GroupsController < ApplicationController
     
     # グループ組合せ試験用
     @gcomb = GroupCombination.all
-     
+    
   end
 
   def edit
