@@ -6,8 +6,8 @@ class User::GroupsController < ApplicationController
   # 試験用
   helper_method :guser
   
-  # オーナー名呼び出しメソッド
-  helper_method :owner_n_name
+  # 簡易ユーザー呼び出しメソッド
+  helper_method :g_user
   
   # グループ参加人数呼び出しメソッド
   helper_method :g_count
@@ -84,11 +84,10 @@ class User::GroupsController < ApplicationController
   end
   
   
-  # オーナーのニックネーム呼び出し
-  def owner_n_name(id)
-    owner = Group.find(id).owner_id
-    ownername = User.find(owner).nickname
-    return ownername
+  # 簡易ユーザー呼び出し
+  def g_user(id)
+    user = User.find(id)
+    return user
   end
   
   

@@ -1,30 +1,86 @@
 <h2><%= @group.title %>のグループページ</h2>
-<p><%= @group.body %></p>
-<p>このグループのオーナー：<%= owner_n_name(@group.id) %></p>
 
-<% if current_user.id == @group.owner_id %>
-    <%= link_to group_path(@group.id), method: :patch do %>
-        <p class="btn btn-info">グループを編集</p>
-    <% end %>
-    <%= link_to group_path(@group.id), method: :delete, "data-confirm" => "本当にグループを削除しますか？" do %>
-        <p class="btn btn-danger">グループを削除</p>
-    <% end %>
-    
-   
-<% elsif @group.exist_user?(current_user) %>
-    <%= link_to group_group_combination_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
-        <p class="btn btn-danger">グループを退会</p>
-    <% end %>
-<% else %>
-    <%= link_to group_group_combinations_path(@group.id), method: :post do %>
-        <p class="btn btn-info">グループに参加</p>
-    <% end %>
-<% end %>
+<div class="container-fluid">
+    <div class="row">
+        <!--紹介文-->
+        <p class="col-10"><%= @group.body %></p>
+        <!--入退会メニュー兼編集破棄ボタン-->
+        <div class="col-2">
+            <% if current_user.id == @group.owner_id %>
+                <%= link_to group_path(@group.id), method: :patch do %>
+                    <p class="btn btn-info">グループを編集</p>
+                <% end %>
+                <%= link_to group_path(@group.id), method: :delete, "data-confirm" => "本当にグループを削除しますか？" do %>
+                    <p class="btn btn-danger">グループを削除</p>
+                <% end %>
+                
+               
+            <% elsif @group.exist_user?(current_user) %>
+                <%= link_to group_group_combination_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+                    <p class="btn btn-danger">グループを退会</p>
+                <% end %>
+            <% else %>
+                <%= link_to group_group_combinations_path(@group.id), method: :post do %>
+                    <p class="btn btn-info">グループに参加</p>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<!--オーナー紹介エリア-->
+<div class=""container-fluid"">
+    <div class="row my-3">
+        <%= link_to user_path(@group.owner_id), class: "col ml-3" do %>
+            <%= image_tag g_user(@group.owner_id).show_p_img(60,60), size: "60x60" %>
+            <span>グループオーナー：<%= g_user(@group.owner_id).nickname %></span>
+        <% end %>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-5">
+            <p class="container-fluid table-border-s" >メンバー投稿</p>
+            <!--ユーザーを抽出-->
+            <% @group.users.each do |member| %>
+                <!--投稿を抽出-->
+                <% member.posts.each do |post| %>
+                        <div class="row table-border">
+                            <%= image_tag post.image, size: "60x60", class: "col-3" %>
+                            <span class="col-6"><%= post.title %></span>
+                            <span class="col-3"><%= member.nickname %></span>
+                        </div>
+                    <% end %>
+            <% end %>
+        </div>
+        
+        <div class="col-3">
+            <p class="container-fluid table-border-s">メンバー一覧</p>
+            <!--ユーザーを抽出：-->
+            <% @group.users.each do |member| %>
+                <%= link_to user_path(member.id) do %>
+                    <div class="row table-border">
+                        <%= image_tag member.show_p_img(60,60), size: "60x60", class: "col-4" %>
+                        <span class="col-5"><%= member.nickname %></span>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+        
+    </div>
+</div>
+
+
 
 
 <div class="mx-auto">
-    <p>後日実装予定：メンバー一覧</p>
-    <p>後日実装予定：メンバー投稿</p>
+    
+    
+    
     <p>後日実装予定：グループメッセージ</p>
 </div>
 

@@ -32,7 +32,7 @@
             </td>
             <td class="col-3">
                 <%= link_to user_path(group.owner_id) do %>
-                    <%= owner_n_name(group.id) %>
+                    <%= g_user(group.owner_id).nickname %>
                 <% end %>
             </td>
             <td class="col-2">
