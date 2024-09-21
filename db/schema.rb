@@ -76,11 +76,13 @@ ActiveRecord::Schema.define(version: 2024_09_21_093914) do
   end
 
   create_table "group_messages", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "group_id", null: false
+    t.integer "user_id"
+    t.integer "group_id"
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_messages_on_group_id"
+    t.index ["user_id"], name: "index_group_messages_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -119,4 +121,6 @@ ActiveRecord::Schema.define(version: 2024_09_21_093914) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
+  add_foreign_key "group_messages", "groups"
+  add_foreign_key "group_messages", "users"
 end

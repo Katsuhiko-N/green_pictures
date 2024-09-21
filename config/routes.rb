@@ -49,7 +49,10 @@ Rails.application.routes.draw do
     
     # グループ機能
     resources :groups do
+      # メンバー登録
       resources :group_members, only:[:create, :destroy]
+      # グループメッセージ
+      resources :group_messages, only:[:create, :destroy]
     end
     
   end
@@ -59,7 +62,7 @@ Rails.application.routes.draw do
   # トップページ
   root to: 'homes#top'
   
-    # devise関係のルーティング
+  # devise関係のルーティング
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
