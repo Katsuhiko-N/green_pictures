@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     
     # グループ機能
     resources :groups do
-      resources :group_combinations, only:[:create, :destroy]
+      resources :group_members, only:[:create, :destroy]
     end
     
   end

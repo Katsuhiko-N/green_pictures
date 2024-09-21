@@ -108,19 +108,19 @@ puts "seedグループ生成完了"
 
 
 puts "seedグループ組合せ生成開始"
-GroupCombination.find_or_create_by!(id: "1") do |group_combinaton|
-  group_combinaton.user_id = "1"
-  group_combinaton.group_id = "1"
+GroupMember.find_or_create_by!(id: "1") do |gmem|
+  gmem.user_id = "1"
+  gmem.group_id = "1"
 end
 
-GroupCombination.find_or_create_by!(id: "2") do |group_combinaton|
-  group_combinaton.user_id = "2"
-  group_combinaton.group_id = "2"
+GroupMember.find_or_create_by!(id: "2") do |gmem|
+  gmem.user_id = "2"
+  gmem.group_id = "2"
 end
 
-GroupCombination.find_or_create_by!(id: "3") do |group_combinaton|
-  group_combinaton.user_id = "3"
-  group_combinaton.group_id = "3"
+GroupMember.find_or_create_by!(id: "3") do |gmem|
+  gmem.user_id = "3"
+  gmem.group_id = "3"
 end
 
 

@@ -9,9 +9,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :group_combinations, dependent: :destroy
-  has_many :group_messages, dependent: :destroy
+  has_many :group_members, dependent: :destroy
   
-  has_many :groups, through: :group_combinations
+  has_many :groups, through: :group_members
   
   
   # バリデーション

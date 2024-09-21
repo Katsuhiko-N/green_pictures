@@ -16,11 +16,11 @@
                 
                
             <% elsif @group.exist_user?(current_user) %>
-                <%= link_to group_group_combination_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+                <%= link_to group_group_member_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
                     <p class="btn btn-danger">グループを退会</p>
                 <% end %>
             <% else %>
-                <%= link_to group_group_combinations_path(@group.id), method: :post do %>
+                <%= link_to group_group_members_path(@group.id), method: :post do %>
                     <p class="btn btn-info">グループに参加</p>
                 <% end %>
             <% end %>
@@ -49,12 +49,13 @@
             <% @group.users.each do |member| %>
                 <!--投稿を抽出-->
                 <% member.posts.each do |post| %>
-                        <div class="row table-border">
+                    <%= link_to post_path(post.id) do %>
+                        <div class="row table-border-s">
                             <%= image_tag post.image, size: "60x60", class: "col-3" %>
-                            <span class="col-6"><%= post.title %></span>
-                            <span class="col-3"><%= member.nickname %></span>
+                            <span class="col-9"><%= post.title %></span>
                         </div>
                     <% end %>
+                <% end %>
             <% end %>
         </div>
         
@@ -63,9 +64,9 @@
             <!--ユーザーを抽出：-->
             <% @group.users.each do |member| %>
                 <%= link_to user_path(member.id) do %>
-                    <div class="row table-border">
+                    <div class="row table-border-s">
                         <%= image_tag member.show_p_img(60,60), size: "60x60", class: "col-4" %>
-                        <span class="col-5"><%= member.nickname %></span>
+                        <span class="col-8"><%= member.nickname %></span>
                     </div>
                 <% end %>
             <% end %>
@@ -88,7 +89,7 @@
 
 
 <!--以下試験用-->
-<% @gcomb.each do |f| %>
+<% @gmem.each do |f| %>
 
 <p>組合せID<%= f.id %></p>
 <p><%= f.group_id %>グループに<%= guser(f.user_id) %></p>

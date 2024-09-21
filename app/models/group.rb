@@ -2,19 +2,19 @@ class Group < ApplicationRecord
     
     has_one_attached :g_image
     
-    has_many :group_combinations, dependent: :destroy
+    has_many :group_members, dependent: :destroy
     has_many :group_messages, dependent: :destroy
     
-    has_many :users, through: :group_combinations
+    has_many :users, through: :group_members
     
     # バリデーション
     validates :title, presence: true
     validates :body, presence: true
     
     # グループに参加しているか？（グループとユーザの組み合わせが存在するか）
-    # groupに結びついたgroupcombinationsにuser.idが一致するものがあるか？
+    # groupに結びついたgroupmembersにuser.idが一致するものがあるか？
     def exist_user?(user)
-        group_combinations.exists?(user_id: user.id)
+        group_members.exists?(user_id: user.id)
     end
     
     

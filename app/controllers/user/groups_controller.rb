@@ -1,5 +1,6 @@
 class User::GroupsController < ApplicationController
-    # ログインしているか
+  
+  # ログインしているか
   before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
   
@@ -25,9 +26,9 @@ class User::GroupsController < ApplicationController
       flash[:notice] = "投稿に成功しました"
       
       # 組合せ（メンバー）作成
-      g_comb = GroupCombination.new(group_id: @group.id)
-      g_comb.user_id = current_user.id
-      g_comb.save
+      g_mem = GroupMember.new(group_id: @group.id)
+      g_mem.user_id = current_user.id
+      g_mem.save
       
       redirect_to group_path(@group.id)
     else
@@ -44,7 +45,7 @@ class User::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     
     # グループ組合せ試験用
-    @gcomb = GroupCombination.all
+    @gmem = GroupMember.all
      
   end
 
@@ -93,7 +94,7 @@ class User::GroupsController < ApplicationController
   
   # グループ参加人数呼び出し
   def g_count(number)
-    counts = GroupCombination.where(group_id: number).count
+    counts = GroupMember.where(group_id: number).count
     return counts
   end
   
