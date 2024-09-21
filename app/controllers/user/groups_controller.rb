@@ -43,6 +43,10 @@ class User::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    # グループメッセージ一覧用（降順）
+    @g_messages = GroupMessage.all.order("id DESC")
+    # グループメッセージ投稿フォーム用
+    @g_message = GroupMessage.new
     
     # グループ組合せ試験用
     @gmem = GroupMember.all

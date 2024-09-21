@@ -1,5 +1,15 @@
 <h2><%= @group.title %>のグループページ</h2>
 
+<!--グループメッセージのエラーメッセージ表示-->
+<% if @g_message.errors.any? %>
+    <%= @g_message.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @g_message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
 <div class="container-fluid">
     <div class="row">
         <!--紹介文-->
@@ -43,52 +53,75 @@
 <div class="container-fluid">
     <div class="row">
         
-        <div class="col-5">
-            <p class="container-fluid table-border-s" >メンバー投稿</p>
+        <!--メンバー投稿一覧-->
+        <div class="col-3">
+            <p class="container table-border-l">メンバー投稿</p>
             <!--ユーザーを抽出-->
             <% @group.users.each do |member| %>
                 <!--投稿を抽出-->
                 <% member.posts.each do |post| %>
                     <%= link_to post_path(post.id) do %>
-                        <div class="row table-border-s">
-                            <%= image_tag post.image, size: "60x60", class: "col-3" %>
-                            <span class="col-9"><%= post.title %></span>
+                        <div class="row mx-1 table-border-s">
+                            <%= image_tag post.image, size: "60x60" %>
+                            <span class="col"><%= post.title %></span>
                         </div>
                     <% end %>
                 <% end %>
             <% end %>
         </div>
         
+        <!--メンバー一覧-->
         <div class="col-3">
-            <p class="container-fluid table-border-s">メンバー一覧</p>
+            <p class="container table-border-l">メンバー一覧</p>
             <!--ユーザーを抽出：-->
             <% @group.users.each do |member| %>
                 <%= link_to user_path(member.id) do %>
-                    <div class="row table-border-s">
-                        <%= image_tag member.show_p_img(60,60), size: "60x60", class: "col-4" %>
-                        <span class="col-8"><%= member.nickname %></span>
+                    <div class="row mx-1 table-border-s">
+                        <%= image_tag member.show_p_img(60,60), size: "60x60" %>
+                        <span class="col"><%= member.nickname %></span>
                     </div>
                 <% end %>
+            <% end %>
+        </div>
+        
+        
+        <!--グループメッセージ-->
+        <div class="col-6">
+            <p class="container table-border-l">グループメッセージ</p>
+            <!--メッセージ一覧-->
+            <% @g_messages.each do |g_message| %>
+            <div class="row mx-1 table-border-s">
+                <p class="col-8"><%= g_message.body %></p>
+                <span class="col-2"><%= g_user(g_message.user_id).nickname %></span>
+                <% if g_message.user_id == current_user.id %>
+                    <%= link_to group_group_message_path(params[:id], g_message.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2" do %>
+                        <p class="btn btn-danger btn-sm">削除</p>
+                    <% end %>
+                <% end %>
+            </div>
             <% end %>
         </div>
         
     </div>
 </div>
 
-
-
-
-<div class="mx-auto">
-    
-    
-    
-    <p>後日実装予定：グループメッセージ</p>
+<div class="container my-3">
+    <!--メッセージ投稿-->
+        <div>
+            <%= form_with model: @g_message, url: group_group_messages_path(params[:id]), method: :post do |f| %>
+            <p>グループメッセージ投稿</p>
+            <%= f.text_area :body, size: "60x2" %>
+            <%= f.submit 'メッセージ投稿' %>
+            <% end %>
+        </div>
 </div>
 
 
 
 
-<!--以下試験用-->
+
+<P class="my-5">以下試験用</P>
+
 <% @gmem.each do |f| %>
 
 <p>組合せID<%= f.id %></p>
