@@ -13,10 +13,15 @@
 <div class="container-fluid">
     <div class="row">
         <!--紹介文-->
-        <p class="col-10"><%= @group.body %></p>
+        <p class="col-9"><%= @group.body %></p>
         <!--入退会メニュー兼編集破棄ボタン-->
-        <div class="col-2">
+        <div class="col-3">
             <% if current_user.id == @group.owner_id %>
+                
+                <%= link_to group_group_members_path(@group.id) do %>
+                    <p class="btn btn-info">グループメンバーを編集</p>
+                <% end %>
+                
                 <%= link_to group_path(@group.id), method: :patch do %>
                     <p class="btn btn-info">グループを編集</p>
                 <% end %>
@@ -24,15 +29,22 @@
                     <p class="btn btn-danger">グループを削除</p>
                 <% end %>
                 
-               
             <% elsif @group.exist_user?(current_user) %>
-                <%= link_to group_group_member_path(@group.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
-                    <p class="btn btn-danger">グループを退会</p>
+               
+                <% if is_member?(current_user.id) %>
+                    <%= link_to group_group_member_path(@group.id, current_user.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+                        <p class="btn btn-danger">グループを退会</p>
+                    <% end %>
+                <% else %>
+                    <p class="btn btn-info disabled">グループに参加申請中</p>
                 <% end %>
+                
             <% else %>
+                
                 <%= link_to group_group_members_path(@group.id), method: :post do %>
-                    <p class="btn btn-info">グループに参加</p>
+                    <p class="btn btn-info">グループに参加申請</p>
                 <% end %>
+                
             <% end %>
         </div>
     </div>
@@ -49,6 +61,24 @@
 </div>
 
 
+<!--ユーザーのグループステータス-->
+<div>
+        <% if current_user.id == @group.owner_id %>
+            <p>あなたのグループステータスは：オーナーです</p>
+        <% elsif @group.exist_user?(current_user) %>
+            <% if is_member?(current_user.id) %>
+                <p>あなたのグループステータスは：メンバーです</p>
+            <% else %>
+                <p>あなたのグループステータスは：メンバー加入申請中です</p>
+            <% end %>
+        <% else %>
+            <p>あなたのグループステータスは：メンバーではありません</p>
+        <% end %>
+</div>
+
+
+
+
 
 <div class="container-fluid">
     <div class="row">
@@ -56,10 +86,10 @@
         <!--メンバー投稿一覧-->
         <div class="col-3">
             <p class="container table-border-l">メンバー投稿</p>
-            <!--ユーザーを抽出-->
-            <% @group.users.each do |member| %>
+            <!--メンバーを抽出-->
+            <% @g_mems.each do |member| %>
                 <!--投稿を抽出-->
-                <% member.posts.each do |post| %>
+                <% g_user(member.user_id).posts.each do |post| %>
                     <%= link_to post_path(post.id) do %>
                         <div class="row mx-1 table-border-s">
                             <%= image_tag post.image, size: "60x60" %>
@@ -73,12 +103,12 @@
         <!--メンバー一覧-->
         <div class="col-3">
             <p class="container table-border-l">メンバー一覧</p>
-            <!--ユーザーを抽出：-->
-            <% @group.users.each do |member| %>
-                <%= link_to user_path(member.id) do %>
+            <!--メンバーを抽出：-->
+            <% @g_mems.each do |member| %>
+                <%= link_to user_path(member.user_id) do %>
                     <div class="row mx-1 table-border-s">
-                        <%= image_tag member.show_p_img(60,60), size: "60x60" %>
-                        <span class="col"><%= member.nickname %></span>
+                        <%= image_tag g_user(member.user_id).show_p_img(60,60), size: "60x60" %>
+                        <span class="col"><%= g_user(member.user_id).nickname %></span>
                     </div>
                 <% end %>
             <% end %>
@@ -105,8 +135,9 @@
     </div>
 </div>
 
-<div class="container my-3">
-    <!--メッセージ投稿-->
+<% if is_member?(current_user.id) %>
+    <div class="container my-3">
+        <!--メッセージ投稿-->
         <div>
             <%= form_with model: @g_message, url: group_group_messages_path(params[:id]), method: :post do |f| %>
             <p>グループメッセージ投稿</p>
@@ -114,18 +145,5 @@
             <%= f.submit 'メッセージ投稿' %>
             <% end %>
         </div>
-</div>
-
-
-
-
-
-<P class="my-5">以下試験用</P>
-
-<% @gmem.each do |f| %>
-
-<p>組合せID<%= f.id %></p>
-<p><%= f.group_id %>グループに<%= guser(f.user_id) %></p>
+    </div>
 <% end %>
-
-<%= link_to "このグループを破棄", group_path(params[:id]), method: :delete %>

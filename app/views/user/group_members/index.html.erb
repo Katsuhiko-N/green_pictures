@@ -1,0 +1,58 @@
+<h2>グループメンバー管理ページ</h2>
+
+<%= link_to group_path(params[:group_id]) do %>
+    <p class="btn btn-info">戻る</p>
+<% end %>
+
+
+<table class="container mx-auto">
+    <tr class="row"><td class="col"><p>加入済みリスト</p></td></tr>
+    <!--メンバーを絞り込む-->
+    <% @g_mems.each do |g_mem| %>
+    <tr class="row">
+            <td><%= image_tag g_mem.user.show_p_img(60,60), size: "60x60" %></td>
+            <td class="col-3"><%= g_mem.user.nickname %></td>
+            <td class="col-3">
+                <%= link_to group_group_member_path(params[:group_id], g_mem.user_id), method: :patch do %>
+                    <!--状態切り替え-->
+                    <% if g_mem.is_active == true %>
+                　      <p class="btn btn-warning">加入待ちに戻す</p>
+                　  <% else %>
+                　     <p class="btn btn-info">加入させる</p>
+                　  <% end %>
+                <% end %>
+            </td>
+            <td class="col-3">
+                <%= link_to group_group_member_path(params[:group_id], g_mem.user_id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+                    <p class="btn btn-danger">退会させる</p>
+                <% end %>
+            </td>
+    </tr>
+    <% end %>
+</table>
+    
+<table class="container mx-auto">
+    <tr class="row"><td class="col"><p>加入待ちリスト</p></td></tr>
+    <!--メンバーを絞り込む-->
+    <% @g_no_mems.each do |g_no_mem| %>
+    <tr class="row">
+        <td><%= image_tag g_no_mem.user.show_p_img(60,60), size: "60x60" %></td>
+        <td class="col-3"><%= g_no_mem.user.nickname %></td>
+        <td class="col-3">
+            <%= link_to group_group_member_path(params[:group_id], g_no_mem.user_id), method: :patch do %>
+            <!--状態切り替え-->
+                    <% if g_no_mem.is_active == true %>
+                　      <p class="btn btn-warning">加入待ちに戻す</p>
+                　  <% else %>
+                　     <p class="btn btn-info">加入させる</p>
+                　  <% end %>
+            <% end %>
+        </td>
+        <td class="col-3">
+            <%= link_to group_group_member_path(params[:group_id], g_no_mem.user_id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+                <p class="btn btn-danger">退会させる</p>
+            <% end %>
+        </td>
+    </tr>
+    <% end %>
+</table>

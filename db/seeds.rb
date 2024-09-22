@@ -111,16 +111,19 @@ puts "seedグループ組合せ生成開始"
 GroupMember.find_or_create_by!(id: "1") do |gmem|
   gmem.user_id = "1"
   gmem.group_id = "1"
+  gmem.is_active = "true"
 end
 
 GroupMember.find_or_create_by!(id: "2") do |gmem|
   gmem.user_id = "2"
   gmem.group_id = "2"
+  gmem.is_active = "true"
 end
 
 GroupMember.find_or_create_by!(id: "3") do |gmem|
   gmem.user_id = "3"
   gmem.group_id = "3"
+  gmem.is_active = "true"
 end
 
 

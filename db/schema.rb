@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2024_09_21_093914) do
   create_table "group_members", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
+    t.boolean "is_active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_members_on_group_id"

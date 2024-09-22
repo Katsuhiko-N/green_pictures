@@ -49,8 +49,8 @@ Rails.application.routes.draw do
     
     # グループ機能
     resources :groups do
-      # メンバー登録
-      resources :group_members, only:[:create, :destroy]
+      # メンバー組合せ（登録）
+      resources :group_members, except:[:new, :edit]
       # グループメッセージ
       resources :group_messages, only:[:create, :destroy]
     end
