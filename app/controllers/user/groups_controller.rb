@@ -1,16 +1,15 @@
 class User::GroupsController < ApplicationController
-    # ログインしているか
+  
+  # ログインしているか
   before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
   
-  # 試験用
-  helper_method :guser
-  
-  # オーナー名呼び出しメソッド
-  helper_method :owner_n_name
-  
   # グループ参加人数呼び出しメソッド
   helper_method :g_count
+  # 簡易ユーザー呼び出しメソッド
+  helper_method :g_user
+  # グループ加入済みか確認
+  helper_method :is_member?
   
   
   def new
@@ -24,10 +23,11 @@ class User::GroupsController < ApplicationController
     if @group.save
       flash[:notice] = "投稿に成功しました"
       
-      # 組合せ（メンバー）作成
-      g_comb = GroupCombination.new(group_id: @group.id)
-      g_comb.user_id = current_user.id
-      g_comb.save
+      # 組合せ（メンバー）作成=オーナー用
+      g_mem = GroupMember.new(group_id: @group.id)
+      g_mem.user_id = current_user.id
+      g_mem.is_active = "true"
+      g_mem.save
       
       redirect_to group_path(@group.id)
     else
@@ -42,11 +42,17 @@ class User::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    
-    # グループ組合せ試験用
-    @gcomb = GroupCombination.all
-    
+
+    # 加入済みメンバーリスト
+    @g_mems = GroupMember.where(group_id: params[:id], is_active: "true")
+    # グループメッセージ一覧用（降順）
+    @g_messages = GroupMessage.all.order("id DESC")
+    # グループメッセージ投稿フォーム用
+    @g_message = GroupMessage.new
+
   end
+
+
 
   def edit
     @group = Group.find(params[:id])
@@ -69,6 +75,7 @@ class User::GroupsController < ApplicationController
   end
   
   
+  
   private
   
   def group_params
@@ -83,28 +90,22 @@ class User::GroupsController < ApplicationController
     end
   end
   
-  
-  # オーナーのニックネーム呼び出し
-  def owner_n_name(id)
-    owner = Group.find(id).owner_id
-    ownername = User.find(owner).nickname
-    return ownername
+  # 簡易ユーザー呼び出し
+  def g_user(id)
+    user = User.find(id)
+    return user
   end
-  
   
   # グループ参加人数呼び出し
   def g_count(number)
-    counts = GroupCombination.where(group_id: number).count
+    counts = GroupMember.where(group_id: number, is_active: true).count
     return counts
   end
   
-  
-  
-  # グループ組合せ試験用
-  def guser(user)
-    name = User.find(user).nickname
-    return name
+  # メンバー加入状態確認メソッド
+  def is_member?(userid)
+    return GroupMember.exists?(group_id: params[:id], user_id: userid , is_active: "true")
   end
   
-  
+ 
 end

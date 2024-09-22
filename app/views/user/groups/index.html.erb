@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         <% @groups.each do |group| %>
-        <tr class="table-border-l row mt-3">
+        <tr class="table-border-s row mt-3">
             <td class="col-3">
                 <%= link_to group_path(group.id) do %>
                     <%= image_tag group.show_g_img(60,60), size: "60x60"%>
@@ -32,14 +32,14 @@
             </td>
             <td class="col-3">
                 <%= link_to user_path(group.owner_id) do %>
-                    <%= owner_n_name(group.id) %>
+                    <%= g_user(group.owner_id).nickname %>
                 <% end %>
             </td>
             <td class="col-2">
                 <%= g_count(group.id) %>人
             </td>
         </tr>
-        <tr class="table-border-s mb-3">
+        <tr class="mb-3">
             <td><%= group.body %></td>
         </tr>
         <% end %>

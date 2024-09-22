@@ -1,6 +1,6 @@
 require "test_helper"
 
-class GroupCombinationTest < ActiveSupport::TestCase
+class User::GroupMessagesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
