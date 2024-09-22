@@ -42,12 +42,14 @@ class User::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+
     # 加入済みメンバーリスト
     @g_mems = GroupMember.where(group_id: params[:id], is_active: "true")
     # グループメッセージ一覧用（降順）
     @g_messages = GroupMessage.all.order("id DESC")
     # グループメッセージ投稿フォーム用
     @g_message = GroupMessage.new
+
   end
 
 
