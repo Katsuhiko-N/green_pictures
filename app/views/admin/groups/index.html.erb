@@ -1,0 +1,40 @@
+<h3>グループ一覧</h3>
+
+<table class="container">
+    <thead>
+        <tr class="table-border-l row">
+            <!--画像用空白セル-->
+            <th class="col-3"></th>
+            <th class="col-4"><p>グループ名</p></th>
+            <th class="col-3"><p>オーナー</p></th>
+            <th class="col-2"><p>人数</p></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @groups.each do |group| %>
+        <tr class="table-border-s row mt-3">
+            <td class="col-3">
+                <%= link_to admin_group_path(group.id) do %>
+                    <%= image_tag group.show_g_img(60,60), size: "60x60"%>
+                <% end %>
+            </td>
+            <td class="col-4">
+                <%= link_to admin_group_path(group.id) do %>
+                    <%= group.title %>
+                <% end %>
+            </td>
+            <td class="col-3">
+                <%= link_to admin_user_path(group.owner_id) do %>
+                    <%= g_user(group.owner_id).nickname %>
+                <% end %>
+            </td>
+            <td class="col-2">
+                <%= g_count(group.id) %>人
+            </td>
+        </tr>
+        <tr class="mb-3">
+            <td><%= group.body %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
