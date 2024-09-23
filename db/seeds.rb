@@ -131,7 +131,7 @@ puts "seedグループ組合せ生成完了"
 
 
 puts "管理者生成開始"
-admin = Admin.find_or_create_by!(email: ENV['AD_EMAIL'] ) do |admin|
+  admin = Admin.find_or_create_by!(email: ENV['AD_EMAIL'] ) do |admin|
   admin.password = ENV['AD_PASSWORD']
 end
 puts "管理者生成完了"

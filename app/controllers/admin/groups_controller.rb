@@ -1,8 +1,9 @@
-class User::GroupsController < ApplicationController
-  
+class Admin::GroupsController < ApplicationController
+    # admin用レイアウト
+  layout 'admin_application'
+    
   # ログインしているか
-  before_action :authenticate_user!
-  before_action :is_matching_login_user, only:[:edit, :update, :destroy]
+  before_action :authenticate_admin!
   
   # グループ参加人数呼び出しメソッド
   helper_method :g_count
@@ -11,29 +12,6 @@ class User::GroupsController < ApplicationController
   # グループ加入済みか確認
   helper_method :is_member?
   
-  
-  def new
-    @group = Group.new
-  end
-
-  def create
-    @group = Group.new(group_params)
-    @group.owner_id = current_user.id
-    
-    if @group.save
-      flash[:notice] = "投稿に成功しました"
-      
-      # 組合せ（メンバー）作成=オーナー用
-      g_mem = GroupMember.new(group_id: @group.id)
-      g_mem.user_id = current_user.id
-      g_mem.is_active = "true"
-      g_mem.save
-      
-      redirect_to group_path(@group.id)
-    else
-      render :new
-    end
-  end
 
   def index
     @groups = Group.all
@@ -53,26 +31,10 @@ class User::GroupsController < ApplicationController
   end
 
 
-
-  def edit
-    @group = Group.find(params[:id])
-  end
-
-  def update
-    @group = Group.find(group_params)
-    if @group.update
-      flash[:notice] = "保存に成功しました"
-      redirect_to group_path(@group.id)
-    else
-      render :new
-    end
-  end
-
-
   def destroy
     group = Group.find(params[:id])
     group.destroy
-    redirect_to groups_path
+    redirect_to admin_groups_path
   end
   
   
@@ -83,13 +45,7 @@ class User::GroupsController < ApplicationController
     params.require(:group).permit(:title, :body)
   end
   
-  # オーナー認証
-  def is_matching_login_user
-    owner = Group.find(params[:id]).owner_id
-    unless owner == current_user.id
-      redirect_to groups_path
-    end
-  end
+
   
   # 簡易ユーザー呼び出し表示用
   def g_user(id)
@@ -107,6 +63,6 @@ class User::GroupsController < ApplicationController
   def is_member?(userid)
     return GroupMember.exists?(group_id: params[:id], user_id: userid , is_active: "true")
   end
-  
- 
+    
+    
 end

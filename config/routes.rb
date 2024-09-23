@@ -15,12 +15,22 @@ Rails.application.routes.draw do
         delete 'comments' => 'comments#idx_destroy', as: "idx_destroy"
       end
     end
+    
     # ユーザー機能
     resources :users, except: [:new, :create, :edit, :destroy]
     
     # 検索機能
     get 'search' => 'searches#search', as: "search"
+    
+    # グループ機能
+    resources :groups, only: [:index, :show, :destroy]
+    
+    
   end
+  
+  
+  
+  
   
   
   # user内のルーティング
