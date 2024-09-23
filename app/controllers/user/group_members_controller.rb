@@ -6,6 +6,9 @@ class User::GroupMembersController < ApplicationController
     # 既にメンバーか？
     before_action :is_member?, only:[:create]
     
+    # 既にメンバーか？
+    before_action :is_owner?, only:[:index, :update]
+    
     
     def create
       g_mem = GroupMember.new(group_id: params[:group_id])
@@ -57,11 +60,23 @@ class User::GroupMembersController < ApplicationController
     
     private
     
+    
+    # オーナー以外をはじく
+    def is_owner?
+      owner_id = Group.find(params[:group_id]).owner_id
+      unless current_user.id == owner_id
+        redirect_to group_path(params[:group_id])
+      end
+    end
+    
+    
+    # 既にメンバーなら詳細ページに戻る
     def is_member?
       if GroupMember.exists?(group_id: params[:id], user_id: current_user.id)
         redirect_to group_path(params[:group_id])
       end
     end
+    
     
     
 end
