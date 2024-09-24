@@ -25,7 +25,6 @@ Rails.application.routes.draw do
     # グループ機能
     resources :groups, only: [:index, :show, :destroy]
     
-    
   end
   
   
@@ -39,6 +38,14 @@ Rails.application.routes.draw do
     resources :posts do
       # 投稿コメント機能
       resources :comments, only: [:create, :destroy]
+      
+      # タグ機能
+      resources :tags do
+        # タグ組合せ
+        resources :tag_lists
+      end
+      
+      
     end
     
     # ジャンル機能は後で実装
@@ -64,6 +71,7 @@ Rails.application.routes.draw do
       # グループメッセージ
       resources :group_messages, only:[:create, :destroy]
     end
+    
     
   end
   
