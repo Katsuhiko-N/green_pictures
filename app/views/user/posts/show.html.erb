@@ -1,3 +1,21 @@
+<!--エラーメッセージ表示-->
+<% if @post.errors.any? %>
+    <%= @post.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+<% elsif @tag.errors.any? %>
+    <%= @tag.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+
 <div class="container">
     <div>
         <h2><%= @post.title %></h2>
@@ -16,6 +34,24 @@
             <% end %>
         </div>
     </div>
+    
+    
+    <!--タグ機能-->
+    <div class="my-3">
+        <div>
+            <!--タグを表示-->
+            <p>登録されているタグ</p>
+            <% @t_lists.each do |t_list| %>
+                <p class="mx-2"><%= t_list.tag.body %></p>
+            <% end %>
+            <!--タグ登録機能-->
+            <%= form_with model: @tag, url: post_tags_path(@post.id), method: :post do |f| %>
+                <%= f.text_area :body, size: "15x1", placeholder: "タグを入力（15文字以内）" %>
+                <%= f.submit "タグを登録" %>
+            <% end %>
+        </div>
+    </div>
+    
     
     <!--投稿画像-->
     <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600" %></div>
@@ -48,6 +84,7 @@
             </tbody>
         </table>
     </div>
+    
     
     <!--コメント投稿フォーム-->
     <div>

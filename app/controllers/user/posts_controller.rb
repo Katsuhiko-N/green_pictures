@@ -34,6 +34,12 @@ class User::PostsController < ApplicationController
     
     # コメント投稿フォーム用
     @comment = Comment.new
+    
+    # タグ表示用
+    @t_lists = TagList.where(post_id: params[:id])
+    # タグ登録用
+    @tag = Tag.new
+    
   end
 
 
