@@ -9,6 +9,14 @@
         <% end %>
     </ul>
 <% end %>
+<% if @tag.errors.any? %>
+    <%= @tag.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
 
 
 <div class="mx-auto">
@@ -22,6 +30,11 @@
     
     <p>説明文</p>
     <%= f.text_area :body %>
+    
+    <%= fields_for @tag do |tag| %>
+        <p>タグ</p>
+        <%= tag.text_area :name, size: "30x2", placeholder: "タグを入力（15文字以内）" %>
+    <% end %>
     
     <%= f.submit '保存' %>
     <% end %>

@@ -10,6 +10,7 @@ class User::PostsController < ApplicationController
     @tag = Tag.new
   end
 
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
@@ -89,11 +90,9 @@ class User::PostsController < ApplicationController
     params.require(:post).permit(:image, :title, :body)
   end
   
-  # タグ登録用
   def tag_params
-        params.require(:tag).permit(:body)
-    end
-  
+      params.require(:tag).permit(:name)
+  end
   
   # 投稿者認証
   def is_matching_login_user

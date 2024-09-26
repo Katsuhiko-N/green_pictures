@@ -49,7 +49,7 @@
             <div>
                 <% @t_lists.each do |t_list| %>
                     <div class="d-flex">
-                        <p class="mx-2"><%= t_list.tag.body %></p>
+                        <p class="mx-2"><%= t_list.tag.name %></p>
                         <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？" do %>
                             <p>タグを削除</p>
                         <% end %>
@@ -61,7 +61,7 @@
             <div>
                 <% if @t_lists.count < 5 %>
                     <%= form_with model: @tag, url: post_tags_path(@post.id), method: :post do |f| %>
-                        <%= f.text_area :body, size: "15x2", placeholder: "タグを入力（15文字以内）" %>
+                        <%= f.text_area :name, size: "15x2", placeholder: "タグを入力（15文字以内）" %>
                         <%= f.submit "タグを登録" %>
                     <% end %>
                 <% else %>
