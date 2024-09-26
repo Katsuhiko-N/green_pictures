@@ -10,7 +10,7 @@ class User::TagsController < ApplicationController
             t_list.post_id = params[:post_id]
             t_list.tag_id = @tag.id
             t_list.save!
-            flash[:notice] = "投稿に成功しました"
+            flash[:notice] = "タグの登録に成功しました"
             redirect_to post_path(params[:post_id])
         else
             flash[:notice] = "保存に失敗しました"

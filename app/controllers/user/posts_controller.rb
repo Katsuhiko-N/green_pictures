@@ -7,17 +7,31 @@ class User::PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @tag = Tag.new
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     
-    # ジャンル選択機能は後で実装
+    @tag = Tag.new(tag_params)
     
     if @post.save
       flash[:notice] = "投稿に成功しました"
-      redirect_to post_path(@post.id)
+      
+      # タグを入力していた場合タグ保存へ
+      if @tag != nil
+        if @tag.save
+          t_list = TagList.new
+          t_list.post_id = @post.id
+          t_list.tag_id = @tag.id
+          t_list.save
+          flash[:notice] = "タグの登録に成功しました"
+          redirect_to post_path(@post.id)
+        else
+          render :new
+        end
+      end
     else
       render :new
     end
@@ -74,6 +88,12 @@ class User::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:image, :title, :body)
   end
+  
+  # タグ登録用
+  def tag_params
+        params.require(:tag).permit(:body)
+    end
+  
   
   # 投稿者認証
   def is_matching_login_user
