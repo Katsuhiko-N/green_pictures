@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     resources :posts, except: [:new, :create, :edit, :update] do
       # 投稿コメント機能
       resources :comments, only: [:destroy]
+      
+      # タグ機能
+      resources :tags, only: [:create, :destroy] do
+        # タグ組合せ
+        resources :tag_lists, only: [:destroy]
+      end
     end
     
     # 投稿コメント一覧機能
@@ -40,9 +46,9 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
       
       # タグ機能
-      resources :tags do
+      resources :tags, only: [:create] do
         # タグ組合せ
-        resources :tag_lists
+        resources :tag_lists, only: [:destroy]
       end
       
       

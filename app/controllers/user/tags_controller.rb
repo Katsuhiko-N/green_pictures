@@ -1,5 +1,6 @@
 class User::TagsController < ApplicationController
-    
+  # ログインしているか
+  before_action :authenticate_user!
     
     def create
         @tag = Tag.new(tag_params)
@@ -22,20 +23,6 @@ class User::TagsController < ApplicationController
                 @t_lists = TagList.where(post_id: params[:post_id])
             render template: "user/posts/show"
         end
-    end
-    
-    
-    def index
-        @tags = Tag.all
-        
-    end
-    
-    
-    # タグを削除（管理者用）   
-    def destroy
-        tag = Tag.find(params[:id])
-        tag.destroy
-        redirect_to post_path(params[:post_id])
     end
     
     
