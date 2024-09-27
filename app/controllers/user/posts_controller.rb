@@ -15,6 +15,8 @@ class User::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     
+    
+    
     @tag = Tag.new(tag_params)
     
     if @post.save
@@ -79,6 +81,11 @@ class User::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     flash[:notice] = "正常に削除されました"
+    
+    # 投稿と一個も結びつきのなくなったタグを削除
+    tags = Tag.left_outer_joins(:tag_lists).where(tag_lists: { id: nil })
+    tags.destroy_all
+    
     redirect_to posts_path
   end
   

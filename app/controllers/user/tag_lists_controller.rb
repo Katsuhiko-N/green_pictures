@@ -4,18 +4,13 @@ class User::TagListsController < ApplicationController
 
     def destroy
         t_list = TagList.find_by(post_id: params[:post_id], tag_id: params[:tag_id])
+        t_list.destroy
         
-        t_lists = TagList.where(tag_id: params[:tag_id])
+        # 投稿と一個も結びつきのなくなったタグを削除
+        tags = Tag.left_outer_joins(:tag_lists).where(tag_lists: { id: nil })
+        tags.destroy_all
         
-        if t_lists.count > 1
-          t_list.destroy
-          redirect_to post_path(params[:post_id])
-        else
-          # 投稿との関連がなくなったタグを削除
-          tag = Tag.find(params[:tag_id])
-          tag.destroy
-          redirect_to post_path(params[:post_id])
-        end
+        redirect_to post_path(params[:post_id])
     end
     
 end

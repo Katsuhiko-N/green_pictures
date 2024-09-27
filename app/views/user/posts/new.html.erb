@@ -34,7 +34,7 @@
     <%= fields_for @tag do |tag| %>
         <p>タグ</p>
         <%= tag.text_area :name, size: "30x2", placeholder: "タグを入力（15文字以内）" %>
-        <P>タグは後から作成可能</P>
+        <P>タグは投稿後から設定可能です</P>
     <% end %>
     
     <%= f.submit '保存' %>
