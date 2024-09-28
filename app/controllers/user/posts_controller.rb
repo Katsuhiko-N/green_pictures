@@ -25,6 +25,7 @@ class User::PostsController < ApplicationController
       
       # 既に同じ名前のタグがあるかどうか
       if same_tag == nil
+        
         if @tag.save
           t_list = TagList.new
           t_list.post_id = @post.id
@@ -35,7 +36,9 @@ class User::PostsController < ApplicationController
         else
           render :new
         end
+        
       else
+        
         # 同じ名前のタグは組合せ（tag_list）だけ保存
         t_list = TagList.new
         t_list.post_id = @post.id
@@ -43,6 +46,7 @@ class User::PostsController < ApplicationController
         t_list.save
         flash[:notice] = "タグの登録に成功しました"
         redirect_to post_path(@post.id)
+        
       end
     else
       render :new
