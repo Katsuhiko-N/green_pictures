@@ -4,9 +4,8 @@ class HomesController < ApplicationController
         
     end
     
+    # テストページ
     def v_test
-        if user_signed_in?
-            @user = User.find(current_user.id)
-        end
+        @tags = Tag.all
     end
 end
