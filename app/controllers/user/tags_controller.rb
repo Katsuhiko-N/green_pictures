@@ -30,7 +30,7 @@ class User::TagsController < ApplicationController
         else
             # 名前重複した場合同じ名前のタグは組合せ（tag_list）だけ保存
             t_list = TagList.new
-            t_list.post_id = @post.id
+            t_list.post_id = params[:post_id]
             t_list.tag_id = same_tag.id
             t_list.save
             flash[:notice] = "タグの登録に成功しました"
