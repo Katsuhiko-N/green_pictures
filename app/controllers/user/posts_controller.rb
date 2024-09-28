@@ -5,6 +5,7 @@ class User::PostsController < ApplicationController
   # 他人が勝手に投稿をいじれないように
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
   
+  
   def new
     @post = Post.new
     @tag = Tag.new
@@ -14,16 +15,16 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    
-    
-    
     @tag = Tag.new(tag_params)
     
     if @post.save
       flash[:notice] = "投稿に成功しました"
       
-      # タグを入力していた場合タグ保存へ
-      if @tag != nil
+      # 同じ名前のタグあるか検索
+      same_tag = Tag.find_by(name: @tag.name)
+      
+      # 既に同じ名前のタグがあるかどうか
+      if same_tag == nil
         if @tag.save
           t_list = TagList.new
           t_list.post_id = @post.id
@@ -34,6 +35,14 @@ class User::PostsController < ApplicationController
         else
           render :new
         end
+      else
+        # 同じ名前のタグは組合せ（tag_list）だけ保存
+        t_list = TagList.new
+        t_list.post_id = @post.id
+        t_list.tag_id = same_tag.id
+        t_list.save
+        flash[:notice] = "タグの登録に成功しました"
+        redirect_to post_path(@post.id)
       end
     else
       render :new
@@ -51,7 +60,6 @@ class User::PostsController < ApplicationController
     
     # コメント投稿フォーム用
     @comment = Comment.new
-    
     # タグ表示用
     @t_lists = TagList.where(post_id: params[:id])
     # タグ登録用

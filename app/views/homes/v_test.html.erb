@@ -1,1 +1,7 @@
 <h2>テストページ</h2>
+
+<p>以下タグリスト</p>
+
+<% @tags.each do |tag| %>
+<p>id:<%= tag.id %> : <%= tag.name %>　中間テーブルの数（関連投稿数）＝<%= tag.tag_lists.count %></p>
+<% end %>

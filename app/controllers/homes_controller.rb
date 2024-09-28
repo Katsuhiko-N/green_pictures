@@ -6,6 +6,6 @@ class HomesController < ApplicationController
     
     # テストページ
     def v_test
-        
+        @tags = Tag.all
     end
 end
