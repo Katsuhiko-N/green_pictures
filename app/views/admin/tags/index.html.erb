@@ -1,0 +1,17 @@
+<h2>タグ一覧</h2>
+
+<p>タグリスト</p>
+<table>
+    <tr>
+        <th>id</th>
+        <th>タグ名</th>
+        <th>中間テーブルの数（関連投稿数</th>
+    </tr>
+    <% @tags.each do |tag| %>
+    <tr>
+        <td><p>id:<%= tag.id %></p></td>
+        <td><p>name: <%= tag.name %></p></td>
+        <td><p><%= tag.tag_lists.count %></p></td>
+    </tr>
+    <% end %>
+</table>
