@@ -55,7 +55,8 @@ class User::PostsController < ApplicationController
   
   
   def index
-    @posts = Post.all
+    # ページネーション
+    @posts = Post.page(params[:page])
   end
 
 
