@@ -13,6 +13,8 @@
             </tr>
         </thead>
         <tbody>
+            <!--ページネーション-->
+            <% posts = posts.page(params[:page]) %>
             <% posts.each do |post| %>
             <tr class="table-border-s">
                 <td>
@@ -37,6 +39,8 @@
             <% end %>
         </tbody>
     </table>
+    
+    <%= paginate posts %>
 <% elsif defined?(users) && users != nil && users != [] %>
 <!--ユーザーが存在かつ空でない＝ユーザー検索結果-->
     <table>
@@ -47,6 +51,8 @@
             </tr>
         </thead>
         <tbody>
+            <!--ページネーション-->
+            <% users = users.page(params[:page]) %>
             <% users.each do |user| %>
             <tr class="table-border-s">
                 <td>
@@ -63,6 +69,8 @@
             <% end %>
         </tbody>
     </table>
+    
+    <%= paginate users %>
 <% elsif defined?(tags) && tags != nil && tags != [] %>
 <!--投稿が存在かつ空でない＝投稿検索結果-->
     <table>
@@ -76,8 +84,9 @@
         </thead>
         <tbody>
             <% tags.each do |tag| %>
-            
-                <% tag.posts.each do |post| %>
+                <!--ページネーション-->
+                <% posts = tag.posts.page(params[:page]) %>
+                <% posts.each do |post| %>
                 <tr class="table-border-s">
                     <td>
                         <%= link_to post_path(post.id) do %>
@@ -103,6 +112,8 @@
             <% end %>
         </tbody>
     </table>
+    
+    <%= paginate posts %>
 <% else %>
 <!--ユーザー、投稿、タグがいずれもも存在しないもしくは空-->
     <div>
