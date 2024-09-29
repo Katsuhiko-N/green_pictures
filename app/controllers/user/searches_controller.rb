@@ -16,10 +16,16 @@ class User::SearchesController < ApplicationController
                 # 繰り返すうちにallから絞り込まれる
                 @posts = @posts.where("title LIKE ? OR body LIKE ?", "%#{keyword}%", "%#{keyword}%")
             end
-        else
+        elsif model == "user"
             @users = User.all
             @keywords.each do |keyword|
                 @users = @users.where("nickname LIKE ?", "%#{keyword}%")
+            end
+        else
+            @tags = Tag.all
+            @keywords.each do |keyword|
+                # 繰り返すうちにallから絞り込まれる
+                @tags = @tags.where("name LIKE ?", "%#{keyword}%")
             end
         end
         
