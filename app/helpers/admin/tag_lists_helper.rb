@@ -1,0 +1,2 @@
+module Admin::TagListsHelper
+end

@@ -8,12 +8,15 @@ Rails.application.routes.draw do
       # 投稿コメント機能
       resources :comments, only: [:destroy]
       
-      # タグ機能
-      resources :tags, only: [:create, :destroy] do
+      # タグ機能（tag_listでタグid取得用＝アクション無し）
+      resources :tags, only: [:nil] do
         # タグ組合せ
         resources :tag_lists, only: [:destroy]
       end
     end
+    
+    # タグ管理用
+    resources :tags, only: [:index, :destroy]
     
     # 投稿コメント一覧機能
     resources :comments, only: [:index] do
@@ -50,12 +53,8 @@ Rails.application.routes.draw do
         # タグ組合せ
         resources :tag_lists, only: [:destroy]
       end
-      
-      
     end
     
-    # ジャンル機能は後で実装
-    # resources :genres, except: [:show]
     
     # ユーザー機能
     resources :users, except: [:new, :index, :edit, :destroy] do
