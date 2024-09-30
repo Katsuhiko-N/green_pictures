@@ -13,12 +13,12 @@
         </thead>
         <tbody>
             <!--ページネーション-->
-            <% posts = posts.page(params[:page]) %>
-            <% posts.each do |post| %>
+            <% posts_p = posts.page(params[:page]) %>
+            <% posts_p.each do |post| %>
             <tr class="table-border-s">
                 <td>
                     <%= link_to admin_post_path(post.id) do %>
-                        <%= image_tag post.image, size: "80x80" %>
+                        <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
                     <% end %>
                 </td>
                 <td>
@@ -39,7 +39,7 @@
         </tbody>
     </table>
     
-    <%= paginate posts %>
+    <%= paginate posts_p %>
 <% elsif defined?(users) && users != nil && users != [] %>
 <!--ユーザーが存在かつ空でない＝ユーザー検索結果-->
     <table>
@@ -51,12 +51,12 @@
         </thead>
         <tbody>
             <!--ページネーション-->
-            <% users = users.page(params[:page]) %>
-            <% users.each do |user| %>
+            <% users_p = users.page(params[:page]) %>
+            <% users_p.each do |user| %>
             <tr class="table-border-s">
                 <td>
                     <%= link_to admin_user_path(user.id) do %>
-                        <%= image_tag user.show_p_img(60,60), size: "60x60" %>
+                        <%= image_tag(user.show_p_img.variant(resize_to_limit: [80, 80]).processed) %>
                     <% end %>
                 </td>
                 <td>
@@ -69,7 +69,7 @@
         </tbody>
     </table>
     
-    <%= paginate posts %>
+    <%= paginate users_ps %>
 <% elsif defined?(tags) && tags != nil && tags != [] %>
 <!--投稿が存在かつ空でない＝投稿検索結果-->
     <table>
@@ -84,12 +84,12 @@
         <tbody>
             <% tags.each do |tag| %>
                 <!--ページネーション-->
-                <% posts = tag.posts.page(params[:page]) %>
-                <% posts.each do |post| %>
+                <% posts_p = tag.posts.page(params[:page]) %>
+                <% posts_p.each do |post| %>
                 <tr class="table-border-s">
                     <td>
                         <%= link_to post_path(post.id) do %>
-                            <%= image_tag post.image, size: "80x80" %>
+                            <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
                         <% end %>
                     </td>
                     <td>
@@ -112,7 +112,7 @@
         </tbody>
     </table>
     
-    <%= paginate posts %>
+    <%= paginate posts_p %>
 <% else %>
 <!--ユーザーと投稿がどちらも存在しないもしくは空-->
     <div>
