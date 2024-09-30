@@ -32,7 +32,9 @@ Rails.application.routes.draw do
     get 'search' => 'searches#search', as: "search"
     
     # グループ機能
-    resources :groups, only: [:index, :show, :destroy]
+    resources :groups, only: [:index, :show, :destroy] do
+      resources :group_messages, only: [:destroy]
+    end
     
   end
   
