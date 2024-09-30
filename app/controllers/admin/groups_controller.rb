@@ -14,7 +14,8 @@ class Admin::GroupsController < ApplicationController
   
 
   def index
-    @groups = Group.all
+    # ページネーション
+    @groups = Group.page(params[:page])
     
   end
 

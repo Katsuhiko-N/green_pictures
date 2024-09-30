@@ -89,8 +89,13 @@
             <p class="container table-border-l">メンバー投稿</p>
             <!--メンバーを抽出-->
             <% @g_mems.each do |member| %>
+                
+                <!--ページネーション-->
+                <% g_posts = g_user(member.user_id).posts %>
+                <% g_posts = g_posts.page(params[:page]) %>
+                
                 <!--投稿を抽出-->
-                <% g_user(member.user_id).posts.each do |post| %>
+                <% g_posts.each do |post| %>
                     <%= link_to post_path(post.id) do %>
                         <div class="row mx-1 table-border-s">
                             <%= image_tag post.image, size: "60x60" %>
@@ -98,6 +103,7 @@
                         </div>
                     <% end %>
                 <% end %>
+                <%= paginate g_posts %>
             <% end %>
         </div>
         
@@ -113,6 +119,7 @@
                     </div>
                 <% end %>
             <% end %>
+            <%= paginate @g_mems %>
         </div>
         
         
@@ -131,6 +138,7 @@
                 <% end %>
             </div>
             <% end %>
+            <%= paginate @g_messages %>
         </div>
         
     </div>
