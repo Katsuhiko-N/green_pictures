@@ -28,7 +28,7 @@ class Admin::GroupsController < ApplicationController
     @g_mems = @g_mems.page(params[:page])
     
     # グループメッセージ一覧用（降順）
-    @g_messages = GroupMessage.all.order("id DESC")
+    @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC")
     # ページネーション
     @g_messages = @g_messages.page(params[:page])
     

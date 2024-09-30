@@ -56,7 +56,7 @@
             <tr class="table-border-s">
                 <td>
                     <%= link_to admin_user_path(user.id) do %>
-                        <%= image_tag(user.show_p_img.variant(resize_to_limit: [80, 80]).processed) %>
+                        <%= image_tag user.show_p_img(60, 60) %>
                     <% end %>
                 </td>
                 <td>
@@ -69,50 +69,7 @@
         </tbody>
     </table>
     
-    <%= paginate users_ps %>
-<% elsif defined?(tags) && tags != nil && tags != [] %>
-<!--投稿が存在かつ空でない＝投稿検索結果-->
-    <table>
-        <thead>
-            <tr class="table-border-l">
-                <th><p>画像</p></th>
-                <th><p>タイトル</p></th>
-                <th><p>投稿者</p></th>
-                <th><p>コメント数</p></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% tags.each do |tag| %>
-                <!--ページネーション-->
-                <% posts_p = tag.posts.page(params[:page]) %>
-                <% posts_p.each do |post| %>
-                <tr class="table-border-s">
-                    <td>
-                        <%= link_to post_path(post.id) do %>
-                            <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <%= link_to post_path(post.id) do %>
-                            <%= post.title %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <%= link_to user_path(post.user.id) do %>
-                            <%= post.user.nickname %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <%= post.comments.count %>件のコメント
-                    </td>
-                </tr>
-                <% end %>
-                
-            <% end %>
-        </tbody>
-    </table>
-    
-    <%= paginate posts_p %>
+    <%= paginate users_p %>
 <% else %>
 <!--ユーザーと投稿がどちらも存在しないもしくは空-->
     <div>

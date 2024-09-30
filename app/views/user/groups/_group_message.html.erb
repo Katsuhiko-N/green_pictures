@@ -1,0 +1,15 @@
+<!--ローカル変数としてg_messagesが必要-->
+<p class="container table-border-l">グループメッセージ</p>
+    <!--メッセージ一覧-->
+    <% g_messages.each do |g_message| %>
+    <div class="row mx-1 table-border-s">
+        <p class="col-8"><%= g_message.body %></p>
+        <span class="col-2"><%= g_user(g_message.user_id).nickname %></span>
+        <% if g_message.user_id == current_user.id %>
+            <%= link_to group_group_message_path(params[:id], g_message.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2" do %>
+                <p class="btn btn-danger btn-sm">削除</p>
+            <% end %>
+        <% end %>
+    </div>
+    <% end %>
+    <%= paginate g_messages %>

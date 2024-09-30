@@ -34,48 +34,21 @@
 
 <div class="container-fluid">
     <div class="row">
-        
-        <!--メンバー投稿一覧-->
-        <div class="col-3">
-            <p class="container table-border-l">メンバー投稿</p>
-            <!--メンバーを抽出-->
-            <% @g_mems.each do |member| %>
-                
-                <!--ページネーション-->
-                <% g_posts = g_user(member.user_id).posts %>
-                <% g_posts = g_posts.page(params[:page]) %>
-                
-                <!--投稿を抽出-->
-                <% g_posts.each do |post| %>
-                    <%= link_to admin_post_path(post.id) do %>
-                        <div class="row mx-1 table-border-s">
-                            <%= image_tag post.image, size: "60x60" %>
-                            <span class="col"><%= post.title %></span>
-                        </div>
-                    <% end %>
-                <% end %>
-                <%= paginate g_posts %>
-            <% end %>
-        </div>
-        
-        <!--メンバー一覧-->
-        <div class="col-3">
-            <p class="container table-border-l">メンバー一覧</p>
-            <!--メンバーを抽出：-->
-            <% @g_mems.each do |member| %>
-                <%= link_to admin_user_path(member.user_id) do %>
-                    <div class="row mx-1 table-border-s">
-                        <%= image_tag g_user(member.user_id).show_p_img(60,60), size: "60x60" %>
-                        <span class="col"><%= g_user(member.user_id).nickname %></span>
-                    </div>
-                <% end %>
-            <% end %>
-            <%= paginate @g_mems %>
-        </div>
-        
-        
-        <!--グループメッセージ-->
+        <!--メンバー投稿-->
         <div class="col-6">
+            <%= link_to admin_search_path(:model => "group_post", :group_id => @group.id) do %>
+                <p class="btn btn-info">グループメンバーの投稿を検索</p>
+            <% end %>
+        </div>
+        <!--グループメンバー-->
+        <div class="col-6">
+            <%= link_to admin_search_path(:model => "group_member", :group_id => @group.id) do %>
+                <p class="btn btn-info">このグループのメンバーを検索</p>
+            <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             <p class="container table-border-l">グループメッセージ</p>
             <!--メッセージ一覧-->
             <% @g_messages.each do |g_message| %>
