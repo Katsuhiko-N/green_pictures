@@ -37,11 +37,21 @@ class User::SearchesController < ApplicationController
                 @keywords.each do |keyword|
                     @users = @users.where("nickname LIKE ?", "%#{keyword}%")
                 end
-            else
+            elsif model == "tag"
                 tags = Tag.all
                 @keywords.each do |keyword|
                     # 繰り返すうちにallから絞り込まれる
                     tags = tags.where("name LIKE ?", "%#{keyword}%")
+                end
+                
+                @posts = Post.joins(:tag_lists).where('tag_lists.tag_id IN (?)', tags.ids)
+                
+            else
+                # タグ一覧（検索ではなく投稿一覧）
+                tags = Tag.all
+                @keywords.each do |keyword|
+                    # 繰り返すうちにallから絞り込まれる
+                    tags = tags.where(name: keyword)
                 end
                 
                 @posts = Post.joins(:tag_lists).where('tag_lists.tag_id IN (?)', tags.ids)
