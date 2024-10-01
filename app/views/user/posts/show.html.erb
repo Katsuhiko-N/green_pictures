@@ -92,28 +92,6 @@
     <!--コメント総数-->
     <p><%= @post.comments.count %>件のコメント <i class="fa-regular fa-comment"></i></p>
     
-    <!--閲覧者コメントテーブル-->
-    <table>
-        <tbody>
-            <% @post.comments.each do |comment| %>
-            <tr>
-                <td class="col-6"><p><%= comment.body %></p></td>
-                <td class="col-2"><p><%= comment.user.nickname %></p></td>
-                <td class="col-2"><%= comment.updated_at %></td>
-                <td class="col-2">
-                    <!--コメント削除ボタン-->
-                    <% if user_signed_in? %>
-                        <% if comment.user_id == current_user.id %>
-                            <%= link_to post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
-                                <p class="btn btn-sm btn-danger">コメントを削除する</p>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                </td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
     
     <!--コメント投稿フォーム-->
     <div>
@@ -123,6 +101,31 @@
         <% end %>
     </div>
     
+    
+    <!--閲覧者コメントテーブル-->
+    <table>
+        <tbody>
+            <% @comments_p.each do |comment| %>
+                <tr>
+                    <td class="col-6"><p><%= comment.body %></p></td>
+                    <td class="col-2"><p><%= comment.user.nickname %></p></td>
+                    <td class="col-2"><%= comment.updated_at %></td>
+                    <td class="col-2">
+                        <!--コメント削除ボタン-->
+                        <% if user_signed_in? %>
+                            <% if comment.user_id == current_user.id %>
+                                <%= link_to post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
+                                    <p class="btn btn-sm btn-danger">コメントを削除する</p>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+            <!--ページネート済み-->
+            <%= paginate @comments_p %>
+        </tbody>
+    </table>
 </div>
 
 

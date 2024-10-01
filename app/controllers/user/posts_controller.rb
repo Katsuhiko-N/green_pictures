@@ -55,7 +55,8 @@ class User::PostsController < ApplicationController
   
   
   def index
-    @posts = Post.all
+    # ページネーション
+    @posts = Post.page(params[:page])
   end
 
 
@@ -64,6 +65,10 @@ class User::PostsController < ApplicationController
     
     # コメント投稿フォーム用
     @comment = Comment.new
+    # コメントリスト用
+    comments = @post.comments
+    @comments_p = comments.page(params[:page])
+    
     # タグ表示用
     @t_lists = TagList.where(post_id: params[:id])
     # タグ登録用

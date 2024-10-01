@@ -60,12 +60,6 @@ ActiveRecord::Schema.define(version: 2024_09_24_102006) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "genres", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "group_members", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"

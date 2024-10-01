@@ -14,7 +14,8 @@ class Admin::GroupsController < ApplicationController
   
 
   def index
-    @groups = Group.all
+    # ページネーション
+    @groups = Group.page(params[:page])
     
   end
 
@@ -23,8 +24,14 @@ class Admin::GroupsController < ApplicationController
 
     # 加入済みメンバーリスト
     @g_mems = GroupMember.where(group_id: params[:id], is_active: "true")
+    # ページネーション
+    @g_mems = @g_mems.page(params[:page])
+    
     # グループメッセージ一覧用（降順）
-    @g_messages = GroupMessage.all.order("id DESC")
+    @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC")
+    # ページネーション
+    @g_messages = @g_messages.page(params[:page])
+    
     # グループメッセージ投稿フォーム用
     @g_message = GroupMessage.new
 

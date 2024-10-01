@@ -22,10 +22,6 @@
           <div class="collapse navbar-collapse", id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item"><%= link_to "TOP", root_path, class:'text-white mx-1' %></li>
-              <!--ジャンル機能は後で実装-->
-              <!--<li class="nav-item">-->
-              <!--  link_to "ジャンル検索", genres_path, class:'text-white mx-1'-->
-              <!--  </li>-->
               <li class="nav-item"><%= link_to "デバッグテスト", test_path, class:'text-white mx-1' %></li>
               <% if user_signed_in? %>
               <li class="nav-item"><%= link_to "新規投稿", new_post_path, class:'text-white mx-1' %></li>

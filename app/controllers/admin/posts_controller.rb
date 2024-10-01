@@ -15,8 +15,9 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     
-    # コメント投稿フォーム用
-    @comment = Comment.new
+    # コメントリスト用
+    comments = @post.comments
+    @comments_p = comments.page(params[:page])
     
     # タグ表示用
     @t_lists = TagList.where(post_id: params[:id])

@@ -13,11 +13,13 @@
             </tr>
         </thead>
         <tbody>
-            <% posts.each do |post| %>
+            <!--ページネーション-->
+            <% posts_p = posts.page(params[:page]) %>
+            <% posts_p.each do |post| %>
             <tr class="table-border-s">
                 <td>
                     <%= link_to post_path(post.id) do %>
-                        <%= image_tag post.image, size: "80x80" %>
+                        <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
                     <% end %>
                 </td>
                 <td>
@@ -37,6 +39,8 @@
             <% end %>
         </tbody>
     </table>
+    
+    <%= paginate posts_p %>
 <% elsif defined?(users) && users != nil && users != [] %>
 <!--ユーザーが存在かつ空でない＝ユーザー検索結果-->
     <table>
@@ -47,11 +51,13 @@
             </tr>
         </thead>
         <tbody>
-            <% users.each do |user| %>
+            <!--ページネーション-->
+            <% users_p = users.page(params[:page]) %>
+            <% users_p.each do |user| %>
             <tr class="table-border-s">
                 <td>
                     <%= link_to user_path(user.id) do %>
-                        <%= image_tag user.show_p_img(60,60), size: "60x60" %>
+                        <%= image_tag user.show_p_img(60,60) %>
                     <% end %>
                 </td>
                 <td>
@@ -63,46 +69,9 @@
             <% end %>
         </tbody>
     </table>
-<% elsif defined?(tags) && tags != nil && tags != [] %>
-<!--投稿が存在かつ空でない＝投稿検索結果-->
-    <table>
-        <thead>
-            <tr class="table-border-l">
-                <th><p>画像</p></th>
-                <th><p>タイトル</p></th>
-                <th><p>投稿者</p></th>
-                <th><p>コメント数</p></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% tags.each do |tag| %>
-            
-                <% tag.posts.each do |post| %>
-                <tr class="table-border-s">
-                    <td>
-                        <%= link_to post_path(post.id) do %>
-                            <%= image_tag post.image, size: "80x80" %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <%= link_to post_path(post.id) do %>
-                            <%= post.title %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <%= link_to user_path(post.user.id) do %>
-                            <%= post.user.nickname %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <%= post.comments.count %>件のコメント
-                    </td>
-                </tr>
-                <% end %>
-                
-            <% end %>
-        </tbody>
-    </table>
+    
+    <%= paginate users_p %>
+    
 <% else %>
 <!--ユーザー、投稿、タグがいずれもも存在しないもしくは空-->
     <div>
