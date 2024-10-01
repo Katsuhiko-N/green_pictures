@@ -64,7 +64,8 @@
     <!--閲覧者コメントテーブル-->
     <table>
         <tbody>
-            <% @post.comments.each do |comment| %>
+            <!--ページネート済み-->
+            <% @comments_p.each do |comment| %>
             <tr>
                 <td class="col-6"><p><%= comment.body %></p></td>
                 <td class="col-2"><p><%= comment.user.nickname %></p></td>
@@ -77,6 +78,7 @@
                 </td>
             </tr>
             <% end %>
+            <%= paginate @comments_p %>
         </tbody>
     </table>
     
