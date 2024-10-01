@@ -57,6 +57,8 @@ Rails.application.routes.draw do
       end
     end
     
+    # タグ一覧機能
+    resources :tags, only: [:index]
     
     # ユーザー機能
     resources :users, except: [:new, :index, :edit, :destroy] do
