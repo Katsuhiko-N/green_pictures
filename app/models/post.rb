@@ -7,8 +7,6 @@ class Post < ApplicationRecord
     has_many :tag, through: :tag_lists
     
     belongs_to :user
-    # ジャンル機能は後で実装
-    # belongs_to :genre
     
     # バリデーション
     validates :title, presence: true
