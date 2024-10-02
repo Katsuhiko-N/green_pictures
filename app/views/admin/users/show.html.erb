@@ -1,6 +1,6 @@
 <h2>ユーザープロフィール</h2>
 
-<%= render 'profile', user: @user %>
+<%= render 'profile', user: @user, groups: @groups %>
 <p class="mx-auto">ユーザーステータス　<%= @user.is_active %></p>
 <p class="mx-auto">※ユーザーステータスがTRUE＝現在会員、FAULSE=退会済み</p>
 

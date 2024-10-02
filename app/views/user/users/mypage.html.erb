@@ -2,7 +2,7 @@
 
 <p class="mx-auto">名前　<%= @user.name %></p>
 
-<%= render 'profile', user: @user %>
+<%= render 'profile', user: @user, groups: @groups %>
 
 <%= link_to edit_users_path, class: "mx-auto" do %>
     <p class="btn btn-info">プロフィールを編集</p>

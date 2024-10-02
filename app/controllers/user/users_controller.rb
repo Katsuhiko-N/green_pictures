@@ -7,11 +7,13 @@ class User::UsersController < ApplicationController
   
   def mypage
     @user = User.find(current_user.id)
+    @groups = @user.groups
   end
 
 
   def show
     @user = User.find(params[:id])
+    @groups = @user.groups
     # 自分のページ開いたらマイページへ遷移
     if  user_signed_in?
       # 閲覧しているユーザープロフィール＝閲覧者ならマイページ
