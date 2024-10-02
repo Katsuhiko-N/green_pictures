@@ -1,23 +1,27 @@
 <h2>タグ一覧</h2>
 
 <p>タグリスト</p>
-<table>
-    <tr>
-        <th>id</th>
-        <th>タグ名</th>
-        <th>中間テーブルの数（関連投稿数</th>
-        <th></th>
-    </tr>
-    <% @tags.each do |tag| %>
-    <tr>
-        <td><p>id:<%= tag.id %></p></td>
-        <td><p><%= tag.name %></p></td>
-        <td><p><%= tag.tag_lists.count %></p></td>
-        <td>
-            <%= link_to admin_tag_path(tag.id), method: :delete do %>
-                <p class="btn btn-danger">削除</p>
-            <% end %>
-        </td>
-    </tr>
-    <% end %>
+<table class="container=fluid  text-center">
+    <thead>
+        <tr class="row">
+            <th class="col-2"><p>id</p></th>
+            <th class="col-5"><p>タグ名</p></th>
+            <th class="col-2"><p>関連投稿数</p></th>
+            <th class="col-3"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @tags.each do |tag| %>
+        <tr class="row">
+            <td class="col-2"><p>id:<%= tag.id %></p></td>
+            <td class="col-5"><p><%= tag.name %></p></td>
+            <td class="col-2"><p><%= tag.tag_lists.count %></p></td>
+            <td class="col-3">
+                <%= link_to admin_tag_path(tag.id), method: :delete do %>
+                    <p class="btn btn-danger">削除</p>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
 </table>
