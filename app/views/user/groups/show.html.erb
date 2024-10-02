@@ -38,7 +38,7 @@
                 <% else %>
                     <p class="btn btn-info disabled">グループに参加申請中</p>
                     
-                    <%= link_to group_group_member_path(@group.id, current_user.id), method: :delete, "data-confirm" => "本当にグループを退会しますか？" do %>
+                    <%= link_to group_group_member_path(@group.id, current_user.id), method: :delete, "data-confirm" => "本当に取り消しますか？" do %>
                         <p class="btn btn-danger">参加申請を取り消す</p>
                     <% end %>
                 <% end %>
