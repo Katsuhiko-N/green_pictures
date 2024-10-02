@@ -83,8 +83,8 @@ puts "seedコメント生成完了"
 puts "seedグループ生成開始"
 Group.find_or_create_by!(id: "1") do |group|
   group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group1.jpg"), filename:"sample-post1.jpg")
-  group.title = "山菜好き"
-  group.body = "季節の山菜の情報共有。食中毒には気を付けて、怪しいものは採らないようにしましょう"
+  group.title = "野草探検隊"
+  group.body = "庭や近所で見かけた気になった植物の情報共有"
   group.owner_id = "1"
 end
 
