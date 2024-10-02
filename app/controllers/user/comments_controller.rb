@@ -1,8 +1,8 @@
 class User::CommentsController < ApplicationController
   # ログインしているか
   before_action :authenticate_user!
-  # 操作しているユーザーはログインユーザーか？
-  before_action :is_matching_login_user, only: [:destroy]
+  # 操作しているユーザーは投稿者（コメントもしくは画像投稿者）ユーザーか？
+  before_action :is_matching_user, only: [:destroy]
   
   
   def create
@@ -14,11 +14,9 @@ class User::CommentsController < ApplicationController
       redirect_to post_path(params[:post_id])
     else
       @post = Post.find(params[:post_id])
-      
       # コメントリスト用
       comments = @post.comments
       @comments_p = comments.page(params[:page])
-      
       # タグ表示用
       @t_lists = TagList.where(post_id: params[:post_id])
       # タグ登録用
@@ -43,9 +41,12 @@ class User::CommentsController < ApplicationController
   end
   
   # 投稿者認証
-  def is_matching_login_user
-    user = Comment.find(params[:id]).user
-    unless user.id == current_user.id
+  def is_matching_user
+    # コメント投稿者
+    c_user = Comment.find(params[:id]).user
+    # 画像投稿者
+    p_user = Post.find(params[:post_id]).user
+    unless c_user.id == current_user.id || p_user.id == current_user.id
       redirect_to posts_path
     end
   end
