@@ -10,6 +10,7 @@ class Admin::SearchesController < ApplicationController
     def search
         word = search_params[:word] 
         model = search_params[:model]
+        time = search_params[:time]
         
         if word == nil
             # wordが存在しない＝グループ用検索
@@ -51,13 +52,22 @@ class Admin::SearchesController < ApplicationController
                  @posts = Post.joins(:tag_lists).where('tag_lists.tag_id IN (?)', tags.ids)
             end
             
+            
+            # 日時で絞りこみ
+            unless time.empty?
+                unless @posts == nil
+                    @posts = @posts.where("posts.created_at >= ?", Date.parse(time) )
+                else
+                    @users = @users.where("posts.created_at >= ?", Date.parse(time) )
+                end
+            end
         end
     end
     
     private
     
     def search_params
-        params.permit(:word, :model)
+        params.permit(:word, :model, :time)
     end
   
   

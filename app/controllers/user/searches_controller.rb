@@ -73,7 +73,7 @@ class User::SearchesController < ApplicationController
     private
     
     def search_params
-        params.permit(:word, :model, :keyword, :time)
+        params.permit(:word, :model, :time)
     end
     
 end
