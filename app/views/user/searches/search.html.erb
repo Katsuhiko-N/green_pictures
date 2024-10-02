@@ -1,1 +1,12 @@
-<%= render 'user/posts/table_template', posts: @posts, users: @users, tags: @tags %>
+<% if defined?(@posts) && @posts != nil && @posts != [] %>
+    <%= render 'p_table', posts: @posts %>
+<% elsif defined?(@users) && @users != nil && @users != [] %>
+    <%= render 'u_table', users: @users %>
+<% else %>
+<!--ユーザー、投稿、タグがいずれもも存在しないもしくは空-->
+    <div>
+        <p>検索に一致するものはありませんでした。</p>
+        <p>一度に複数の語句で絞り込むのではなく、少ない単語でお試しください。</p>
+        <p>検索条件を変更するか、かな・カナ・漢字の表現を変えてお試しください。</p>
+    </div>
+<% end %>

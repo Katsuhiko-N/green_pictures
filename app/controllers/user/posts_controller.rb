@@ -17,39 +17,48 @@ class User::PostsController < ApplicationController
     @post.user_id = current_user.id
     @tag = Tag.new(tag_params)
     
-    if @post.save
-      flash[:notice] = "投稿に成功しました"
+    if tag_params[:name].blank?
       
-      # 同じ名前のタグあるか検索
-      same_tag = Tag.find_by(name: @tag.name)
-      
-      # 既に同じ名前のタグがあるかどうか
-      if same_tag == nil
+        # タグ付けなし＝そのまま完了
+      if @post.save
+        flash[:notice] = "投稿に成功しました"
+        redirect_to post_path(@post.id)
+      else
+        render :new
+      end
+    else
+      # タグ入力した場合
+      if @post.save
+        flash[:notice] = "投稿に成功しました"
         
-        if @tag.save
+        # 同じ名前のタグあるか検索
+        same_tag = Tag.find_by(name: @tag.name)
+        
+        if same_tag == nil
+          # 新規タグの場合新規生成
+          if @tag.save
+            t_list = TagList.new
+            t_list.post_id = @post.id
+            t_list.tag_id = @tag.id
+            t_list.save
+            flash[:notice] = "タグの登録に成功しました"
+            redirect_to post_path(@post.id)
+          else
+            render :new
+          end
+          
+        else
+          # 既存タグは組合せ（tag_list）だけ保存
           t_list = TagList.new
           t_list.post_id = @post.id
-          t_list.tag_id = @tag.id
+          t_list.tag_id = same_tag.id
           t_list.save
           flash[:notice] = "タグの登録に成功しました"
           redirect_to post_path(@post.id)
-        else
-          render :new
         end
-        
       else
-        
-        # 同じ名前のタグは組合せ（tag_list）だけ保存
-        t_list = TagList.new
-        t_list.post_id = @post.id
-        t_list.tag_id = same_tag.id
-        t_list.save
-        flash[:notice] = "タグの登録に成功しました"
-        redirect_to post_path(@post.id)
-        
+        render :new
       end
-    else
-      render :new
     end
   end
   

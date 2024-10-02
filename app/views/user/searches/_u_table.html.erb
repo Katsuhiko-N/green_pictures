@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <tr class="table-border-l">
+            <th><p>プロフィール画像</p></th>
+            <th><p>ユーザー名</p></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--ページネーション-->
+        <% users_p = users.page(params[:page]) %>
+        <% users_p.each do |user| %>
+        <tr class="table-border-s">
+            <td>
+                <%= link_to user_path(user.id) do %>
+                    <%= image_tag user.show_p_img(60,60) %>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to user_path(user.id) do %>
+                    <%= user.nickname %>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= paginate users_p %>
