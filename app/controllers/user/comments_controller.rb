@@ -8,10 +8,24 @@ class User::CommentsController < ApplicationController
   def create
     post = Post.find(params[:post_id])
     # post.user_id=current_user_idでインスタンス作成
-    comment = current_user.comments.new(comment_params)
-    comment.post_id = post.id
-    comment.save
-    redirect_to post_path(params[:post_id])
+    @comment = current_user.comments.new(comment_params)
+    @comment.post_id = post.id
+    if @comment.save
+      redirect_to post_path(params[:post_id])
+    else
+      @post = Post.find(params[:post_id])
+      
+      # コメントリスト用
+      comments = @post.comments
+      @comments_p = comments.page(params[:page])
+      
+      # タグ表示用
+      @t_lists = TagList.where(post_id: params[:post_id])
+      # タグ登録用
+      @tag = Tag.new
+      
+      render template: "user/posts/show"
+    end
   end
 
 

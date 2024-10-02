@@ -1,8 +1,8 @@
 <!--エラーメッセージ表示-->
-<% if @post.errors.any? %>
-    <%= @post.errors.count %>件のエラーが発生しました
+<% if @comment.errors.any? %>
+    <%= @comment.errors.count %>件のエラーが発生しました
     <ul>
-        <% @post.errors.full_messages.each do |message| %>
+        <% @comment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
     </ul>
