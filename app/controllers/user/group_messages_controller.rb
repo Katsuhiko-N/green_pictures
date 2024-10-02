@@ -4,16 +4,16 @@ class User::GroupMessagesController < ApplicationController
     before_action :authenticate_user!
     
     
-    
     def create
         @g_message = GroupMessage.new(message_params)
         @g_message.user_id = current_user.id
         @g_message.group_id = params[:group_id]
         if @g_message.save
-            flash[:notice] = "編集されました"
+            flash[:notice] = "投稿されました"
             redirect_to group_path(params[:group_id])
         else
-            render :create
+            flash[:notice] = "投稿に失敗しました"
+            redirect_to group_path(params[:group_id])
         end
     end
     
