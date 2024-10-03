@@ -12,7 +12,6 @@ class User::GroupsController < ApplicationController
   # グループ加入済みか確認
   helper_method :is_member?
   
-  
   def new
     @group = Group.new
   end
