@@ -1,4 +1,4 @@
-<!--ローカル変数としてg_messagesが必要-->
+<!--ローカル変数としてg_messages, groupが必要-->
     
 <table class="container-fluid">
     <thead>
@@ -30,7 +30,7 @@
                 <%= g_message.updated_at %>
             </td>
             <td class="col-2 table-border-s">
-                <% if g_message.user_id == current_user.id %>
+                <% if g_message.user_id == current_user.id || group.owner_id == current_user.id %>
                     <%= link_to group_group_message_path(params[:id], g_message.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2" do %>
                         <p class="btn btn-danger btn-sm">削除</p>
                     <% end %>
