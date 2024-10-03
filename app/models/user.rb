@@ -32,4 +32,22 @@ class User < ApplicationRecord
   end
   
   
+  # 以下ゲストログイン関係
+  GUEST_USER_EMAIL = "guest@example.com"
+  
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+      user.nickname = "ゲストユーザー"
+    end
+  end
+  
+  # emailが一致するか
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+  
+  
 end
+

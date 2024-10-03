@@ -4,6 +4,8 @@ class User::GroupsController < ApplicationController
   before_action :authenticate_user!
   # オーナーが操作しているか？
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
+  # ゲストユーザーか？
+  before_action :ensure_guest_user
   
   # グループ参加人数呼び出しメソッド
   helper_method :g_count
@@ -116,5 +118,12 @@ class User::GroupsController < ApplicationController
     return GroupMember.exists?(group_id: params[:id], user_id: userid , is_active: "true")
   end
   
- 
+  # ゲストユーザーか識別# ゲストユーザーか識別
+  def ensure_guest_user
+      @user = User.find(current_user.id)
+      if @user.guest_user?
+          redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
+      end
+  end
+
 end

@@ -1,6 +1,8 @@
 class User::TagsController < ApplicationController
   # ログインしているか
   before_action :authenticate_user!
+  # ゲストユーザーか？
+  before_action :ensure_guest_user, except:[:index]
     
     def create
         @tag = Tag.new(tag_params)
@@ -59,11 +61,9 @@ class User::TagsController < ApplicationController
     end
     
     
-    
     def index
         @tags = Tag.page(params[:page])
     end
-    
     
     
     
@@ -73,6 +73,12 @@ class User::TagsController < ApplicationController
         params.require(:tag).permit(:name)
     end
     
-    
+    # ゲストユーザーか識別# ゲストユーザーか識別
+    def ensure_guest_user
+        @user = User.find(current_user.id)
+        if @user.guest_user?
+            redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
+        end
+    end
     
 end

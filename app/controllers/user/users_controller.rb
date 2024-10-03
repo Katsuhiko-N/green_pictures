@@ -4,6 +4,8 @@ class User::UsersController < ApplicationController
   # アクセスしているユーザーはログインユーザーか？
   # 他人が勝手にいじれないように
   before_action :is_matching_login_user, only:[:update, :withdraw]
+  # ゲストユーザーか？
+  before_action :ensure_guest_user, except:[:show]
   
   def mypage
     @user = User.find(current_user.id)
@@ -67,5 +69,14 @@ class User::UsersController < ApplicationController
       redirect_to mypage_users_path
     end
   end
+  
+  # ゲストユーザーか識別# ゲストユーザーか識別
+  def ensure_guest_user
+    @user = User.find(current_user.id)
+    if @user.guest_user?
+        redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
+    end
+  end
+  
   
 end

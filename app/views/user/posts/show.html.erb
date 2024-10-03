@@ -49,15 +49,20 @@
             <div>
                 <% @t_lists.each do |t_list| %>
                     <div class="d-flex">
-                        <p class="mx-2"><%= t_list.tag.name %></p>
-                        <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？" do %>
-                            <p>タグを削除</p>
+                        <p class="mx-2">・<%= t_list.tag.name %></p>
+                        <!--ゲストログイン時に消滅-->
+                        <% if current_user.email != "guest@example.com" %>
+                            <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？" do %>
+                                <p>タグを削除</p>
+                            <% end %>
                         <% end %>
                     </div>
                 <% end %>
             </div>
             
             <!--タグ登録機能 5個まで-->
+            <!--ゲストログイン時消滅-->
+            <% if current_user.email != "guest@example.com" %>
             <div>
                 <% if @t_lists.count < 5 %>
                     <%= form_with model: @tag, url: post_tags_path(@post.id), method: :post do |f| %>
@@ -68,6 +73,7 @@
                     <p>タグ登録数上限に達しました</p>
                 <% end %>
             </div>
+            <% end %>
         </div>
         
         
@@ -94,13 +100,15 @@
     
     
     <!--コメント投稿フォーム-->
+    <!--ゲストログイン時消滅-->
+    <% if current_user.email != "guest@example.com" %>
     <div>
         <%= form_with model: [@post, @comment] do |f| %>
             <%= f.text_area :body, size: "60x2", placeholder: "コメントはこちら（100文字まで）" %>
             <%= f.submit "コメントを送信" %>
         <% end %>
     </div>
-    
+    <% end %>
     
     <!--閲覧者コメントテーブル-->
     <table>
