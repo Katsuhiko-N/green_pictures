@@ -202,21 +202,21 @@ puts "seedグループ組合せ生成完了"
 
 puts "seedグループメッセージ生成開始"
 GroupMessage.find_or_create_by!(id: "1") do |gmes|
-  gmem.user_id = "1"
-  gmem.group_id = "1"
-  gmem.body = "珍しい植物を見つけたらおしえてください"
+  gmes.user_id = "1"
+  gmes.group_id = "1"
+  gmes.body = "珍しい植物を見つけたらおしえてください"
 end
 
 GroupMessage.find_or_create_by!(id: "2") do |gmes|
-  gmem.user_id = "2"
-  gmem.group_id = "2"
-  gmem.body = "この時期めっちゃキノコ生えるので見つけたら投稿して"
+  gmes.user_id = "2"
+  gmes.group_id = "2"
+  gmes.body = "この時期めっちゃキノコ生えるので見つけたら投稿して"
 end
 
 GroupMessage.find_or_create_by!(id: "3") do |gmes|
-  gmem.user_id = "3"
-  gmem.group_id = "3"
-  gmem.body = "誰か季節ごとの映えスポットとかあったら教えて"
+  gmes.user_id = "3"
+  gmes.group_id = "3"
+  gmes.body = "誰か季節ごとの映えスポットとかあったら教えて"
 end
 
 puts "seedグループメッセージに成完了"
