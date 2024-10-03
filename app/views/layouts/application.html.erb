@@ -30,6 +30,7 @@
               <li class="nav-item"><%= link_to "グループ一覧", groups_path, class:'text-white mx-1' %></li>
               <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:'text-white mx-1' %></li>
               <% else %>
+              <li class="nav-item"><%= link_to "ゲストログイン（閲覧用）", user_guest_sign_in_path, method: :post, class:'text-white mx-1' %></li>
               <li class="nav-item"><%= link_to "新規ユーザー登録", new_user_registration_path, class:'text-white mx-1' %></li>
               <li class="nav-item"><%= link_to "ログイン", new_user_session_path, class:'text-white mx-1' %></li>
               <% end %>
