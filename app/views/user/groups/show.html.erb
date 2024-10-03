@@ -15,6 +15,8 @@
         <!--紹介文-->
         <p class="col-9"><%= @group.body %></p>
         <!--入退会メニュー兼編集破棄ボタン-->
+        <!--ゲストログイン時に消滅-->
+        <% if current_user.email != "guest@example.com" %>
         <div class="col-3">
             <% if current_user.id == @group.owner_id %>
                 
@@ -44,13 +46,12 @@
                 <% end %>
                 
             <% else %>
-                
                 <%= link_to group_group_members_path(@group.id), method: :post do %>
                     <p class="btn btn-info">グループに参加申請</p>
                 <% end %>
-                
             <% end %>
         </div>
+        <% end %>
     </div>
 </div>
 
