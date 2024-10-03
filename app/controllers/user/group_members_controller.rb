@@ -6,7 +6,7 @@ class User::GroupMembersController < ApplicationController
     # 既にメンバーか？
     before_action :is_member?, only:[:create]
     
-    # 既にメンバーか？
+    # オーナーか？
     before_action :is_owner?, only:[:index, :update]
     
     
@@ -16,6 +16,8 @@ class User::GroupMembersController < ApplicationController
       g_mem.save
       redirect_to group_path(params[:group_id])
     end
+    
+    
     
     # 全メンバーリスト
     def index

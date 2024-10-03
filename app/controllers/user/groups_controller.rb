@@ -2,6 +2,7 @@ class User::GroupsController < ApplicationController
   
   # ログインしているか
   before_action :authenticate_user!
+  # オーナーが操作しているか？
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
   
   # グループ参加人数呼び出しメソッド
@@ -67,8 +68,8 @@ class User::GroupsController < ApplicationController
   end
 
   def update
-    @group = Group.find(group_params)
-    if @group.update
+    @group = Group.find(params[:id])
+    if @group.update(group_params)
       flash[:notice] = "保存に成功しました"
       redirect_to group_path(@group.id)
     else
@@ -88,7 +89,7 @@ class User::GroupsController < ApplicationController
   private
   
   def group_params
-    params.require(:group).permit(:title, :body)
+    params.require(:group).permit(:g_image, :title, :body)
   end
   
   # オーナー認証

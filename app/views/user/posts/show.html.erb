@@ -1,8 +1,8 @@
 <!--エラーメッセージ表示-->
-<% if @post.errors.any? %>
-    <%= @post.errors.count %>件のエラーが発生しました
+<% if @comment.errors.any? %>
+    <%= @comment.errors.count %>件のエラーが発生しました
     <ul>
-        <% @post.errors.full_messages.each do |message| %>
+        <% @comment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
     </ul>
@@ -113,8 +113,8 @@
                     <td class="col-2">
                         <!--コメント削除ボタン-->
                         <% if user_signed_in? %>
-                            <% if comment.user_id == current_user.id %>
-                                <%= link_to post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
+                            <% if comment.user_id == current_user.id || @post.user_id == current_user.id %>
+                                <%= link_to post_comment_path(@post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
                                     <p class="btn btn-sm btn-danger">コメントを削除する</p>
                                 <% end %>
                             <% end %>

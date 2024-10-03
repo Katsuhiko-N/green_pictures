@@ -19,7 +19,7 @@
 <div class=""container-fluid"">
     <div class="row my-3">
         <%= link_to admin_user_path(@group.owner_id), class: "col ml-3" do %>
-            <%= image_tag g_user(@group.owner_id).show_p_img(60,60), size: "60x60" %>
+            <%= image_tag g_user(@group.owner_id).show_p_img(60,60) %>
             <span>グループオーナー：<%= g_user(@group.owner_id).nickname %></span>
         <% end %>
     </div>
@@ -49,18 +49,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <p class="container table-border-l">グループメッセージ</p>
-            <!--メッセージ一覧-->
-            <% @g_messages.each do |g_message| %>
-            <div class="row mx-1 table-border-s">
-                <p class="col-8"><%= g_message.body %></p>
-                <span class="col-2"><%= g_user(g_message.user_id).nickname %></span>
-                <%= link_to admin_group_group_message_path(params[:id], g_message.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-2" do %>
-                    <p class="btn btn-danger btn-sm">削除</p>
-                <% end %>
-            </div>
-            <% end %>
-            <%= paginate @g_messages %>
+            <%= render 'group_message', g_messages: @g_messages %>
         </div>
         
     </div>

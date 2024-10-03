@@ -1,36 +1,37 @@
 <h2>コメント一覧</h2>
 
-<table>
-        <thead>
-            <tr class="table-border-l">
-                <th><p>コメント</p></th>
-                <th><p>投稿者</p></th>
-                <th><p>投稿先</p></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @comments.each do |comment| %>
-            <tr class="table-border-s">
-                <td>
-                    <p><%= comment.body %></p>
-                </td>
-                <td>
-                    <%= link_to admin_user_path(comment.user_id) do %>
-                        <%= comment.user.nickname %>
-                    <% end %>
-                </td>
-                <td>
-                    <%= link_to admin_post_path(comment.post_id) do %>
-                        <%= comment.post.title %>
-                    <% end %>
-                </td>
-                <td>
-                    <!--コメント削除ボタン-->
-                    <%= link_to idx_destroy_admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
-                        <p class="btn btn-sm btn-danger">コメントを削除する</p>
-                    <% end %>
-                </td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
+<table class="container-fluid">
+    <thead>
+        <tr class="row table-border-l">
+            <th class="col-6"><p>コメント</p></th>
+            <th class="col-2"><p>投稿者</p></th>
+            <th class="col-2"><p>投稿先</p></th>
+            <th class="col-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @comments.each do |comment| %>
+        <tr class="row table-border-s">
+            <td class="col-6 text-break">
+                <p><%= comment.body %></p>
+            </td>
+            <td class="col-2">
+                <%= link_to admin_user_path(comment.user_id) do %>
+                    <%= comment.user.nickname %>
+                <% end %>
+            </td>
+            <td class="col-2">
+                <%= link_to admin_post_path(comment.post_id) do %>
+                    <%= comment.post.title %>
+                <% end %>
+            </td>
+            <td class="col-2">
+                <!--コメント削除ボタン-->
+                <%= link_to idx_destroy_admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
+                    <p class="btn btn-sm btn-danger">コメントを削除する</p>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

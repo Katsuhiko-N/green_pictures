@@ -22,7 +22,7 @@
                     <p class="btn btn-info">グループメンバーを編集</p>
                 <% end %>
                 
-                <%= link_to group_path(@group.id), method: :patch do %>
+                <%= link_to edit_group_path(@group.id) do %>
                     <p class="btn btn-info">グループを編集</p>
                 <% end %>
                 <%= link_to group_path(@group.id), method: :delete, "data-confirm" => "本当にグループを削除しますか？" do %>
@@ -59,7 +59,7 @@
 <div class=""container-fluid"">
     <div class="row my-3">
         <%= link_to user_path(@group.owner_id), class: "col ml-3" do %>
-            <%= image_tag g_user(@group.owner_id).show_p_img(60,60), size: "60x60" %>
+            <%= image_tag g_user(@group.owner_id).show_p_img(60,60) %>
             <span>グループオーナー：<%= g_user(@group.owner_id).nickname %></span>
         <% end %>
     </div>

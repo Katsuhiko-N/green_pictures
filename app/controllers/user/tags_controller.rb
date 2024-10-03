@@ -8,7 +8,7 @@ class User::TagsController < ApplicationController
         # 同じ名前のタグあるか検索
         same_tag = Tag.find_by(name: @tag.name)
            
-        # 既に同じ名前のタグがあるかどうか
+        # 既に同じ名前のタグがある（既存のタグ）かどうか
         if same_tag == nil
             # 存在しない場合タグと中間テーブルを新規登録
             if @tag.save
@@ -24,12 +24,15 @@ class User::TagsController < ApplicationController
                     @post = Post.find(params[:post_id])
                     # コメント投稿フォーム用
                     @comment = Comment.new
+                    # コメントリスト用
+                    comments = @post.comments
+                    @comments_p = comments.page(params[:page])
                     # タグ表示用
                     @t_lists = TagList.where(post_id: params[:post_id])
                 render template: "user/posts/show"
             end
         else
-            # 同じ名前が存在した場合
+            # 既存のタグをつける場合
             if TagList.where(post_id: params[:post_id], tag_id: same_tag.id).exists?
                 # 既に同じ投稿に同じタグがつけられている場合
                 flash[:notice] = "1つの投稿に同じタグはつけられません"
@@ -37,6 +40,9 @@ class User::TagsController < ApplicationController
                     @post = Post.find(params[:post_id])
                     # コメント投稿フォーム用
                     @comment = Comment.new
+                    # コメントリスト用
+                    comments = @post.comments
+                    @comments_p = comments.page(params[:page])
                     # タグ表示用
                     @t_lists = TagList.where(post_id: params[:post_id])
                 render template: "user/posts/show"

@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @groups = @user.groups
+    @groups = @user.groups.page(params[:page])
   end
 
 
