@@ -76,8 +76,66 @@ Comment.find_or_create_by!(id: "3") do |comment|
   comment.user_id = "2"
   comment.body = "隙間に見えるシロツメクサとはまた違った花だね"
 end
-
 puts "seedコメント生成完了"
+
+
+puts "seedタグ生成開始"
+Tag.find_or_create_by!(id: "1") do |tag|
+  tag.name = "野草"
+end
+
+Tag.find_or_create_by!(id: "2") do |tag|
+  tag.name = "きのこ"
+end
+
+Tag.find_or_create_by!(id: "3") do |tag|
+  tag.name = "桜"
+end
+
+Tag.find_or_create_by!(id: "4") do |tag|
+  tag.name = "春"
+end
+
+Tag.find_or_create_by!(id: "5") do |tag|
+  tag.name = "名前がわからない"
+end
+puts "seedタグ生成完了"
+
+
+
+puts "seedタグリスト生成開始"
+TagList.find_or_create_by!(id: "1") do |t_list|
+  t_list.post_id = "1"
+  t_list.tag_id = "1"
+end
+
+TagList.find_or_create_by!(id: "2") do |t_list|
+  t_list.post_id = "2"
+  t_list.tag_id = "2"
+end
+
+TagList.find_or_create_by!(id: "3") do |t_list|
+  t_list.post_id = "3"
+  t_list.tag_id = "3"
+end
+
+TagList.find_or_create_by!(id: "4") do |t_list|
+  t_list.post_id = "1"
+  t_list.tag_id = "5"
+end
+
+TagList.find_or_create_by!(id: "5") do |t_list|
+  t_list.post_id = "2"
+  t_list.tag_id = "5"
+end
+
+TagList.find_or_create_by!(id: "6") do |t_list|
+  t_list.post_id = "3"
+  t_list.tag_id = "4"
+end
+puts "seedタグリスト生成完了"
+
+
 
 
 puts "seedグループ生成開始"
@@ -87,7 +145,6 @@ Group.find_or_create_by!(id: "1") do |group|
   group.body = "庭や近所で見かけた気になった植物の情報共有"
   group.owner_id = "1"
 end
-
 
 Group.find_or_create_by!(id: "2") do |group|
   group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group2.jpg"), filename:"sample-post2.jpg")
@@ -127,7 +184,43 @@ GroupMember.find_or_create_by!(id: "3") do |gmem|
 end
 
 
+GroupMember.find_or_create_by!(id: "4") do |gmem|
+  gmem.user_id = "2"
+  gmem.group_id = "1"
+  gmem.is_active = "true"
+end
+
+GroupMember.find_or_create_by!(id: "5") do |gmem|
+  gmem.user_id = "1"
+  gmem.group_id = "3"
+  gmem.is_active = "true"
+end
+
 puts "seedグループ組合せ生成完了"
+
+
+
+puts "seedグループメッセージ生成開始"
+GroupMessage.find_or_create_by!(id: "1") do |gmes|
+  gmem.user_id = "1"
+  gmem.group_id = "1"
+  gmem.body = "珍しい植物を見つけたらおしえてください"
+end
+
+GroupMessage.find_or_create_by!(id: "2") do |gmes|
+  gmem.user_id = "2"
+  gmem.group_id = "2"
+  gmem.body = "この時期めっちゃキノコ生えるので見つけたら投稿して"
+end
+
+GroupMessage.find_or_create_by!(id: "3") do |gmes|
+  gmem.user_id = "3"
+  gmem.group_id = "3"
+  gmem.body = "誰か季節ごとの映えスポットとかあったら教えて"
+end
+
+puts "seedグループメッセージに成完了"
+
 
 
 puts "管理者生成開始"
