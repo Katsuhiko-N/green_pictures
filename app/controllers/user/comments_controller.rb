@@ -3,7 +3,8 @@ class User::CommentsController < ApplicationController
   before_action :authenticate_user!
   # 操作しているユーザーは投稿者（コメントもしくは画像投稿者）ユーザーか？
   before_action :is_matching_user, only: [:destroy]
-  
+  # ゲストユーザーか？
+  before_action :ensure_guest_user
   
   def create
     post = Post.find(params[:post_id])
@@ -48,6 +49,14 @@ class User::CommentsController < ApplicationController
     p_user = Post.find(params[:post_id]).user
     unless c_user.id == current_user.id || p_user.id == current_user.id
       redirect_to posts_path
+    end
+  end
+  
+  # ゲストユーザーか識別
+  def ensure_guest_user
+    @user = User.find(current_user.id)
+    if @user.guest_user?
+     redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
     end
   end
   

@@ -43,4 +43,11 @@ class User < ApplicationRecord
     end
   end
   
+  # emailが一致するか
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+  
+  
 end
+

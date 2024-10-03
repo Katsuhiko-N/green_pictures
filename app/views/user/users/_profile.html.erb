@@ -9,6 +9,8 @@
 <p class="mx-auto">これまで投稿した数:<%= user.posts.count %>件</p>
 <p class="mx-auto">これまで投稿へのコメントした数:<%= user.comments.count %>件</p>
 
+<!--ゲストログイン時に消滅-->
+<% if current_user.email != "guest@example.com" %>
 <table class="container-fluid">
     <thead>
         <tr class="row table-border-l">
@@ -37,3 +39,4 @@
         <%= paginate groups %>
     </tbody>
 </table>
+<% end %>

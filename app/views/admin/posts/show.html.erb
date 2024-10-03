@@ -30,7 +30,7 @@
             <div>
                 <% @t_lists.each do |t_list| %>
                     <div class="d-flex">
-                        <p class="mx-2"><%= t_list.tag.name %></p>
+                        <p class="mx-2">・<%= t_list.tag.name %></p>
                         <%= link_to admin_post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？" do %>
                             <p>タグを削除</p>
                         <% end %>

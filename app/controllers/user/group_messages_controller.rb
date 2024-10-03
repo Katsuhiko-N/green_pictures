@@ -2,7 +2,8 @@ class User::GroupMessagesController < ApplicationController
     
     # ログインしているか
     before_action :authenticate_user!
-    
+    # ゲストユーザーか？
+    before_action :ensure_guest_user
     
     def create
         @g_message = GroupMessage.new(message_params)
@@ -30,5 +31,13 @@ class User::GroupMessagesController < ApplicationController
         params.require(:group_message).permit(:body)
     end
     
+    
+    # ゲストユーザーか識別# ゲストユーザーか識別
+    def ensure_guest_user
+        @user = User.find(current_user.id)
+        if @user.guest_user?
+            redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
+        end
+    end
     
 end

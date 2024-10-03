@@ -4,7 +4,8 @@ class User::PostsController < ApplicationController
   # アクセスしているユーザーはログインユーザーか？
   # 他人が勝手に投稿をいじれないように
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
-  
+  # ゲストユーザーか？
+  before_action :ensure_guest_user, except:[:index, :show]
   
   def new
     @post = Post.new
@@ -135,5 +136,12 @@ class User::PostsController < ApplicationController
     end
   end
   
+  # ゲストユーザーか識別# ゲストユーザーか識別
+  def ensure_guest_user
+      @user = User.find(current_user.id)
+      if @user.guest_user?
+          redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
+      end
+  end
   
 end

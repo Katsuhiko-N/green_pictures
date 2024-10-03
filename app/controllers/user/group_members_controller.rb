@@ -2,12 +2,12 @@ class User::GroupMembersController < ApplicationController
     
     # ログインしているか
     before_action :authenticate_user!
-  
     # 既にメンバーか？
     before_action :is_member?, only:[:create]
-    
     # オーナーか？
     before_action :is_owner?, only:[:index, :update]
+    # ゲストユーザーか？
+    before_action :ensure_guest_user
     
     
     def create
@@ -79,6 +79,12 @@ class User::GroupMembersController < ApplicationController
       end
     end
     
-    
+    # ゲストユーザーか識別
+    def ensure_guest_user
+      @user = User.find(current_user.id)
+      if @user.guest_user?
+       redirect_to posts_path, notice: "ゲストユーザーはこの操作を実行できません"
+      end
+    end
     
 end

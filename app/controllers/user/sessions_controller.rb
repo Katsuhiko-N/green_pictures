@@ -17,7 +17,7 @@ class User::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to posts_path(user), notice: "ゲストユーザーでログインしました"
+    redirect_to posts_path, notice: "ゲストユーザーでログインしました"
   end
 
   # GET /resource/sign_in
