@@ -1,11 +1,13 @@
 <h3>グループ一覧</h3>
 
-<div>
-    <%= link_to new_group_path do %>
-        <p class="btn btn-info">グループを作成</p>
-    <% end %>
-</div>
-
+<!--ゲストログイン時に消滅-->
+<% if current_user.email != "guest@example.com" %>
+    <div>
+        <%= link_to new_group_path do %>
+            <p class="btn btn-info">グループを作成</p>
+        <% end %>
+    </div>
+<% end %>
 
 <table class="container-fluid">
     <thead>
