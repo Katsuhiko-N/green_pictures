@@ -64,7 +64,7 @@ class User::SearchesController < ApplicationController
                 unless @posts == nil
                     @posts = @posts.where("posts.created_at >= ?", Date.parse(time) )
                 else
-                    @users = @users.where("posts.created_at >= ?", Date.parse(time) )
+                    @users = @users.where("users.created_at >= ?", Date.parse(time) )
                 end
             end
         end
