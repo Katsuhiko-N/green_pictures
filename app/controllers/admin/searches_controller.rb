@@ -54,7 +54,7 @@ class Admin::SearchesController < ApplicationController
             
             
             # 日時で絞りこみ
-            unless time.empty?
+            unless time.nil? || time.empty?
                 unless @posts == nil
                     @posts = @posts.where("posts.created_at >= ?", Date.parse(time) )
                 else
