@@ -89,9 +89,6 @@ Rails.application.routes.draw do
   # トップページ
   root to: 'homes#top'
   
-  # デバッグテストページ
-  get 'homes/v_test' => 'homes#v_test', as: "test"
-  
   # devise関係のルーティング
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
