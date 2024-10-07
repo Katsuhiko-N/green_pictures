@@ -24,16 +24,16 @@
     </thead>
     <tbody>
         <% groups.each do |group| %>
-        <tr class="row table-border-s">
-            <td class="col-8 table-border-s">
-                <%= group.title %>
-            </td>
-            <td class="col-4 table-border-s">
-                <%= link_to group_path(group.id) do %>
-                    <p class="btn btn-info">移動</p>
-                <% end %>
-            </td>
-        </tr>
+            <tr class="row table-border-s">
+                <td class="col-8 table-border-s">
+                    <%= group.title %>
+                </td>
+                <td class="col-4 table-border-s">
+                    <%= link_to group_path(group.id) do %>
+                        <p class="btn btn-info">移動</p>
+                    <% end %>
+                </td>
+            </tr>
         <% end %>
         <%= paginate groups %>
     </tbody>

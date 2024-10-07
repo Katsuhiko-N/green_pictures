@@ -11,26 +11,26 @@
         <!--ページネーション-->
         <% posts_p = posts.page(params[:page]) %>
         <% posts_p.each do |post| %>
-        <tr class="table-border-s">
-            <td>
-                <%= link_to post_path(post.id) do %>
-                    <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
-                <% end %>
-            </td>
-            <td>
-                <%= link_to post_path(post.id) do %>
-                    <%= post.title %>
-                <% end %>
-            </td>
-            <td>
-                <%= link_to user_path(post.user.id) do %>
-                    <%= post.user.nickname %>
-                <% end %>
-            </td>
-            <td>
-                <%= post.comments.count %>件のコメント
-            </td>
-        </tr>
+            <tr class="table-border-s">
+                <td>
+                    <%= link_to post_path(post.id) do %>
+                        <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to post_path(post.id) do %>
+                        <%= post.title %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to user_path(post.user.id) do %>
+                        <%= post.user.nickname %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= post.comments.count %>件のコメント
+                </td>
+            </tr>
         <% end %>
     </tbody>
 </table>
