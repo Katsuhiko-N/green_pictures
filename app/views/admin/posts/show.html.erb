@@ -62,11 +62,11 @@
     <p><%= @post.comments.count %>件のコメント <i class="fa-regular fa-comment"></i></p>
     
     <!--閲覧者コメントテーブル-->
-    <table>
+    <table class="container-fluid my-3 table-border-l">
         <tbody>
             <!--ページネート済み-->
             <% @comments_p.each do |comment| %>
-            <tr>
+            <tr class="row table-border-s">
                 <td class="col-6 text-break"><p><%= comment.body %></p></td>
                 <td class="col-2"><p><%= comment.user.nickname %></p></td>
                 <td class="col-2"><%= comment.updated_at %></td>

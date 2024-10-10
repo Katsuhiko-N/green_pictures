@@ -1,33 +1,33 @@
-<table>
+<table class="container-fluid">
     <thead>
-        <tr class="table-border-l">
-            <th><p>画像</p></th>
-            <th><p>タイトル</p></th>
-            <th><p>投稿者</p></th>
-            <th><p>コメント数</p></th>
+        <tr class="row table-border-l">
+            <th class="col-2"><p>画像</p></th>
+            <th class="col-6"><p>タイトル</p></th>
+            <th class="col-2"><p>投稿者</p></th>
+            <th class="col-2"><p>コメント数</p></th>
         </tr>
     </thead>
     <tbody>
         <!--ページネーション-->
         <% posts_p = posts.page(params[:page]) %>
         <% posts_p.each do |post| %>
-            <tr class="table-border-s">
-                <td>
+            <tr class="row table-border-s">
+                <td class="col-2">
                     <%= link_to post_path(post.id) do %>
                         <%= image_tag(post.image.variant(resize_to_limit: [80, 80]).processed) %>
                     <% end %>
                 </td>
-                <td>
+                <td class="col-6">
                     <%= link_to post_path(post.id) do %>
                         <%= post.title %>
                     <% end %>
                 </td>
-                <td>
+                <td class="col-2">
                     <%= link_to user_path(post.user.id) do %>
                         <%= post.user.nickname %>
                     <% end %>
                 </td>
-                <td>
+                <td class="col-2">
                     <%= post.comments.count %>件のコメント
                 </td>
             </tr>
