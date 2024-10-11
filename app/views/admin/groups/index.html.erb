@@ -13,27 +13,25 @@
     <tbody>
         <% @groups.each do |group| %>
         <tr class="table-border-s row mt-3">
-            <td class="col-3">
+            <td class="col-7 border border-5">
                 <%= link_to admin_group_path(group.id) do %>
-                    <%= image_tag group.show_g_img(60,60) %>
-                <% end %>
-            </td>
-            <td class="col-4">
-                <%= link_to admin_group_path(group.id) do %>
-                    <%= group.title %>
+                    <div class="d-flex ml-3">
+                        <%= image_tag group.show_g_img(60,60) %>
+                        <p class="mx-3"></p><%= group.title %>
+                    </div>
                 <% end %>
             </td>
             <td class="col-3">
                 <%= link_to admin_user_path(group.owner_id) do %>
-                    <%= g_user(group.owner_id).nickname %>
+                    <p><%= g_user(group.owner_id).nickname %></p>
                 <% end %>
             </td>
             <td class="col-2">
-                <%= g_count(group.id) %>人
+                <p><%= g_count(group.id) %>人</p>
             </td>
         </tr>
         <tr class="mb-3">
-            <td><%= group.body %></td>
+            <td><p class="ml-3"><%= group.body %></p></td>
         </tr>
         <% end %>
     </tbody>

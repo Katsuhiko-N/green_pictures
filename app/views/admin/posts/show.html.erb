@@ -73,7 +73,7 @@
                 <td class="col-2">
                     <!--コメント削除ボタン-->
                     <%= link_to admin_post_comment_path(comment.post.id, comment.id), method: :delete, "data-confirm" => "本当にコメントを削除しますか？" do %>
-                        <p class="btn btn-sm btn-danger">コメントを削除する</p>
+                        <p class="btn btn-sm btn-danger">コメント削除</p>
                     <% end %>
                 </td>
             </tr>
