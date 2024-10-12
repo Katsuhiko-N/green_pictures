@@ -12,10 +12,10 @@
     </thead>
     <tbody>
         <% @groups.each do |group| %>
-        <tr class="table-border-s row mt-3">
-            <td class="col-7 border border-5">
+        <tr class="table-border-l row mt-3">
+            <td class="col-7">
                 <%= link_to admin_group_path(group.id) do %>
-                    <div class="d-flex ml-3">
+                    <div class="d-flex bg-info text-white">
                         <%= image_tag group.show_g_img(60,60) %>
                         <p class="mx-3"></p><%= group.title %>
                     </div>
