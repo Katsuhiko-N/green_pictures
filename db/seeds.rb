@@ -9,27 +9,27 @@
 puts "seed生成開始"
 
 puts "seed人物生成開始"
-taro = User.find_or_create_by!(email: "Taro@example.com") do |user|
+taro = User.find_or_create_by!(email: "Taro@example1.com") do |user|
   user.name = "太郎"
   user.nickname = "タロー"
   user.body = "珍しい植物をさがしています"
-  user.password = "password1"
+  user.password = "password001"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
 end
 
-jiro = User.find_or_create_by!(email: "Jiro@example.com") do |user|
+jiro = User.find_or_create_by!(email: "Jiro@example2.com") do |user|
   user.name = "二郎"
   user.nickname = "ジロー"
   user.body = "キノコを見つけたい"
-  user.password = "password2"
+  user.password = "password002"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
 end
 
-hanako = User.find_or_create_by!(email: "Hanako@example.com") do |user|
+hanako = User.find_or_create_by!(email: "Hanako@example3.com") do |user|
   user.name = "花子"
   user.nickname = "ハナコ"
   user.body = "花が好きです"
-  user.password = "password3"
+  user.password = "password003"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
 end
 puts "seed人物生成完了"
@@ -142,7 +142,7 @@ puts "seedグループ生成開始"
 Group.find_or_create_by!(id: "1") do |group|
   group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group1.jpg"), filename:"sample-post1.jpg")
   group.title = "野草探検隊"
-  group.body = "庭や近所で見かけた気になった植物の情報共有、コメントや投稿で情報共有しましょう"
+  group.body = "庭の手入れがてら見かけた植物の情報共有、草刈りの悩みなどコメントや投稿で情報共有しましょう"
   group.owner_id = "1"
 end
 
