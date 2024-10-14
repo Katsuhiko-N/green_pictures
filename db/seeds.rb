@@ -89,7 +89,7 @@ Tag.find_or_create_by!(id: "2") do |tag|
 end
 
 Tag.find_or_create_by!(id: "3") do |tag|
-  tag.name = "桜"
+  tag.name = "秋"
 end
 
 Tag.find_or_create_by!(id: "4") do |tag|
