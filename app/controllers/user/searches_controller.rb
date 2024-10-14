@@ -20,6 +20,7 @@ class User::SearchesController < ApplicationController
             else
                 # グループユーザー検索
                 @users = User.joins(:group_members).where('group_members.group_id = ? AND group_members.is_active = ?', params[:group_id], true)
+                
             end
             
         else
@@ -36,7 +37,7 @@ class User::SearchesController < ApplicationController
             elsif model == "user"
                 @users = User.all
                 @keywords.each do |keyword|
-                    @users = @users.where("nickname LIKE ?", "%#{keyword}%")
+                    @users = @users.where("nickname LIKE ?", "%#{keyword}%").where.not(email: "guest@example.com")
                 end
             elsif model == "tag"
                 tags = Tag.all
@@ -64,7 +65,8 @@ class User::SearchesController < ApplicationController
                 unless @posts == nil
                     @posts = @posts.where("posts.created_at >= ?", Date.parse(time) )
                 else
-                    @users = @users.where("users.created_at >= ?", Date.parse(time) )
+                    @users = @users.where("users.created_at >= ?", Date.parse(time) ).where.not(email: "guest@example.com")
+                    
                 end
             end
         end

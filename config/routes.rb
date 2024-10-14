@@ -61,7 +61,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index]
     
     # ユーザー機能
-    resources :users, except: [:new, :index, :edit, :destroy] do
+    resources :users, only: [:show, :update] do
       collection do
         get 'mypage'
         get 'mypage/edit' => 'users#edit', as: "edit"
@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     # グループ機能
     resources :groups do
       # メンバー組合せ（登録）
-      resources :group_members, except:[:new, :edit]
+      resources :group_members, except:[:new, :show, :edit]
       # グループメッセージ
       resources :group_messages, only:[:create, :destroy]
     end

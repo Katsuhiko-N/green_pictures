@@ -9,27 +9,27 @@
 puts "seed生成開始"
 
 puts "seed人物生成開始"
-taro = User.find_or_create_by!(email: "Taro@example.com") do |user|
+taro = User.find_or_create_by!(email: "Taro@example1.com") do |user|
   user.name = "太郎"
   user.nickname = "タロー"
-  user.body = "珍しい植物が見たい"
-  user.password = "password"
+  user.body = "珍しい植物をさがしています"
+  user.password = "password001"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
 end
 
-jiro = User.find_or_create_by!(email: "Jiro@example.com") do |user|
+jiro = User.find_or_create_by!(email: "Jiro@example2.com") do |user|
   user.name = "二郎"
   user.nickname = "ジロー"
   user.body = "キノコを見つけたい"
-  user.password = "password"
+  user.password = "password002"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
 end
 
-hanako = User.find_or_create_by!(email: "Hanako@example.com") do |user|
+hanako = User.find_or_create_by!(email: "Hanako@example3.com") do |user|
   user.name = "花子"
   user.nickname = "ハナコ"
   user.body = "花が好きです"
-  user.password = "password"
+  user.password = "password003"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
 end
 puts "seed人物生成完了"
@@ -39,19 +39,19 @@ puts "seed人物生成完了"
 puts "seed投稿生成開始"
 Post.find_or_create_by!(title: "庭に生えた草") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
-  post.body = "名前がわかりませんが大きいです。"
+  post.body = "名前がわかりませんが大きいです。ワラビに似ていますがどうでしょう？"
   post.user = taro
 end
 
 Post.find_or_create_by!(title: "キノコ?") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")
-  post.body = "これはキノコでしょうか？"
+  post.body = "道端の古い丸太になんか生えていました。もしかしてこれはキノコでしょうか？"
   post.user = jiro
 end
 
 Post.find_or_create_by!(title: "綺麗な花") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
-  post.body = '綺麗な花が咲いてた！'
+  post.body = 'ふと足元をみたら綺麗な花が咲いてたので！'
   post.user = hanako
 end
 puts "seed投稿生成完了"
@@ -62,7 +62,7 @@ puts "seedコメント生成開始"
 Comment.find_or_create_by!(id: "1") do |comment|
   comment.post_id = "1"
   comment.user_id = "3"
-  comment.body = "とっても大きくてワラビみたいな葉っぱですね"
+  comment.body = "とっても大きいですね！たしかにワラビみたいな葉っぱです"
 end
 
 Comment.find_or_create_by!(id: "2") do |comment|
@@ -74,7 +74,7 @@ end
 Comment.find_or_create_by!(id: "3") do |comment|
   comment.post_id = "3"
   comment.user_id = "2"
-  comment.body = "隙間に見えるシロツメクサとはまた違った花だね"
+  comment.body = "隙間に見えるシロツメクサとはまた違った花だね、なんだろう"
 end
 puts "seedコメント生成完了"
 
@@ -89,11 +89,11 @@ Tag.find_or_create_by!(id: "2") do |tag|
 end
 
 Tag.find_or_create_by!(id: "3") do |tag|
-  tag.name = "桜"
+  tag.name = "秋"
 end
 
 Tag.find_or_create_by!(id: "4") do |tag|
-  tag.name = "春"
+  tag.name = "白い花"
 end
 
 Tag.find_or_create_by!(id: "5") do |tag|
@@ -142,7 +142,7 @@ puts "seedグループ生成開始"
 Group.find_or_create_by!(id: "1") do |group|
   group.g_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-group1.jpg"), filename:"sample-post1.jpg")
   group.title = "野草探検隊"
-  group.body = "庭や近所で見かけた気になった植物の情報共有"
+  group.body = "庭の手入れがてら見かけた植物の情報共有、草刈りの悩みなどコメントや投稿で情報共有しましょう"
   group.owner_id = "1"
 end
 
@@ -210,7 +210,7 @@ end
 GroupMessage.find_or_create_by!(id: "2") do |gmes|
   gmes.user_id = "2"
   gmes.group_id = "2"
-  gmes.body = "この時期めっちゃキノコ生えるので見つけたら投稿して"
+  gmes.body = "この時期めっちゃキノコ生えるので見つけたら投稿してください"
 end
 
 GroupMessage.find_or_create_by!(id: "3") do |gmes|
