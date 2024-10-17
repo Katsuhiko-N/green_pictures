@@ -41,10 +41,13 @@
     <div class="actions my-3">
       <%= f.submit "編集完了" %>
     </div>
-    
-    <%= link_to unsubscribe_users_path do%>
-      <p class="btn btn-danger my-5">退会する</p>
-    <% end %>
-    
+  <% end %>
+</div>
+
+<!--退会手続きへのリンク-->
+<div class="d-flex my-5 mr-3">
+  <p class="ml-auto">退会手続き（アカウント削除）はこちら→</p>
+  <%= link_to unsubscribe_users_path do %>
+    <p class="btn btn-danger btn-sm">退会手続きへ</p>
   <% end %>
 </div>
