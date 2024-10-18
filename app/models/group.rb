@@ -9,7 +9,7 @@ class Group < ApplicationRecord
     
     # バリデーション
     validates :title, presence: true
-    validates :body, presence: true
+    validates :body, presence: true, length: {minimum: 1, maximum: 100}
     
     # グループに参加しているか？（グループとユーザの組み合わせが存在するか）
     # groupに結びついたgroupmembersにuser.idが一致するものがあるか？

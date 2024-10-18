@@ -20,7 +20,7 @@
     <%= f.text_field :title %>
     
     <p>説明文</p>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, size: "60x5", placeholder:"100文字以内で入力してください" %>
     
     <%= f.submit '編集完了' %>
     <% end %>
