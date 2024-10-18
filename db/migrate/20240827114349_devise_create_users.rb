@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # ニックネームカラム
       t.string :nickname, null: false, unique: true
       # コメントカラム
-      t.text :body
+      t.text :body, default: 'よろしくお願いします。'
       # ステータスカラム
       t.boolean :is_active, null: false, default: 'TRUE'
       
