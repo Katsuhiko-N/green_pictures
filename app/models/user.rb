@@ -18,7 +18,7 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :nickname, presence: true
     validates :email, presence: true
-  
+    validates :body, length: {minimum: 1, maximum: 100}
   
   
   # プロフ画像呼び出しメソッド
