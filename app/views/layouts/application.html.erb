@@ -48,12 +48,13 @@
     <!--検索バー-->
     <% if user_signed_in? %>
       <div class="container search_bar">
-        <div class="float-right">
+        <div class="float-right d-flex">
+          <span class="mx-2"><i class="fa-solid fa-magnifying-glass"></i></span>
           <%= form_with url: search_path, method: :get do |f| %>
             <!--検索ワード:word-->
             <%= f.text_field :word, required: true, placeholder: "検索したい単語を入力" %>
             <!--検索ワード:time-->
-            <span>指定した日時以降で絞り込み :</span>
+            <span>指定した日時以降で絞り込み(オプション) :</span>
             <%= f.date_field :time %>
             <!--検索モデル選択（投稿・ユーザー名）-->
             <%= f.select :model, [["投稿を検索", "post"], ["ユーザーを検索", "user"], ["タグで検索", "tag"]], {selected: "post"} %>
