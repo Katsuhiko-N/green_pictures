@@ -43,6 +43,11 @@
           </div>
         </div>
       </nav>
+      <% if user_signed_in? %>
+        <% if current_user.email == "guest@example.com" %>
+          <p class="text-info bg-dark text-center">ゲストユーザーとしてログイン中（一部機能が制限されています）</p>
+        <% end %>
+      <% end %>
     </header>
     
     <!--検索バー-->
