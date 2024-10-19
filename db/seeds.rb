@@ -54,6 +54,19 @@ Post.find_or_create_by!(title: "綺麗な花") do |post|
   post.body = 'ふと足元をみたら綺麗な花が咲いてたので！'
   post.user = hanako
 end
+
+Post.find_or_create_by!(title: "カンバタケ？") do |post|
+  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post6.jpg"), filename:"sample-post2.jpg")
+  post.body = "雨上がり散歩してたら枯れ木にたくさんのキノコが！？"
+  post.user = jiro
+end
+
+Post.find_or_create_by!(title: "キノコ大量発生") do |post|
+  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post7.jpg"), filename:"sample-post2.jpg")
+  post.body = "名前がわからないけどめっちゃ生えてた！"
+  post.user = taro
+end
+
 puts "seed投稿生成完了"
 
 
@@ -76,6 +89,19 @@ Comment.find_or_create_by!(id: "3") do |comment|
   comment.user_id = "2"
   comment.body = "隙間に見えるシロツメクサとはまた違った花だね、なんだろう"
 end
+
+Comment.find_or_create_by!(id: "4") do |comment|
+  comment.post_id = "4"
+  comment.user_id = "1"
+  comment.body = "がっつり生えてる( ﾟДﾟ)！？"
+end
+
+Comment.find_or_create_by!(id: "5") do |comment|
+  comment.post_id = "5"
+  comment.user_id = "2"
+  comment.body = "奥にもたくさん生えてそう！"
+end
+
 puts "seedコメント生成完了"
 
 
@@ -99,6 +125,15 @@ end
 Tag.find_or_create_by!(id: "5") do |tag|
   tag.name = "名前がわからない"
 end
+
+Tag.find_or_create_by!(id: "6") do |tag|
+  tag.name = "カンバタケ？"
+end
+
+Tag.find_or_create_by!(id: "7") do |tag|
+  tag.name = "雨上がり"
+end
+
 puts "seedタグ生成完了"
 
 
@@ -133,6 +168,37 @@ TagList.find_or_create_by!(id: "6") do |t_list|
   t_list.post_id = "3"
   t_list.tag_id = "4"
 end
+
+TagList.find_or_create_by!(id: "7") do |t_list|
+  t_list.post_id = "4"
+  t_list.tag_id = "2"
+end
+
+TagList.find_or_create_by!(id: "8") do |t_list|
+  t_list.post_id = "4"
+  t_list.tag_id = "6"
+end
+
+TagList.find_or_create_by!(id: "9") do |t_list|
+  t_list.post_id = "4"
+  t_list.tag_id = "7"
+end
+
+TagList.find_or_create_by!(id: "10") do |t_list|
+  t_list.post_id = "5"
+  t_list.tag_id = "3"
+end
+
+TagList.find_or_create_by!(id: "11") do |t_list|
+  t_list.post_id = "5"
+  t_list.tag_id = "5"
+end
+
+TagList.find_or_create_by!(id: "12") do |t_list|
+  t_list.post_id = "5"
+  t_list.tag_id = "7"
+end
+
 puts "seedタグリスト生成完了"
 
 
@@ -196,6 +262,13 @@ GroupMember.find_or_create_by!(id: "5") do |gmem|
   gmem.is_active = "true"
 end
 
+GroupMember.find_or_create_by!(id: "6") do |gmem|
+  gmem.user_id = "1"
+  gmem.group_id = "2"
+  gmem.is_active = "true"
+end
+
+
 puts "seedグループ組合せ生成完了"
 
 
@@ -219,7 +292,13 @@ GroupMessage.find_or_create_by!(id: "3") do |gmes|
   gmes.body = "誰か季節ごとの映えスポットとかあったら教えて"
 end
 
-puts "seedグループメッセージに成完了"
+GroupMessage.find_or_create_by!(id: "4") do |gmes|
+  gmes.user_id = "1"
+  gmes.group_id = "2"
+  gmes.body = "こっちもキノコ見つけた！"
+end
+
+puts "seedグループメッセージ生成完了"
 
 
 
