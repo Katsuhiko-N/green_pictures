@@ -315,4 +315,42 @@ ActiveRecord::Base.transaction do
 end
 
 
+
+
+# データ生成日修正
+ActiveRecord::Base.transaction do
+  # ここからトランザクション
+  puts "seed人物生成日時修正"
+  user1 = User.find_by(id: 1)
+  user1.update(created_at: DateTime.parse("2024-10-10 05:18:44"))
+  
+  user2 = User.find_by(id: 2)
+  user2.update(created_at: DateTime.parse("2024-10-11 11:46:05"))
+  
+  user3 = User.find_by(id: 3)
+  user3.update(created_at: DateTime.parse("2024-10-12 20:08:19"))
+  puts "seed人物生成日時修正完了"
+  
+  
+  puts "seed投稿日時修正開始"
+  post1 = Post.find_by(id: 1)
+  post1.update(created_at: DateTime.parse("2024-10-11 11:57:50"))
+  
+  post2 = Post.find_by(id: 2)
+  post2.update(created_at: DateTime.parse("2024-10-11 16:41:25"))
+  
+  post3 = Post.find_by(id: 3)
+  post3.update(created_at: DateTime.parse("2024-10-13 06:29:08"))
+  
+  post4 = Post.find_by(id: 4)
+  post4.update(created_at: DateTime.parse("2024-10-17 14:34:21"))
+  
+  post5 = Post.find_by(id: 5)
+  post5.update(created_at: DateTime.parse("2024-10-18 10:46:01"))
+  
+  puts "seed投稿日時修正完了"
+  
+  # トランザクション終了
+end
+
 puts "seed生成完了"
