@@ -350,6 +350,25 @@ ActiveRecord::Base.transaction do
   
   puts "seed投稿日時修正完了"
   
+  
+  puts "seed投稿コメント日時修正開始"
+  comment1 = Comment.find_by(id: 1)
+  comment1.update(created_at: DateTime.parse("2024-10-15 12:25:37"))
+  
+  post2 = Post.find_by(id: 2)
+  post2.update(created_at: DateTime.parse("2024-10-12 09:14:44"))
+  
+  post3 = Post.find_by(id: 3)
+  post3.update(created_at: DateTime.parse("2024-10-16 20:34:50"))
+  
+  post4 = Post.find_by(id: 4)
+  post4.update(created_at: DateTime.parse("2024-10-17 19:03:49"))
+  
+  post5 = Post.find_by(id: 5)
+  post5.update(created_at: DateTime.parse("2024-10-19 18:57:14"))
+  
+  puts "seed投稿コメント日時修正完了"
+  
   # トランザクション終了
 end
 
