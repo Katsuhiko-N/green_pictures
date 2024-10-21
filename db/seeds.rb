@@ -23,7 +23,7 @@ ActiveRecord::Base.transaction do
   jiro = User.find_or_create_by!(email: "Jiro@example2.com") do |user|
     user.name = "二郎"
     user.nickname = "ジロー"
-    user.body = "キノコを見つけたい"
+    user.body = "キノコ好き。キノコを見つけたい。"
     user.password = "password002"
     user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
   end
@@ -31,7 +31,7 @@ ActiveRecord::Base.transaction do
   hanako = User.find_or_create_by!(email: "Hanako@example3.com") do |user|
     user.name = "花子"
     user.nickname = "ハナコ"
-    user.body = "花が好きです"
+    user.body = "綺麗な花の写真をたくさん見たい"
     user.password = "password003"
     user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
   end
