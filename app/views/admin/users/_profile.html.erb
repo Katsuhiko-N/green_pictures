@@ -5,7 +5,8 @@
 <p class="mx-auto">名前　<%= user.name %></p>
 <p class="mx-auto">email　<%= user.email %></p>
 
-<p class="mx-auto">コメント:<%= user.body %></p>
+<p class="mx-auto">コメント:</p>
+<p class="mx-auto mb-5 w-50 text-center text-break"><%= user.body %></p>
 
 <p class="mx-auto">これまで投稿した数:<%= user.posts.count %>件</p>
 <p class="mx-auto">これまで投稿へのコメントした数:<%= user.comments.count %>件</p>

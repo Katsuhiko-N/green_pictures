@@ -5,18 +5,24 @@
     <thead>
         <tr class="row">
             <th class="col-2"><p>id</p></th>
-            <th class="col-5"><p>タグ名</p></th>
+            <th class="col-4"><p>タグ名</p></th>
             <th class="col-2"><p>関連投稿数</p></th>
-            <th class="col-3"></th>
+            <th class="col-2"><p>関連投稿リンク</p></th>
+            <th class="col-2"></th>
         </tr>
     </thead>
     <tbody>
         <% @tags.each do |tag| %>
         <tr class="row">
             <td class="col-2"><p>id:<%= tag.id %></p></td>
-            <td class="col-5"><p><%= tag.name %></p></td>
+            <td class="col-4"><p><%= tag.name %></p></td>
             <td class="col-2"><p><%= tag.tag_lists.count %></p></td>
-            <td class="col-3">
+            <td class="col-2 text-center">
+                <%= link_to admin_search_path(:model => "tag_index", :word => "#{tag.name}") do %>
+                    <p class="btn btn-info">リンク</p>
+                <% end %>
+            </td>
+            <td class="col-2">
                 <%= link_to admin_tag_path(tag.id), method: :delete do %>
                     <p class="btn btn-danger">削除</p>
                 <% end %>
@@ -25,3 +31,4 @@
         <% end %>
     </tbody>
 </table>
+<%= paginate @tags %>

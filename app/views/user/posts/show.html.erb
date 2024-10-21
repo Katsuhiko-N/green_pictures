@@ -21,7 +21,7 @@
 <div class="container">
     <div>
         <h2><%= @post.title %></h2>
-        <span class="ml-auto">投稿日　<%= @post.updated_at %></span>
+        <span class="ml-auto">投稿日　<%= @post.created_at %></span>
     </div>
     
     <!--投稿者・名前-->
@@ -41,19 +41,19 @@
     <div class="row">
         
         <!--タグ機能-->
-        <div class="col-4 mx-1">
+        <div class="col-4 px-1">
             <p>登録されているタグ</p>
             <p>(1～15文字、5個まで)</p>
             
             <!--タグを表示-->
-            <div>
+            <div class="container-fluid">
                 <% @t_lists.each do |t_list| %>
-                    <div class="d-flex">
-                        <p class="mx-2">・<%= t_list.tag.name %></p>
+                    <div class="d-flex row my-2">
+                        <p class="col-7">・<%= t_list.tag.name %></p>
                         <!--ゲストログイン時に消滅-->
                         <% if current_user.email != "guest@example.com" %>
-                            <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？" do %>
-                                <p>タグを削除</p>
+                            <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？", class: "col-5" do %>
+                                <p class="btn btn-danger btn-sm mx-1">タグ削除</p>
                             <% end %>
                         <% end %>
                     </div>
@@ -77,9 +77,9 @@
         </div>
         
         
-        <div>
+        <div class="col-8">
             <!--投稿画像-->
-            <div class="post_img mx-auto"><%= image_tag @post.image, size: "600x600" %></div>
+            <div class="mx-auto"><%= image_tag @post.image, class: "post_img img-fluid" %></div>
             <!--投稿者コメント-->
             <div class="mx-auto my-1 comment-box"><p>投稿者コメント<br><%= @post.body %></p></div>
             

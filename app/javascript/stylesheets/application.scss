@@ -29,13 +29,14 @@ a{
 }
 
 .comment-box{
+    width: 100%;
     background-color: #c0cddc;
     color: none;
 }
 
 .post_img{
-    width: 600px;
-    height: 600px;
+    width: 100%;
+    background-size: contain;
 }
 
 .footer{
