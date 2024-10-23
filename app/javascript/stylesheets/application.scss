@@ -11,6 +11,18 @@ a{
     color : black;
 }
 
+.t-visual{
+    width: 100%;
+    height: 500px;
+    background-image: url(../../../db/fixtures/bg-title.jpg);
+    background-size: cover;
+}
+
+.m-title{
+    font-family: "serif";
+}
+
+
 .u-header{
     background-color: darkolivegreen;
 }
