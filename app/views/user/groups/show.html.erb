@@ -1,4 +1,7 @@
-<h2><%= @group.title %>のグループページ</h2>
+<div class="d-flex align-items-center g-title">
+    <div><%= image_tag @group.show_g_img(100,100) %></div>
+    <h2><%= @group.title %>のグループページ</h2>
+</div>
 
 <!--グループメッセージのエラーメッセージ表示-->
 <% if @g_message.errors.any? %>
@@ -69,17 +72,17 @@
 
 <!--ユーザーのグループステータス-->
 <div>
-        <% if current_user.id == @group.owner_id %>
-            <p>あなたのグループステータスは：オーナーです</p>
-        <% elsif @group.exist_user?(current_user) %>
-            <% if is_member?(current_user.id) %>
-                <p>あなたのグループステータスは：メンバーです</p>
-            <% else %>
-                <p>あなたのグループステータスは：メンバー加入申請中です</p>
-            <% end %>
+    <% if current_user.id == @group.owner_id %>
+        <p>あなたのグループステータスは：オーナーです</p>
+    <% elsif @group.exist_user?(current_user) %>
+        <% if is_member?(current_user.id) %>
+            <p>あなたのグループステータスは：メンバーです</p>
         <% else %>
-            <p>あなたのグループステータスは：メンバーではありません</p>
+            <p>あなたのグループステータスは：メンバー加入申請中です</p>
         <% end %>
+    <% else %>
+        <p>あなたのグループステータスは：メンバーではありません</p>
+    <% end %>
 </div>
 
 
