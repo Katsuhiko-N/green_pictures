@@ -66,7 +66,7 @@ class User::PostsController < ApplicationController
   
   def index
     # ページネーション
-    @posts = Post.page(params[:page])
+    @posts = Post.all.order("created_at DESC")
   end
 
 
