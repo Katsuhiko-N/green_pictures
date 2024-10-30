@@ -44,7 +44,7 @@
             <!--投稿画像-->
             <div class="mx-auto"><%= image_tag @post.image, class: "post_img img-fluid"  %></div>
             <!--投稿者コメント-->
-            <div class="mx-auto my-1 comment-box"><p>投稿者コメント<br><%= @post.body %></p></div>
+            <div class="mx-auto my-1 comment-box"><p>投稿者コメント<br><%= simple_format(@post.body, sanitize: true) %></p></div>
             
         </div>
     
