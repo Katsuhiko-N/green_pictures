@@ -1,18 +1,16 @@
-<div class="d-flex justify-content-center">
-        <div class="mx-auto"><%= image_tag user.show_p_img(100, 100) %></div>
-</div>
-<p class="mx-auto">ニックネーム　<%= user.nickname %></p>
+<div class="mx-auto"><%= image_tag user.show_p_img(100, 100) %></div>
+<p class="mx-auto">ニックネーム：<%= user.nickname %></p>
 
-<p class="mx-auto">コメント:</p>
-<p class="mx-auto mb-5 w-50 text-center text-break"><%= user.show_comment %></p>
+<p class="mx-auto">コメント</p>
+<div class="mx-auto mb-5 w-50 text-break border border-3 rounded"><%= simple_format(user.show_comment, sanitize: true) %></div>
 
-<p class="mx-auto">これまで投稿した数:<%= user.posts.count %>件</p>
-<p class="mx-auto">これまで投稿へのコメントした数:<%= user.comments.count %>件</p>
+<p class="mx-auto">これまで投稿した数：<%= user.posts.count %>件</p>
+<p class="mx-auto">これまで投稿へのコメントした数：<%= user.comments.count %>件</p>
 
 
 <table class="container-fluid">
     <thead>
-        <tr class="row table-border-l">
+        <tr class="row-fluid table-border-l">
             <th class="col-5 table-border-s">
                 <p>参加・参加希望中のグループリスト</p>
             </th>
@@ -27,7 +25,7 @@
     </thead>
     <tbody>
         <% groups.each do |group| %>
-            <tr class="row table-border-s">
+            <tr class="row-fluid table-border-s">
                 <td class="col-5 table-border-s">
                     <p>・<%= group.title %></p>
                 </td>
