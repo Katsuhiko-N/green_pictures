@@ -11,18 +11,17 @@
 
 <table class="container-fluid">
     <thead>
-        <tr class="table-border-l row">
+        <tr class="table-border-l row-fluid">
             <!--画像用空白セル-->
-            <th class="col-3"></th>
-            <th class="col-4"><p>グループ名</p></th>
-            <th class="col-3"><p>オーナー</p></th>
-            <th class="col-2"><p>人数</p></th>
+            <th class="col-9"><p>グループ名</p></th>
+            <th class="col-2"><p>オーナー</p></th>
+            <th class="col-1"><p>人数</p></th>
         </tr>
     </thead>
     <tbody>
         <% @groups.each do |group| %>
-        <tr class="table-border-l row mt-3">
-            <td class="col-7">
+        <tr class="table-border-l row-fluid mt-3">
+            <td class="col-9">
                 <%= link_to group_path(group.id) do %>
                     <div class="d-flex bg-info text-white">
                         <%= image_tag group.show_g_img(60,60) %>
@@ -30,16 +29,16 @@
                     </div>
                 <% end %>
             </td>
-            <td class="col-3">
+            <td class="col-2">
                 <%= link_to user_path(group.owner_id) do %>
                     <p><%= g_user(group.owner_id).nickname %></p>
                 <% end %>
             </td>
-            <td class="col-2">
+            <td class="col-1">
                 <p><%= g_count(group.id) %>人</p>
             </td>
         </tr>
-        <tr class="mb-3">
+        <tr class="row-fluid mb-3">
             <td><p class="ml-3"><%= group.body %></p></td>
         </tr>
         <% end %>
