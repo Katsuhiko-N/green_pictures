@@ -14,7 +14,7 @@
 <% end %>
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row-fluid d-flex">
         <!--紹介文-->
         <p class="col-9"><%= @group.body %></p>
         <!--入退会メニュー兼編集破棄ボタン-->
@@ -60,8 +60,8 @@
 
 
 <!--オーナー紹介エリア-->
-<div class=""container-fluid"">
-    <div class="row my-3">
+<div class="container-fluid">
+    <div class="row-fluid my-3">
         <%= link_to user_path(@group.owner_id), class: "col ml-3" do %>
             <%= image_tag g_user(@group.owner_id).show_p_img(60,60) %>
             <span>グループオーナー：<%= g_user(@group.owner_id).nickname %></span>
@@ -90,7 +90,7 @@
 
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row-fluid d-flex">
         <!--メンバー投稿-->
         <div class="col-6">
             <%= link_to search_path(:model => "group_post", :group_id => @group.id) do %>
@@ -104,7 +104,7 @@
             <% end %>
         </div>
     </div>
-    <div class="row">
+    <div class="row-fluid">
         <!--グループメッセージ-->
         <div class="col">
             <%= render 'group_message', g_messages: @g_messages, group: @group %>
