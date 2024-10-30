@@ -5,13 +5,12 @@
 <% end %>
 
 
-<table class="container mx-auto">
-    <tr class="row"><td class="col"><p>加入済みリスト</p></td></tr>
+<table class="container mx-auto  table-border-l">
+    <tr class="row-fluid"><td class="col-6"><p>加入済みリスト</p></td></tr>
     <!--メンバーを絞り込む-->
     <% @g_mems.each do |g_mem| %>
-    <tr class="row">
-            <td><%= image_tag g_mem.user.show_p_img(60,60), size: "60x60" %></td>
-            <td class="col-3"><%= g_mem.user.nickname %></td>
+    <tr class="row-fluid table-border-s">
+            <td class="col-6"><%= image_tag g_mem.user.show_p_img(60,60), size: "60x60" %><%= g_mem.user.nickname %></td>
             <td class="col-3">
                 <%= link_to group_group_member_path(params[:group_id], g_mem.user_id), method: :patch do %>
                     <!--状態切り替え-->
@@ -31,13 +30,12 @@
     <% end %>
 </table>
     
-<table class="container mx-auto">
-    <tr class="row"><td class="col"><p>加入待ちリスト</p></td></tr>
+<table class="container mx-auto table-border-l">
+    <tr class="row-fluid"><td class="col-6"><p>加入待ちリスト</p></td></tr>
     <!--メンバーを絞り込む-->
     <% @g_no_mems.each do |g_no_mem| %>
-    <tr class="row">
-        <td><%= image_tag g_no_mem.user.show_p_img(60,60), size: "60x60" %></td>
-        <td class="col-3"><%= g_no_mem.user.nickname %></td>
+    <tr class="row-fluid table-border-s">
+        <td class="col-6"><%= image_tag g_no_mem.user.show_p_img(60,60), size: "60x60" %><%= g_no_mem.user.nickname %></td>
         <td class="col-3">
             <%= link_to group_group_member_path(params[:group_id], g_no_mem.user_id), method: :patch do %>
             <!--状態切り替え-->
