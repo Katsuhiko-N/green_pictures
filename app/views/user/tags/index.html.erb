@@ -2,7 +2,7 @@
 
 <table class="container-fluid">
     <thead>
-        <tr class="row table-border-l">
+        <tr class="row-fluid table-border-l">
             <th class="col-8"><p>タグ名</p></th>
             <th class="col-2"><p>関連投稿数</p></th>
             <th class="col-2"><p>付けられた投稿一覧</p></th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <% @tags.each do |tag| %>
-        <tr class="row table-border-s">
+        <tr class="row-fluid table-border-s">
             <td class="col-8"><p>・<%= tag.name %></p></td>
             <td class="col-2"><p><%= tag.tag_lists.count %>件</p></td>
             <td class="col-2 text-center">

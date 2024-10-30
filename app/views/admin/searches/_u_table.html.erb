@@ -1,6 +1,6 @@
 <table class="container-fluid">
     <thead>
-        <tr class="row table-border-l">
+        <tr class="row-fluid table-border-l">
             <th class="col-3"><p>プロフィール画像</p></th>
             <th class="col-3"><p>ユーザー名</p></th>
             <th class="col-4"><p>コメント</p></th>
@@ -11,7 +11,7 @@
         <!--ページネーション-->
         <% users_p = users.page(params[:page]) %>
         <% users_p.each do |user| %>
-                <tr class="row table-border-s">
+                <tr class="row-fluid table-border-s">
                     <td class="col-3">
                         <%= link_to admin_user_path(user.id) do %>
                             <%= image_tag user.show_p_img(60,60) %>
