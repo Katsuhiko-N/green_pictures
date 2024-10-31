@@ -31,6 +31,18 @@ class User < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
   
+  #コメント呼び出しメソッド
+  def show_comment
+    # 未設定（空欄の場合）
+    if body.blank?
+      body = "よろしくお願いします。"
+      return body
+    end
+    body = User.find(id).body
+    return body
+  end
+  
+  
   
   # 以下ゲストログイン関係
   GUEST_USER_EMAIL = "guest@example.com"

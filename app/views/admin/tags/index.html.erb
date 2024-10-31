@@ -3,7 +3,7 @@
 <p>タグリスト</p>
 <table class="container=fluid  text-center">
     <thead>
-        <tr class="row">
+        <tr class="row-fluid">
             <th class="col-2"><p>id</p></th>
             <th class="col-4"><p>タグ名</p></th>
             <th class="col-2"><p>関連投稿数</p></th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <% @tags.each do |tag| %>
-        <tr class="row">
+        <tr class="row-fluid">
             <td class="col-2"><p>id:<%= tag.id %></p></td>
             <td class="col-4"><p><%= tag.name %></p></td>
             <td class="col-2"><p><%= tag.tag_lists.count %></p></td>
