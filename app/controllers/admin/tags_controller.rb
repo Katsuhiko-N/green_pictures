@@ -1,9 +1,6 @@
 class Admin::TagsController < ApplicationController
-  # admin用レイアウト
-  layout 'admin_application'
-  
-  # 管理者ログインしているか
-  before_action :authenticate_admin!
+    layout 'admin_application'
+    before_action :authenticate_admin!
     
     def index
         @tags = Tag.page(params[:page])

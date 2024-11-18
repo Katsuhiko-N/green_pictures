@@ -1,5 +1,4 @@
 class User::SearchesController < ApplicationController
-      # ログインしているか
       before_action :authenticate_user!
   
     # 検索機能 

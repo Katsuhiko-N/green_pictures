@@ -1,12 +1,7 @@
 class User::GroupMembersController < ApplicationController
-    
-    # ログインしているか
     before_action :authenticate_user!
-    # 既にメンバーか？
     before_action :is_member?, only:[:create]
-    # オーナーか？
     before_action :is_owner?, only:[:index, :update]
-    # ゲストユーザーか？
     before_action :ensure_guest_user
     
     
@@ -18,10 +13,7 @@ class User::GroupMembersController < ApplicationController
     end
     
     
-    
-    # 全メンバーリスト
     def index
-      
       # オーナーを除外
       owner_id = Group.find(params[:group_id]).owner_id
       all_mems = GroupMember.where.not(user_id: owner_id)
@@ -32,22 +24,22 @@ class User::GroupMembersController < ApplicationController
       @g_no_mems = all_mems.where(group_id: params[:group_id], is_active: "false")
     end
     
-    # 加入済み・加入待ち切り替え処置
+    
     def update
       g_mem = GroupMember.find_by(group_id: params[:group_id], user_id: params[:id])
       
       if g_mem.is_active == false
-         g_mem.update(is_active: "true")
-          flash[:notice] = "ステータス変更されました"
-          redirect_to group_group_members_path(params[:group_id])
+        g_mem.update(is_active: "true")
+        flash[:notice] = "ステータスが変更されました"
+        redirect_to group_group_members_path(params[:group_id])
       else
         g_mem.update(is_active: "false")
-        flash[:notice] = "ステータス変更されました"
+        flash[:notice] = "ステータスが変更されました"
         redirect_to group_group_members_path(params[:group_id])
       end
     end
     
-    # グループ退会
+    
     def destroy
       group = Group.find(params[:group_id])
       g_mem = GroupMember.find_by(user_id: params[:id], group_id: group.id)
@@ -57,13 +49,9 @@ class User::GroupMembersController < ApplicationController
     
     
     
-    
-    
-    
     private
     
-    
-    # オーナー以外をはじく
+    # オーナー認証
     def is_owner?
       owner_id = Group.find(params[:group_id]).owner_id
       unless current_user.id == owner_id
@@ -78,6 +66,7 @@ class User::GroupMembersController < ApplicationController
         redirect_to group_path(params[:group_id])
       end
     end
+    
     
     # ゲストユーザーか識別
     def ensure_guest_user

@@ -1,10 +1,6 @@
 class User::GroupsController < ApplicationController
-  
-  # ログインしているか
   before_action :authenticate_user!
-  # オーナーが操作しているか？
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
-  # ゲストユーザーか？
   before_action :ensure_guest_user, except:[:index, :show]
   
   # グループ参加人数呼び出しメソッド

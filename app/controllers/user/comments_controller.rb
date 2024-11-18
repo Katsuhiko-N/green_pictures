@@ -1,23 +1,18 @@
 class User::CommentsController < ApplicationController
-  # ログインしているか
   before_action :authenticate_user!
-  # 操作しているユーザーは投稿者（コメントもしくは画像投稿者）ユーザーか？
   before_action :is_matching_user, only: [:destroy]
-  # ゲストユーザーか？
   before_action :ensure_guest_user
   
   def create
-    post = Post.find(params[:post_id])
     # post.user_id=current_user_idでインスタンス作成
     @comment = current_user.comments.new(comment_params)
-    @comment.post_id = post.id
+    @post = Post.find(params[:post_id])
+    @comment.post_id = @post.id
     if @comment.save
       redirect_to post_path(params[:post_id])
     else
-      @post = Post.find(params[:post_id])
       # コメントリスト用
-      comments = @post.comments
-      @comments_p = comments.page(params[:page])
+      @comments_p = @post.comments.page(params[:page])
       # タグ表示用
       @t_lists = TagList.where(post_id: params[:post_id])
       # タグ登録用
@@ -52,7 +47,7 @@ class User::CommentsController < ApplicationController
     end
   end
   
-  # ゲストユーザーか識別
+  # ゲストユーザー排除
   def ensure_guest_user
     @user = User.find(current_user.id)
     if @user.guest_user?
