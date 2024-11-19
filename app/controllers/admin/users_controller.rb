@@ -1,8 +1,5 @@
 class Admin::UsersController < ApplicationController
-  # admin用レイアウト
   layout 'admin_application'
-  
-  # 管理者ログインしているか
   before_action :authenticate_admin!
 
   
@@ -37,9 +34,6 @@ class Admin::UsersController < ApplicationController
         render :edit
       end
     end
-    
-    
-      
     
   end
 

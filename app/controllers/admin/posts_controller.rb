@@ -1,8 +1,5 @@
 class Admin::PostsController < ApplicationController
-  # admin用レイアウト
   layout 'admin_application'
-  
-  # 管理者ログインしているか
   before_action :authenticate_admin!
   
   
@@ -15,11 +12,8 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     
-    # コメントリスト用
-    comments = @post.comments
-    @comments_p = comments.page(params[:page])
+    @comments_p = @post.comments.page(params[:page])
     
-    # タグ表示用
     @t_lists = TagList.where(post_id: params[:id])
   end
 

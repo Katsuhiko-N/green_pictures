@@ -1,10 +1,6 @@
 class User::UsersController < ApplicationController
-  # ログインしているか
   before_action :authenticate_user!
-  # アクセスしているユーザーはログインユーザーか？
-  # 他人が勝手にいじれないように
   before_action :is_matching_login_user, only:[:update, :withdraw]
-  # ゲストユーザーか？
   before_action :ensure_guest_user, except:[:show]
   
   def mypage

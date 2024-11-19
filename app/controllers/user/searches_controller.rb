@@ -1,5 +1,4 @@
 class User::SearchesController < ApplicationController
-      # ログインしているか
       before_action :authenticate_user!
   
     # 検索機能 
@@ -15,7 +14,6 @@ class User::SearchesController < ApplicationController
                 users = User.joins(:group_members).where('group_members.group_id = ? AND group_members.is_active = ?', params[:group_id], true)
                 # 投稿から絞り込んだusersのidと一致するものを抜き出す
                 @posts = Post.where(user_id: users.ids)
-                
                 @posts.page(params[:page])
             else
                 # グループユーザー検索

@@ -1,10 +1,6 @@
 class User::PostsController < ApplicationController
-  # ログインしているか
   before_action :authenticate_user!
-  # アクセスしているユーザーはログインユーザーか？
-  # 他人が勝手に投稿をいじれないように
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
-  # ゲストユーザーか？
   before_action :ensure_guest_user, except:[:index, :show]
   
   def new
@@ -19,8 +15,6 @@ class User::PostsController < ApplicationController
     @tag = Tag.new(tag_params)
     
     if tag_params[:name].blank?
-      
-        # タグ付けなし＝そのまま完了
       if @post.save
         flash[:notice] = "投稿に成功しました"
         redirect_to post_path(@post.id)

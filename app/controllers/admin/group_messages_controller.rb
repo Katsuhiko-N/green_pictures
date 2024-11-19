@@ -1,6 +1,5 @@
 class Admin::GroupMessagesController < ApplicationController
-      # ログインしているか
-  before_action :authenticate_admin!
+    before_action :authenticate_admin!
   
     def destroy
         g_message = GroupMessage.find(params[:id])

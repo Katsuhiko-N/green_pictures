@@ -1,7 +1,5 @@
 class User::TagsController < ApplicationController
-  # ログインしているか
   before_action :authenticate_user!
-  # ゲストユーザーか？
   before_action :ensure_guest_user, except:[:index]
     
     def create
@@ -64,7 +62,6 @@ class User::TagsController < ApplicationController
     def index
         @tags = Tag.page(params[:page])
     end
-    
     
     
     private

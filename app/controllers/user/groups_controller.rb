@@ -1,16 +1,8 @@
 class User::GroupsController < ApplicationController
-  
-  # ログインしているか
   before_action :authenticate_user!
-  # オーナーが操作しているか？
   before_action :is_matching_login_user, only:[:edit, :update, :destroy]
-  # ゲストユーザーか？
   before_action :ensure_guest_user, except:[:index, :show]
   
-  # グループ参加人数呼び出しメソッド
-  helper_method :g_count
-  # 簡易ユーザー呼び出しメソッド
-  helper_method :g_user
   # グループ加入済みか確認
   helper_method :is_member?
   
@@ -101,24 +93,13 @@ class User::GroupsController < ApplicationController
     end
   end
   
-  # 簡易ユーザー呼び出し表示用
-  def g_user(id)
-    user = User.find(id)
-    return user
-  end
-  
-  # グループ参加人数呼び出し表示用
-  def g_count(number)
-    counts = GroupMember.where(group_id: number, is_active: true).count
-    return counts
-  end
   
   # メンバー加入状態確認メソッド
   def is_member?(userid)
     return GroupMember.exists?(group_id: params[:id], user_id: userid , is_active: "true")
   end
   
-  # ゲストユーザーか識別# ゲストユーザーか識別
+  # ゲストユーザーか識別
   def ensure_guest_user
       @user = User.find(current_user.id)
       if @user.guest_user?

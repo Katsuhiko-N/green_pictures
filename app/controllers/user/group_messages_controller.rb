@@ -1,8 +1,5 @@
 class User::GroupMessagesController < ApplicationController
-    
-    # ログインしているか
     before_action :authenticate_user!
-    # ゲストユーザーか？
     before_action :ensure_guest_user
     
     def create

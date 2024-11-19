@@ -31,11 +31,11 @@
             </td>
             <td class="col-2">
                 <%= link_to user_path(group.owner_id) do %>
-                    <p><%= g_user(group.owner_id).nickname %></p>
+                    <p><%= group.g_user(group.owner_id).nickname %></p>
                 <% end %>
             </td>
             <td class="col-1">
-                <p><%= g_count(group.id) %>人</p>
+                <p><%= group.member_count(group.id) %>人</p>
             </td>
         </tr>
         <tr class="row-fluid mb-3">
