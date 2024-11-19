@@ -64,7 +64,6 @@ class User::TagsController < ApplicationController
     end
     
     
-    
     private
     
     def tag_params
