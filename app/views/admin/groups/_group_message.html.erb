@@ -1,4 +1,4 @@
-<!--ローカル変数としてg_messagesが必要-->
+<!--ローカル変数としてgroup,g_messagesが必要-->
     
 <table class="container-fluid">
     <thead>
@@ -24,7 +24,7 @@
                 <%= g_message.body %>
             </td>
             <td class="col-2 table-border-s">
-                <%= g_user(g_message.user_id).nickname %>
+                <%= group.g_user(g_message.user_id).nickname %>
             </td>
             <td class="col-2 table-border-s">
                 <%= g_message.updated_at %>

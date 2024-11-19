@@ -22,8 +22,8 @@
 <div class="container-fluid">
     <div class="row-fluid my-3">
         <%= link_to admin_user_path(@group.owner_id), class: "col ml-3" do %>
-            <%= image_tag g_user(@group.owner_id).show_p_img(60,60) %>
-            <span>グループオーナー：<%= g_user(@group.owner_id).nickname %></span>
+            <%= image_tag @group.g_user(@group.owner_id).show_p_img(60,60) %>
+            <span>グループオーナー：<%= @group.g_user(@group.owner_id).nickname %></span>
         <% end %>
     </div>
 </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="row-fluid">
         <div class="col">
-            <%= render 'group_message', g_messages: @g_messages %>
+            <%= render 'group_message', group: @group, g_messages: @g_messages %>
         </div>
         
     </div>

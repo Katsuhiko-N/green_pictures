@@ -17,6 +17,17 @@ class Group < ApplicationRecord
         group_members.exists?(user_id: user.id)
     end
     
+    # グループ参加人数
+    def member_count(number)
+        counts = GroupMember.where(group_id: number, is_active: true).count
+        return counts
+    end
+    
+    # 簡易ユーザー呼び出し表示用
+    def g_user(id)
+        user = User.find(id)
+        return user
+    end
     
     # グループ画像呼び出しメソッド
     def show_g_img(width,height)
