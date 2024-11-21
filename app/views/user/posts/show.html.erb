@@ -117,7 +117,7 @@
                 <tr class="row table-border-s">
                     <td class="col-6 text-break"><p><%= comment.body %></p></td>
                     <td class="col-2"><p><%= comment.user.nickname %></p></td>
-                    <td class="col-2"><%= comment.updated_at %></td>
+                    <td class="col-2"><%= comment.created_at %></td>
                     <td class="col-2">
                         <!--コメント削除ボタン-->
                         <% if user_signed_in? %>
