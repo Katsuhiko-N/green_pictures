@@ -1,4 +1,4 @@
-<h3>グループ一覧</h3>
+<h2 class="py-2 g-title">グループ一覧</h3>
 <p>ユーザーが作成したグループの一覧です。ユーザーは誰でも独自のテーマでグループを作成可能です。</p>
 
 <!--ゲストログイン時に消滅-->
@@ -24,7 +24,7 @@
         <tr class="table-border-l row-fluid mt-3">
             <td class="col-9">
                 <%= link_to group_path(group.id) do %>
-                    <div class="d-flex bg-info text-white">
+                    <div class="d-flex g-main text-white">
                         <%= image_tag group.show_g_img(60,60) %>
                         <p class="mx-3"></p><%= group.title %>
                     </div>
