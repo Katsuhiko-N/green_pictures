@@ -46,19 +46,23 @@
             <p>(1～15文字、5個まで)</p>
             
             <!--タグを表示-->
-            <div class="container-fluid">
-                <% @t_lists.each do |t_list| %>
-                    <div class="d-flex row my-2">
-                        <p class="col-7">・<%= t_list.tag.name %></p>
-                        <!--ゲストログイン時に消滅-->
-                        <% if current_user.email != "guest@example.com" %>
-                            <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？", class: "col-5" do %>
-                                <p class="btn btn-danger btn-sm mx-1">タグ削除</p>
+            <% unless @t_lists.blank? %>
+                <div class="container-fluid">
+                    <% @t_lists.each do |t_list| %>
+                        <div class="d-flex row my-2">
+                            <p class="col-7">・<%= t_list.tag.name %></p>
+                            <!--ゲストログイン時に消滅-->
+                            <% if current_user.email != "guest@example.com" %>
+                                <%= link_to post_tag_tag_list_path(@post.id, t_list.tag.id, t_list.id), method: :delete, "data-confirm" => "本当にタグを削除しますか？", class: "col-5" do %>
+                                    <p class="btn btn-danger btn-sm mx-1">タグ削除</p>
+                                <% end %>
                             <% end %>
-                        <% end %>
-                    </div>
-                <% end %>
-            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% else %>
+                <p>*タグはまだ登録されていません*</p>
+            <% end %>
             
             <!--タグ登録機能 5個まで-->
             <!--ゲストログイン時消滅-->
