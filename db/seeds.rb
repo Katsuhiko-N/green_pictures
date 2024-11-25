@@ -355,19 +355,37 @@ ActiveRecord::Base.transaction do
   comment1 = Comment.find_by(id: 1)
   comment1.update(created_at: DateTime.parse("2024-10-15 12:25:37"))
   
-  post2 = Post.find_by(id: 2)
-  post2.update(created_at: DateTime.parse("2024-10-12 09:14:44"))
+  comment2 = Comment.find_by(id: 2)
+  comment2.update(created_at: DateTime.parse("2024-10-12 09:14:44"))
   
-  post3 = Post.find_by(id: 3)
-  post3.update(created_at: DateTime.parse("2024-10-16 20:34:50"))
+  comment3 = Comment.find_by(id: 3)
+  comment3.update(created_at: DateTime.parse("2024-10-16 20:34:50"))
   
-  post4 = Post.find_by(id: 4)
-  post4.update(created_at: DateTime.parse("2024-10-17 19:03:49"))
+  comment4 = Comment.find_by(id: 4)
+  comment4.update(created_at: DateTime.parse("2024-10-17 19:03:49"))
   
-  post5 = Post.find_by(id: 5)
-  post5.update(created_at: DateTime.parse("2024-10-19 18:57:14"))
+  comment5 = Comment.find_by(id: 5)
+  comment5.update(created_at: DateTime.parse("2024-10-19 18:57:14"))
   
   puts "seed投稿コメント日時修正完了"
+  
+  
+  puts "seed投稿グループメッセージ日時修正開始"
+  gmes1 =  GroupMessage.find_by(id: 1)
+  gmes1.update(created_at: DateTime.parse("2024-10-12 09:23:41"))
+  
+  gmes2 =  GroupMessage.find_by(id: 2)
+  gmes2.update(created_at: DateTime.parse("2024-10-11 20:34:09"))
+  
+  gmes3 =  GroupMessage.find_by(id: 3)
+  gmes3.update(created_at: DateTime.parse("2024-10-14 07:48:10"))
+  
+  gmes4 =  GroupMessage.find_by(id: 4)
+  gmes4.update(created_at: DateTime.parse("2024-10-17 21:08:33"))
+  
+  puts "seed投稿グループメッセージ日時修正完了"
+  
+  
   
   # トランザクション終了
 end

@@ -1,4 +1,5 @@
-<h2>タグ一覧</h2>
+<h2 class="py-2 p-title">タグ一覧</h2>
+<p>ユーザーの全投稿につけられたタグの一覧です。</p>
 
 <table class="container-fluid">
     <thead>
@@ -15,7 +16,7 @@
             <td class="col-2"><p><%= tag.tag_lists.count %>件</p></td>
             <td class="col-2 text-center">
                 <%= link_to search_path(:model => "tag_index", :word => "#{tag.name}") do %>
-                    <p class="btn btn-info">リンク</p>
+                    <p class="btn btn-info">一覧へ</p>
                 <% end %>
             </td>
         </tr>
