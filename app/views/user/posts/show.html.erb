@@ -99,10 +99,6 @@
 <!--コメント関係-->
 <div class="container mx-auto">
     
-    <!--コメント総数-->
-    <p><%= @post.comments.count %>件のコメント <i class="fa-regular fa-comment"></i></p>
-    
-    
     <!--コメント投稿フォーム-->
     <!--ゲストログイン時消滅-->
     <% if current_user.email != "guest@example.com" %>
@@ -113,6 +109,9 @@
         <% end %>
     </div>
     <% end %>
+    
+    <!--コメント総数-->
+    <p><%= @post.comments.count %>件のコメント <i class="fa-regular fa-comment"></i></p>
     
     <!--閲覧者コメントテーブル-->
     <table class="container-fluid my-3 table-border-l">

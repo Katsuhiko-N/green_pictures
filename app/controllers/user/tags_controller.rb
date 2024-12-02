@@ -25,8 +25,7 @@ class User::TagsController < ApplicationController
                     # コメント投稿フォーム用
                     @comment = Comment.new
                     # コメントリスト用
-                    comments = @post.comments
-                    @comments_p = comments.page(params[:page])
+                    @comments_p = @post.comments.page(params[:page])
                     # タグ表示用
                     @t_lists = TagList.where(post_id: params[:post_id])
                 render template: "user/posts/show"
@@ -41,8 +40,7 @@ class User::TagsController < ApplicationController
                     # コメント投稿フォーム用
                     @comment = Comment.new
                     # コメントリスト用
-                    comments = @post.comments
-                    @comments_p = comments.page(params[:page])
+                    @comments_p = @post.comments.page(params[:page])
                     # タグ表示用
                     @t_lists = TagList.where(post_id: params[:post_id])
                 render template: "user/posts/show"
