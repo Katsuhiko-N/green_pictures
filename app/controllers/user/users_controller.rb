@@ -14,7 +14,7 @@ class User::UsersController < ApplicationController
     @groups = @user.groups.page(params[:page])
     # 自分のページ開いたらマイページへ遷移
     if  user_signed_in?
-      # 閲覧しているユーザープロフィール＝閲覧者ならマイページ
+      # 閲覧しているユーザープロフィール＝閲覧者ならマイページへ
       if @user.id == current_user.id
         redirect_to mypage_users_path
       end

@@ -17,7 +17,7 @@ class User::GroupsController < ApplicationController
     if @group.save
       flash[:notice] = "投稿に成功しました"
       
-      # 組合せ（メンバー）作成=オーナー用
+      # オーナーと今作成したグループとの組合せ（メンバー）作成
       g_mem = GroupMember.new(group_id: @group.id)
       g_mem.user_id = current_user.id
       g_mem.is_active = "true"
@@ -37,19 +37,11 @@ class User::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-
-    # 加入済みメンバーリスト
-    @g_mems = GroupMember.where(group_id: params[:id], is_active: "true")
-    # ページネーション
-    @g_mems = @g_mems.page(params[:page])
     
+    # グループメッセージ一覧取得（降順）
+    @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC").page(params[:page])
     
-    # グループメッセージ一覧用（降順）
-    @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC")
-    # ページネーション
-    @g_messages = @g_messages.page(params[:page])
-    
-    # グループメッセージ投稿フォーム用
+    # グループメッセージ投稿フォーム
     @g_message = GroupMessage.new
 
   end
