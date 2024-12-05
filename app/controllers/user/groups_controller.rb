@@ -40,7 +40,6 @@ class User::GroupsController < ApplicationController
     
     # グループメッセージ一覧取得（降順）
     @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC").page(params[:page])
-    
     # グループメッセージ投稿フォーム
     @g_message = GroupMessage.new
 
