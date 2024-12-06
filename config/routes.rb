@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     resources :posts, except: [:new, :create, :edit, :update] do
       # 投稿コメント機能
       resources :comments, only: [:destroy]
-      
       # タグ機能（tag_listでタグid取得用＝アクション無し）
       resources :tags, only: [:nil] do
         # タグ組合せ
@@ -17,7 +16,6 @@ Rails.application.routes.draw do
     
     # タグ管理用
     resources :tags, only: [:index, :destroy]
-    
     # 投稿コメント一覧機能
     resources :comments, only: [:index] do
       member do
@@ -27,10 +25,8 @@ Rails.application.routes.draw do
     
     # ユーザー機能
     resources :users, except: [:new, :create, :edit, :destroy]
-    
     # 検索機能
     get 'search' => 'searches#search', as: "search"
-    
     # グループ機能
     resources :groups, only: [:index, :show, :destroy] do
       resources :group_messages, only: [:destroy]
@@ -49,7 +45,6 @@ Rails.application.routes.draw do
     resources :posts do
       # 投稿コメント機能
       resources :comments, only: [:create, :destroy]
-      
       # タグ機能
       resources :tags, only: [:create] do
         # タグ組合せ
@@ -59,7 +54,6 @@ Rails.application.routes.draw do
     
     # タグ一覧機能
     resources :tags, only: [:index]
-    
     # ユーザー機能
     resources :users, only: [:show, :update] do
       collection do

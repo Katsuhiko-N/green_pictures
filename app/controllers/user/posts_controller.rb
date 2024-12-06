@@ -68,12 +68,10 @@ class User::PostsController < ApplicationController
     # コメント投稿フォーム用
     @comment = Comment.new
     # コメントリスト用
-    comments = @post.comments
-    @comments_p = comments.page(params[:page])
+    @comments_p = @post.comments.page(params[:page])
     
-    # タグ表示用
+    # タグ表示・登録用
     @t_lists = TagList.where(post_id: params[:id])
-    # タグ登録用
     @tag = Tag.new
     
   end
