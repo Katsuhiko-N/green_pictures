@@ -12,7 +12,6 @@ class User::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @groups = @user.groups.page(params[:page])
-    # 自分のページ開いたらマイページへ遷移
     if  user_signed_in?
       # 閲覧しているユーザープロフィール＝閲覧者ならマイページへ
       if @user.id == current_user.id
@@ -34,6 +33,7 @@ class User::UsersController < ApplicationController
       flash[:notice] = "編集されました"
       redirect_to mypage_users_path
     else
+      flash.now[:alert] = "編集に失敗しました..."
       render :edit
     end
   end
@@ -48,6 +48,7 @@ class User::UsersController < ApplicationController
     user = User.find(current_user.id)
     user.update(is_active: false)
     reset_session
+    flash[:notice] = "退会手続き完了しました。ご利用ありがとうございました。"
     redirect_to new_user_registration_path
   end
   

@@ -1,6 +1,6 @@
 class User::GroupMembersController < ApplicationController
     before_action :authenticate_user!
-    before_action :is_member?, only:[:create]
+    before_action :already_member?, only:[:create]
     before_action :is_owner?, only:[:index, :update]
     before_action :ensure_guest_user
     
@@ -60,8 +60,7 @@ class User::GroupMembersController < ApplicationController
     end
     
     
-    # 既にメンバーなら詳細ページに戻る
-    def is_member?
+    def already_member?
       if GroupMember.exists?(group_id: params[:id], user_id: current_user.id)
         redirect_to group_path(params[:group_id])
       end

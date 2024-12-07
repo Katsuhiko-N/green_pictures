@@ -25,6 +25,7 @@ class User::GroupsController < ApplicationController
       
       redirect_to group_path(@group.id)
     else
+      flash.now[:alert] = "グループ作成に失敗しました..."
       render :new
     end
   end
@@ -42,15 +43,14 @@ class User::GroupsController < ApplicationController
     @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC").page(params[:page])
     # グループメッセージ投稿フォーム
     @g_message = GroupMessage.new
-
   end
-
-
-
+  
+  
   def edit
     @group = Group.find(params[:id])
   end
-
+  
+  
   def update
     @group = Group.find(params[:id])
     if @group.update(group_params)

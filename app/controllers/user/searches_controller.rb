@@ -44,7 +44,6 @@ class User::SearchesController < ApplicationController
                     # 繰り返すうちにallから絞り込まれる
                     tags = tags.where("name LIKE ?", "%#{keyword}%")
                 end
-                
                 @posts = Post.joins(:tag_lists).where('tag_lists.tag_id IN (?)', tags.ids)
                 
             else
@@ -65,7 +64,6 @@ class User::SearchesController < ApplicationController
                     @posts = @posts.where("posts.created_at >= ?", Date.parse(time) )
                 else
                     @users = @users.where("users.created_at >= ?", Date.parse(time) ).where.not(email: "guest@example.com")
-                    
                 end
             end
         end

@@ -13,9 +13,8 @@ class User::CommentsController < ApplicationController
     else
       # コメントリスト用
       @comments_p = @post.comments.page(params[:page])
-      # タグ表示用
+      # タグ表示・登録用
       @t_lists = TagList.where(post_id: params[:post_id])
-      # タグ登録用
       @tag = Tag.new
       
       render template: "user/posts/show"

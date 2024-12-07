@@ -73,7 +73,6 @@ class User::PostsController < ApplicationController
     # タグ表示・登録用
     @t_lists = TagList.where(post_id: params[:id])
     @tag = Tag.new
-    
   end
 
 
