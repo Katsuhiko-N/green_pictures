@@ -18,7 +18,7 @@ class User::TagsController < ApplicationController
                 flash[:notice] = "タグの登録に成功しました"
                 redirect_to post_path(params[:post_id])
             else
-                flash[:notice] = "保存に失敗しました"
+                flash.now[:alert] = "タグの登録に失敗しました..."
                 # postのshowアクションへ（以下表示用インスタンス変数）
                 @post = Post.find(params[:post_id])
                 # コメント投稿フォーム用
@@ -33,7 +33,7 @@ class User::TagsController < ApplicationController
             # 以下既存のタグをつける場合
             if TagList.where(post_id: params[:post_id], tag_id: same_tag.id).exists?
                 # 既に同じ投稿に同じタグがつけられている場合（ダブり）
-                flash[:notice] = "1つの投稿に同じタグはつけられません"
+                flash[:alert] = "1つの投稿に同じタグはつけられません"
                 # postのshowアクションへ（以下表示用インスタンス変数）
                 @post = Post.find(params[:post_id])
                 @comment = Comment.new
