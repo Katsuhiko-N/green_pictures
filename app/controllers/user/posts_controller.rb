@@ -14,47 +14,45 @@ class User::PostsController < ApplicationController
     @post.user_id = current_user.id
     @tag = Tag.new(tag_params)
     
-    if tag_params[:name].blank?
-      if @post.save
-        flash[:notice] = "投稿に成功しました"
-        redirect_to post_path(@post.id)
-      else
-        render :new
-      end
-    else
-      # タグ入力した場合
-      if @post.save
-        flash[:notice] = "投稿に成功しました"
+    if @post.save
+      if tag_params[:name].present?
+        # タグ入力した場合タグ組合せ生成
+        t_list = TagList.new
+        t_list.post_id = @post.id
         
         # 同じ名前のタグあるか検索
         same_tag = Tag.find_by(name: @tag.name)
         
+        # 新規タグの場合新規生成、既存タグは組合せ（tag_list）だけ保存
         if same_tag == nil
-          # 新規タグの場合新規生成
           if @tag.save
-            t_list = TagList.new
-            t_list.post_id = @post.id
             t_list.tag_id = @tag.id
             t_list.save
-            flash[:notice] = "タグの登録に成功しました"
+            flash[:notice] = "投稿・タグの登録に成功しました"
             redirect_to post_path(@post.id)
           else
-            render :new
+            flash[:alert] = "タグの設定に失敗しました..."
+            redirect_to post_path(@post.id)
           end
-          
         else
-          # 既存タグは組合せ（tag_list）だけ保存
-          t_list = TagList.new
-          t_list.post_id = @post.id
           t_list.tag_id = same_tag.id
           t_list.save
-          flash[:notice] = "タグの登録に成功しました"
+          flash[:notice] = "投稿・タグの登録に成功しました"
           redirect_to post_path(@post.id)
         end
+        
       else
-        render :new
+        # タグ未入力の場合
+        flash[:notice] = "投稿に成功しました"
+        redirect_to post_path(@post.id)
       end
+      
+    else
+      flash.now[:alert] = "投稿に失敗しました..."
+      render :new
     end
+    
+    
   end
   
   
@@ -70,14 +68,11 @@ class User::PostsController < ApplicationController
     # コメント投稿フォーム用
     @comment = Comment.new
     # コメントリスト用
-    comments = @post.comments
-    @comments_p = comments.page(params[:page])
+    @comments_p = @post.comments.page(params[:page])
     
-    # タグ表示用
+    # タグ表示・登録用
     @t_lists = TagList.where(post_id: params[:id])
-    # タグ登録用
     @tag = Tag.new
-    
   end
 
 

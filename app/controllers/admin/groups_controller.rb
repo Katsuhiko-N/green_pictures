@@ -10,14 +10,9 @@ class Admin::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-
-    # 加入済みメンバーリスト
-    @g_mems = GroupMember.where(group_id: params[:id], is_active: "true")
-    @g_mems = @g_mems.page(params[:page])
     
-    # グループメッセージ一覧用（降順）
-    @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC")
-    @g_messages = @g_messages.page(params[:page])
+    # グループメッセージ一覧取得（降順）
+    @g_messages = GroupMessage.where(group_id: params[:id]).all.order("id DESC").page(params[:page])
     
     @g_message = GroupMessage.new
 

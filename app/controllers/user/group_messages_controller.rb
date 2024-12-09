@@ -10,7 +10,7 @@ class User::GroupMessagesController < ApplicationController
             flash[:notice] = "投稿されました"
             redirect_to group_path(params[:group_id])
         else
-            flash[:notice] = "投稿に失敗しました"
+            flash[:alert] = "投稿に失敗しました..."
             redirect_to group_path(params[:group_id])
         end
     end

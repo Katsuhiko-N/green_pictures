@@ -5,12 +5,11 @@ class User::TagsController < ApplicationController
     def create
         @tag = Tag.new(tag_params)
         
-        # 同じ名前のタグあるか検索
+        # 同じ名前のタグあるか検索して、分岐
         same_tag = Tag.find_by(name: @tag.name)
            
-        # 既に同じ名前のタグがある（既存のタグ）かどうか
         if same_tag == nil
-            # 存在しない場合タグと中間テーブルを新規登録
+            # 同じ名前が存在しない場合タグと中間テーブルを新規登録
             if @tag.save
                 t_list = TagList.new
                 t_list.post_id = params[:post_id]
@@ -19,30 +18,27 @@ class User::TagsController < ApplicationController
                 flash[:notice] = "タグの登録に成功しました"
                 redirect_to post_path(params[:post_id])
             else
-                flash[:notice] = "保存に失敗しました"
+                flash.now[:alert] = "タグの登録に失敗しました..."
                 # postのshowアクションへ（以下表示用インスタンス変数）
-                    @post = Post.find(params[:post_id])
-                    # コメント投稿フォーム用
-                    @comment = Comment.new
-                    # コメントリスト用
-                    @comments_p = @post.comments.page(params[:page])
-                    # タグ表示用
-                    @t_lists = TagList.where(post_id: params[:post_id])
+                @post = Post.find(params[:post_id])
+                # コメント投稿フォーム用
+                @comment = Comment.new
+                # コメントリスト用
+                @comments_p = @post.comments.page(params[:page])
+                # タグ表示用
+                @t_lists = TagList.where(post_id: params[:post_id])
                 render template: "user/posts/show"
             end
         else
-            # 既存のタグをつける場合
+            # 以下既存のタグをつける場合
             if TagList.where(post_id: params[:post_id], tag_id: same_tag.id).exists?
-                # 既に同じ投稿に同じタグがつけられている場合
-                flash[:notice] = "1つの投稿に同じタグはつけられません"
+                # 既に同じ投稿に同じタグがつけられている場合（ダブり）
+                flash[:alert] = "1つの投稿に同じタグはつけられません"
                 # postのshowアクションへ（以下表示用インスタンス変数）
-                    @post = Post.find(params[:post_id])
-                    # コメント投稿フォーム用
-                    @comment = Comment.new
-                    # コメントリスト用
-                    @comments_p = @post.comments.page(params[:page])
-                    # タグ表示用
-                    @t_lists = TagList.where(post_id: params[:post_id])
+                @post = Post.find(params[:post_id])
+                @comment = Comment.new
+                @comments_p = @post.comments.page(params[:page])
+                @t_lists = TagList.where(post_id: params[:post_id])
                 render template: "user/posts/show"
             else
                 # 名前重複した場合同じ名前のタグは組合せ（tag_list）だけ保存

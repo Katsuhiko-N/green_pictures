@@ -11,9 +11,7 @@ class Admin::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    
     @comments_p = @post.comments.page(params[:page])
-    
     @t_lists = TagList.where(post_id: params[:id])
   end
 
