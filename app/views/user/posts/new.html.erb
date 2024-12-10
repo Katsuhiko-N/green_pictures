@@ -1,18 +1,13 @@
 <h2 class="py-2 p-title">新規投稿</h2>
 
 <!--エラーメッセージ表示-->
-<% if @post.errors.any? || @comment.errors.any? %>
-    <% if @post.errors.any? %>
-        <% instance = @post %>
-    <% elsif @comment.errors.any? %>
-        <% instance = @comment %>
-    <% end %>
-        <%= instance.errors.count %>件のエラーが発生しました
-        <ul>
-            <% instance.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-        </ul>
+<% if @post.errors.any? %>
+    <%= @post.errors.count %>件のエラーが発生しました
+    <ul>
+        <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
 <% end %>
 
 
